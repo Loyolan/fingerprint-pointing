@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { EnseignantService } from '../../services/enseignant.service';
+import { MatiereService } from '../../services/matiere.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
@@ -20,11 +21,13 @@ import { trigger, transition, style, animate } from '@angular/animations';
 export class ProfsComponent implements OnInit {
 
   profs: any[] = [];
+  mats: any[] = [];
   addForm: FormGroup;
   updateForm: FormGroup;
   selected: string = "";
   constructor(
     private fb: FormBuilder,
+    private matiereService: MatiereService,
     private service: EnseignantService,
     private notifier: NotifierService
   ) {
@@ -39,6 +42,7 @@ export class ProfsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getMatieres();
     this.getAllEnseignants();
   }
 
@@ -48,19 +52,25 @@ export class ProfsComponent implements OnInit {
       if (data) {
         this.profs = data
         for(let i=0; i<this.profs.length; i++) {
-          this.service.allMatieresEnseignant(this.profs[i].enseignantId).subscribe((m)=>{
-            let mats = []
-            for(let j=0; j<m.length; j++) {
-              mats.push(m[j].matiereCode)
+          let mats = [];
+          for(let j=0; j<this.mats.length; j++) {
+            if(this.mats[j].enseignant == this.profs[i].enseignantId) {
+              mats.push(this.mats[j].matiereCode);
             }
-            this.profs[i].matieres = mats;
-          })
+          }
+          this.profs[i].matieres = mats
         }
-        console.log(this.profs)
       } else {
         this.notifier.notify('error', 'Le sereur back inaccessible!!!')
       }
     });
+  }
+
+  /** GET MATIERES */
+  getMatieres() {
+    this.matiereService.allMatieres().subscribe((m) => {
+      this.mats = m;
+    })
   }
 
   /** ADD NEW YEAR */
