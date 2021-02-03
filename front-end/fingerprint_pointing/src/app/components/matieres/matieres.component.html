@@ -1,1 +1,180 @@
-<p>matieres works!</p>
+<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+    <app-navbar></app-navbar>
+    <div class="app-main">
+        <app-sidebar></app-sidebar>
+        <div class="app-main__outer">
+            <div class="app-main__inner">
+                <div class="app-page-title">
+                    <div class="page-title-wrapper">
+                        <div class="page-title-heading">
+                            <div class="page-title-icon">
+                                <i class="fa fa-database icon-gradient bg-mean-fruit">
+                                </i>
+                            </div>
+                            <div>Gestion des matieres 
+                                <div class="page-title-subheading">
+                                    Vous pouvez gérer ici les Matieres
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-title-actions">
+                            <button class="btn btn-success"  data-toggle="modal" data-target="#modal-add"><i class="pe-7s-plus"></i> Ajouter</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="main-card mb-3 card">
+                            <div class="card-body">
+                                <h5 class="card-title">MATIERES</h5>
+                                <div>
+                                    <nav *ngFor="let m of matieres" class="mt-2" aria-label="breadcrumb">
+                                        <div class="active breadcrumb-item row" aria-current="page">
+                                            <span class="col-md-5">
+                                                <i class="pe-7s-albums"></i> {{m.matiereDesc}}
+                                            </span>
+                                            <span class="col-md-2">
+                                                <span class="badge badge-success">{{m.matiereCode}}</span>
+                                            </span>
+                                            <span class="col-md-3">
+                                                <span class="badge badge-danger badge-clickable" data-toggle="modal" data-target="#modal-change" (click)="changeProf(m.matiereId)">{{m.prof}}</span>
+                                            </span>
+                                            <span class="col-md-2 text-right">
+                                                <div role="group" class="btn-group-sm btn-group btn-group-toggle">
+                                                    <label (click)="editMatiere(m.matiereId)" class="btn btn-primary" data-toggle="modal" data-target="#modal-edit">
+                                                        <i class="fa fa-edit"></i>
+                                                    </label>
+                                                    <label (click)="deleteMatiere(m.matiereId)" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
+                                                        <i class="fa fa-trash"></i>
+                                                    </label>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-footer></app-footer>
+        </div>
+    </div>
+</div>
+
+<!-- AJOUT -->
+<div class="modal" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="AJOUT" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <form [formGroup]="addForm" (ngSubmit)="onSubmitAddForm()" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">AJOUT</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control" id="code" formControlName="code"
+                            placeholder="Code Matiere">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control" id="desc" formControlName="desc"
+                            placeholder="Description">
+                    </div>
+                </div>
+                <div class="input-group mt-2">
+                    <div class="nk-int-st">
+                        <select class="form-control" id="prof" formControlName="prof">
+                            <option *ngFor="let p of profs" value="{{p.enseignantId}}">{{p.enseignantNomComplet}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeAdd" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary" [disabled]="addForm.invalid">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODIFICATION -->
+<div class="modal" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="MODIFICATION" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <form [formGroup]="updateForm" (ngSubmit)="onSubmitUpdateForm()" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">MIS A JOUR</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control" id="code" formControlName="code" placeholder="Code Matiere">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control" id="desc" formControlName="desc" placeholder="Description">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeEdit" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary" [disabled]="updateForm.invalid">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- DELETE -->
+<div class="modal" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="SUPPRESSION" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CONFIRMATION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6><i class="fa fa-warning"></i> Voulez vous vraiment le supprimer?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeDelete" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                <button type="button" (click)="deleteMatiereData()" class="btn btn-danger">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CHANGE PROF -->
+<div class="modal" id="modal-change" tabindex="-1" role="dialog" aria-labelledby="ENSEIGNANT" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <form [formGroup]="changeForm" (ngSubmit)="onSubmitChangeForm()" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">ENSEIGNANTS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mt-2">
+                    <div class="nk-int-st">
+                        <select class="form-control" id="prof" formControlName="prof">
+                            <option *ngFor="let p of profs" value="{{p.enseignantId}}">{{p.enseignantNomComplet}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeChange" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-danger" [disabled]="changeForm.invalid">Changer</button>
+            </div>
+        </form>
+    </div>
+</div>

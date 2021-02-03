@@ -18,11 +18,20 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
 
 import { UsersService } from './services/users.service';
+import { AnneeUnivService } from './services/annee-univ.service';
+import { EnseignantService } from './services/enseignant.service';
+import { EtudiantService } from './services/etudiant.service';
+import { MatiereService } from './services/matiere.service';
+import { NiveauService } from './services/niveau.service';
+import { ParcoursService } from './services/parcours.service';
+
 import { UsersComponent } from './components/users/users.component';
 import { ProfsComponent } from './components/profs/profs.component';
 import { EtudiantsComponent } from './components/etudiants/etudiants.component';
 import { MatieresComponent } from './components/matieres/matieres.component';
 import { AnneeUnivComponent } from './components/annee-univ/annee-univ.component';
+import { ParcoursComponent } from './components/parcours/parcours.component';
+import { NiveauComponent } from './components/niveau/niveau.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +49,9 @@ import { AnneeUnivComponent } from './components/annee-univ/annee-univ.component
     ProfsComponent,
     EtudiantsComponent,
     MatieresComponent,
-    AnneeUnivComponent
+    AnneeUnivComponent,
+    ParcoursComponent,
+    NiveauComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +98,13 @@ import { AnneeUnivComponent } from './components/annee-univ/annee-univ.component
     })
   ],
   providers: [
-    UsersService
+    UsersService,
+    AnneeUnivService,
+    EnseignantService,
+    EtudiantService,
+    MatiereService,
+    NiveauService,
+    ParcoursService
   ],
   bootstrap: [AppComponent]
 })

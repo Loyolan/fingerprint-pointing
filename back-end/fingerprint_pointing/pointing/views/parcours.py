@@ -21,7 +21,7 @@ def getParcoursById(request, id):
     except ValidationError:
         res = {'status': 'error', 'message': 'Identifiant Invalide'}
     except:
-        res = {'status': 'warning', 'message': 'Utilisateur introuvable'}
+        res = {'status': 'warning', 'message': 'Parcours introuvable'}
     return Response(res)
 
 # CREATE PARCOURS
@@ -49,7 +49,7 @@ def updateParcours(request, id):
         parcours.save()
         res = {'status': 'success', "message": "Mis à jour des infos réussi"}
     except ValidationError:
-        res = {'status': 'error', 'message': "Utilisateur introuvable"}
+        res = {'status': 'error', 'message': "Parcours introuvable"}
     except:
         res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
     return Response(res)

@@ -29,7 +29,7 @@ class EnseignantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enseignant
         fields = '__all__'
-
+        
 # MATIERE
 class MatiereSerializer(serializers.ModelSerializer):
     class Meta:

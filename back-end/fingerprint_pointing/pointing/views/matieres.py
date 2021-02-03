@@ -15,6 +15,17 @@ def allMatieres(request):
         res = {'status': 'warning', 'message': 'Une erreur c\'est produite, essayez plus tard'}
     return Response(res)
 
+# GET ALL MATIERES OF AN ENSEIGNANT
+@api_view(['GET'])
+def getMatieresProfs(request, id):
+    try:
+        matieres = Matiere.objects.all().filter(enseignant=id)
+        serialisation = MatiereSerializer(matieres, many=True)
+        res = serialisation.data
+    except: 
+        res = {'status': 'warning', 'message': 'Une erreur c\'est produite, essayez plus tard'}
+    return Response(res)
+
 # GET MATIERE BY ID
 @api_view(['GET'])
 def getMatiereById(request, id):

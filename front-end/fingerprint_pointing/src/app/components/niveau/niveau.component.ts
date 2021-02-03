@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
-import { EnseignantService } from '../../services/enseignant.service';
+import { NiveauService } from '../../services/niveau.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
-  selector: 'app-profs',
-  templateUrl: './profs.component.html',
-  styleUrls: ['./profs.component.css'],
+  selector: 'app-niveau',
+  templateUrl: './niveau.component.html',
+  styleUrls: ['./niveau.component.css'],
   animations: [
     trigger('fade', [
       transition('void => *', [
@@ -17,46 +17,35 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ])
   ]
 })
-export class ProfsComponent implements OnInit {
-
-  profs: any[] = [];
+export class NiveauComponent implements OnInit {
+  niveaux: any[] = [];
   addForm: FormGroup;
   updateForm: FormGroup;
   selected: string = "";
   constructor(
     private fb: FormBuilder,
-    private service: EnseignantService,
+    private service: NiveauService,
     private notifier: NotifierService
   ) {
     this.addForm = this.fb.group({
-      enseignantCode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
-      enseignantNomComplet: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(255)]]
+      niveauCode: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(4)]],
+      niveauDesc: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(255)]]
     });
     this.updateForm = this.fb.group({
-      enseignantCode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
-      enseignantNomComplet: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(255)]]
+      niveauCode: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(4)]],
+      niveauDesc: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(255)]]
     })
   }
 
   ngOnInit(): void {
-    this.getAllEnseignants();
+    this.getAllNiveaux();
   }
 
   /** GET ALL ANNEE UNIV */
-  getAllEnseignants() {
-    this.service.allEnseignants().subscribe((data) => {
+  getAllNiveaux() {
+    this.service.allNiveaus().subscribe((data) => {
       if (data) {
-        this.profs = data
-        for(let i=0; i<this.profs.length; i++) {
-          this.service.allMatieresEnseignant(this.profs[i].enseignantId).subscribe((m)=>{
-            let mats = []
-            for(let j=0; j<m.length; j++) {
-              mats.push(m[j].matiereCode)
-            }
-            this.profs[i].matieres = mats;
-          })
-        }
-        console.log(this.profs)
+        this.niveaux = data;
       } else {
         this.notifier.notify('error', 'Le sereur back inaccessible!!!')
       }
@@ -66,13 +55,13 @@ export class ProfsComponent implements OnInit {
   /** ADD NEW YEAR */
   onSubmitAddForm() {
     const n = this.addForm.value;
-    this.service.addEnseignant(n).subscribe((data) => {
+    this.service.addNiveau(n).subscribe((data) => {
       if (data.status) {
         if (data.status == 'success') {
           let c = document.getElementById('closeAdd');
           c!.click()
           this.notifier.notify(data.status, data.message);
-          this.getAllEnseignants();
+          this.getAllNiveaux();
         } else {
           this.notifier.notify(data.status, data.message);
         }
@@ -83,14 +72,13 @@ export class ProfsComponent implements OnInit {
   }
 
   /** MODIFIER ANNEE */
-  editEnseignant(id: string) {
-
-    this.service.getOneEnseignant(id).subscribe((data) => {
+  editNiveau(id: string) {
+    this.service.getOneNiveau(id).subscribe((data) => {
       if (data) {
-        this.selected = data.enseignantId;
+        this.selected = data.niveauId;
         this.updateForm.setValue({
-          enseignantCode: data.enseignantCode,
-          enseignantNomComplet: data.enseignantNomComplet
+          niveauCode: data.niveauCode,
+          niveauDesc: data.niveauDesc
         });
       } else {
         this.notifier.notify('error', 'Erreur inattendue viens du serveur, Réessayez plus tard!')
@@ -98,19 +86,19 @@ export class ProfsComponent implements OnInit {
     })
   }
 
-  deleteEnseignant(id: string) {
+  deleteNiveau(id: string) {
     this.selected = id;
   }
 
   onSubmitUpdateForm() {
     const n = this.updateForm.value;
-    this.service.updateEnseignant(this.selected, n).subscribe((data) => {
+    this.service.updateNiveau(this.selected, n).subscribe((data) => {
       if (data.status) {
         if (data.status == 'success') {
           let c = document.getElementById('closeEdit');
           c!.click();
           this.notifier.notify(data.status, data.message);
-          this.getAllEnseignants();
+          this.getAllNiveaux();
         } else {
           this.notifier.notify(data.status, data.message);
         }
@@ -120,13 +108,13 @@ export class ProfsComponent implements OnInit {
     })
   }
 
-  deleteEnseignantData() {
-    this.service.deleteEnseignant(this.selected).subscribe((data) => {
+  deleteNiveauData() {
+    this.service.deleteNiveau(this.selected).subscribe((data) => {
       if (data) {
         let c = document.getElementById('closeDelete');
         c!.click();
         this.notifier.notify(data.status, data.message);
-        this.getAllEnseignants();
+        this.getAllNiveaux();
       } else {
         this.notifier.notify('error', 'Erreur inattendue viens du serveur, Réessayez plus tard!');
       }

@@ -11,15 +11,15 @@
                                 <i class="fa fa-database icon-gradient bg-mean-fruit">
                                 </i>
                             </div>
-                            <div>Année Universitaire
+                            <div> Gestion des niveaux
                                 <div class="page-title-subheading">
-                                    Vous pouvez gérer ici l'Année Universitaire
+                                    Vous pouvez gérer ici le niveau
                                 </div>
                             </div>
                         </div>
                         <div class="page-title-actions">
-                            <button type="button" data-toggle="modal" data-target="#modal-add" class="btn btn-success"><i
-                                    class="pe-7s-plus"></i> Ajouter</button>
+                            <button type="button" data-toggle="modal" data-target="#modal-add"
+                                class="btn btn-success"><i class="pe-7s-plus"></i> Ajouter</button>
                         </div>
                     </div>
                 </div>
@@ -28,27 +28,25 @@
                     <div class="col-md-8">
                         <div @fade class="main-card mb-3 card">
                             <div class="card-body">
-                                <h5 class="card-title">ANNEE UNIVERSITAIRE</h5>
-                                <div *ngFor="let a of annees"  class="mt-2">
+                                <h5 class="card-title">NIVEAUX</h5>
+                                <div *ngFor="let n of niveaux"  class="mt-2">
                                     <nav class="" aria-label="breadcrumb">
                                         <div class="active breadcrumb-item row" aria-current="page">
-                                            <span class="col-md-4">
-                                                <i class="pe-7s-albums"></i> {{a.anneeUnivDesc}}
+                                            <span class="col-md-8">
+                                                <i class="pe-7s-albums"></i> {{n.niveauDesc}}
                                             </span>
-                                            <span class="col-md-6">
+                                            <span class="col-md-2">
                                                 <span
-                                                    class="badge badge-danger">{{a.anneeUnivDesc.split('-')[0]}}</span>
-                                                <span
-                                                    class="badge badge-danger ml-4">{{a.anneeUnivDesc.split('-')[1]}}</span>
+                                                    class="badge badge-danger">{{n.niveauCode}}</span>
                                             </span>
                                             <span class="col-md-2 right">
                                                 <div role="group" class="btn-group-sm btn-group btn-group-toggle">
                                                     <label data-toggle="modal" data-target="#modal-edit"
-                                                        (click)="editAnneeUniv(a.anneeUnivId)" class="btn btn-primary">
+                                                        (click)="editNiveau(n.niveauId)" class="btn btn-primary">
                                                         <i class="fa fa-edit"></i>
                                                     </label>
                                                     <label data-toggle="modal" data-target="#modal-delete"
-                                                        (click)="deleteAnneeUniv(a.anneeUnivId)" class="btn btn-danger">
+                                                        (click)="deleteNiveau(n.niveauId)" class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>
                                                     </label>
                                                 </div>
@@ -80,20 +78,19 @@
             <div class="modal-body">
                 <div class="input-group">
                     <div class="nk-int-st">
-                        <input type="text" (keyup)="setAnnee2()" class="form-control" id="year1"
-                            formControlName="year1" placeholder="Année debut">
+                        <input type="text" class="form-control" id="niveauCode" formControlName="niveauCode"
+                            placeholder="Abbreviation">
                     </div>
                 </div>
                 <div class="input-group">
                     <div class="nk-int-st">
-                        <input type="text" class="form-control" id="year2" formControlName="year2"
-                            placeholder="Année prochaine" readonly>
+                        <input type="text" class="form-control" id="niveauDesc" formControlName="niveauDesc"
+                            placeholder="Description">
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="closeAdd" class="btn btn-secondary"
-                    data-dismiss="modal">Annuler</button>
+                <button type="button" id="closeAdd" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                 <button type="submit" class="btn btn-primary" [disabled]="addForm.invalid">Enregistrer</button>
             </div>
         </form>
@@ -113,20 +110,17 @@
             <div class="modal-body">
                 <div class="input-group">
                     <div class="nk-int-st">
-                        <input type="text" (keyup)="setAnnee2()" class="form-control" id="year1"
-                            formControlName="year1" placeholder="Année debut">
+                        <input type="text" class="form-control" id="niveauCode" formControlName="niveauCode" placeholder="Abbreviation">
                     </div>
                 </div>
                 <div class="input-group">
                     <div class="nk-int-st">
-                        <input type="text" class="form-control" id="year2" formControlName="year2"
-                            placeholder="Année prochaine" readonly>
+                        <input type="text" class="form-control" id="niveauDesc" formControlName="niveauDesc" placeholder="Description">
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="closeEdit" class="btn btn-secondary"
-                    data-dismiss="modal">Annuler</button>
+                <button type="button" id="closeEdit" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                 <button type="submit" class="btn btn-primary" [disabled]="updateForm.invalid">Enregistrer</button>
             </div>
         </form>
@@ -148,7 +142,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="closeDelete" class="btn btn-primary" data-dismiss="modal">Annuler</button>
-                <button type="button" (click)="deleteAnnee()" class="btn btn-danger">Supprimer</button>
+                <button type="button" (click)="deleteNiveauData()" class="btn btn-danger">Supprimer</button>
             </div>
         </div>
     </div>

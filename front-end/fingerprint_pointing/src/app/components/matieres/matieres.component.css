@@ -1,0 +1,7 @@
+.badge-clickable {
+    cursor: pointer;
+}
+
+.badge-clickable:hover {
+    background-color: #300;
+}

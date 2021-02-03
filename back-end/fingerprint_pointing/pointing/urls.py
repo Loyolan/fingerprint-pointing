@@ -31,6 +31,7 @@ urlpatterns = [
     path('niveaux/<id>/delete', views.deleteNiveau),
 
     path('enseignants/', views.allEnseignants),
+     path('enseignants/<id>/matieres', views.getMatieresProfs),
     path('enseignants/<id>/', views.getEnseignantById),
     path('enseignants/add', views.addEnseignant),
     path('enseignants/<id>/update', views.updateEnseignant),
