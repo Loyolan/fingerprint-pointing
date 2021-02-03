@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
 
   initIsAuth() {
     if (this.session.nom != null) {
-      this.router.navigate([`/eni/figerprint_pointing/home`]);
+      this.router.navigate([`/eni/fingerprint_pointing/home`]);
     }
   }
 
@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
           setTimeout(()=>{
             this.notifier.notify('info', 'L\'admin vous enverra un mail de confirmation!');
             setTimeout(()=>{
-              this.router.navigate(['/eni/figerprint_pointing/login']);
+              this.router.navigate(['/eni/fingerprint_pointing/login']);
             })
           }, 3000);
         } else {

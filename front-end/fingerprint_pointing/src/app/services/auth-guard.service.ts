@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     if (this.session.nom != null) {
       return true;
     } else {
-      this.router.navigate(['/eni/figerprint_pointing/login']);
+      this.router.navigate(['/eni/fingerprint_pointing/login']);
       return false;
     }
   }

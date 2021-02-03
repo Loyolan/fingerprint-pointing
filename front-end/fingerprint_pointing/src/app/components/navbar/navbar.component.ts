@@ -10,6 +10,7 @@ import { NotifierService } from 'angular-notifier';
 })
 export class NavbarComponent implements OnInit {
 
+  isAdmin: any = false;
   session: any;
   user: any = null;
   updateForm: FormGroup;
@@ -20,6 +21,13 @@ export class NavbarComponent implements OnInit {
     private readonly notifier: NotifierService) {
 
     this.session = this.userService.getUserSession();
+    this.userService.getOneUser(this.session.id).subscribe((data) => {
+      if (data.role) {
+        if (data.role == 'ADMIN') {
+          this.isAdmin = true;
+        }
+      }
+    });
     this.updateForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(12)]],
       fullname: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(32)]],

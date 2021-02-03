@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotifierModule } from 'angular-notifier';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,10 @@ import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.compon
 
 import { UsersService } from './services/users.service';
 import { UsersComponent } from './components/users/users.component';
+import { ProfsComponent } from './components/profs/profs.component';
+import { EtudiantsComponent } from './components/etudiants/etudiants.component';
+import { MatieresComponent } from './components/matieres/matieres.component';
+import { AnneeUnivComponent } from './components/annee-univ/annee-univ.component';
 
 @NgModule({
   declarations: [
@@ -32,13 +36,18 @@ import { UsersComponent } from './components/users/users.component';
     LoginComponent,
     RegisterComponent,
     ForgotPassComponent,
-    UsersComponent
+    UsersComponent,
+    ProfsComponent,
+    EtudiantsComponent,
+    MatieresComponent,
+    AnneeUnivComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     NotifierModule.withConfig({
       position: {
         horizontal: {

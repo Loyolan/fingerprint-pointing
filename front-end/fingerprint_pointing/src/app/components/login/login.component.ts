@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
 
   initIsAuth() {
     if (this.session.nom != null) {
-      this.router.navigate([`/eni/figerprint_pointing/home`]);
+      this.router.navigate([`/eni/fingerprint_pointing/home`]);
     }
   }
 
@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
   onSubmitLogin() {
     const loginValue = this.loginForm.value;
     this.userService.authentification(loginValue['nom'], loginValue['password']).subscribe((data) => {
+      console.log(data);
       let a = document.getElementById('alert');
       let t = document.getElementById('traitement');
       a!.innerHTML = '';

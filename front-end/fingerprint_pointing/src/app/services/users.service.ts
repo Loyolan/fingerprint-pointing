@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 
-const endpoint = "http://127.0.0.1:8000/eni/api/figerprint_pointing";
+const endpoint = "http://127.0.0.1:8000/eni/api/fingerprint_pointing";
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +14,7 @@ export class UsersService {
   httpOptions = {
     headers: new HttpHeaders({
       'content-type': 'application/json',
-      'X-CSRFToken': ''
+      'X-CSRFToken': 'TqXf7sEvC3uKNYocBxhSRcI64KprmjzB'
     })
   };
 

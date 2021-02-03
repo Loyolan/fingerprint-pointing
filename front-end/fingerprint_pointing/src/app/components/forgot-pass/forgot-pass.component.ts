@@ -34,7 +34,7 @@ export class ForgotPassComponent implements OnInit {
 
   initIsAuth() {
     if (this.session.nom != null) {
-      this.router.navigate([`/eni/figerprint_pointing/home`]);
+      this.router.navigate([`/eni/fingerprint_pointing/home`]);
     }
   }
 }

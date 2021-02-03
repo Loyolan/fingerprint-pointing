@@ -6,18 +6,22 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
 import { UsersComponent } from './components/users/users.component';
 import { FourOhFourComponent } from './components/four-oh-four/four-oh-four.component';
+import { ProfsComponent } from './components/profs/profs.component';
+import { EtudiantsComponent } from './components/etudiants/etudiants.component';
 
 import { AuthGuard } from './services/auth-guard.service';
 import { AdminGuard } from './services/admin-guard.service';
 
 
 const routes: Routes = [
-  { path: 'eni/figerprint_pointing/home', canActivate:[AuthGuard], component: HomeComponent },
-  { path: 'eni/figerprint_pointing/login', component: LoginComponent },
-  { path: 'eni/figerprint_pointing/register', component: RegisterComponent },
-  { path: 'eni/figerprint_pointing/forgot_pass', component: ForgotPassComponent },
-  { path: 'eni/figerprint_pointing/administrations', canActivate:[AdminGuard], component: UsersComponent},
-  { path: '', redirectTo: 'eni/figerprint_pointing/home', pathMatch: 'full' },
+  { path: 'eni/fingerprint_pointing/home', canActivate:[AuthGuard], component: HomeComponent },
+  { path: 'eni/fingerprint_pointing/profs', canActivate: [AuthGuard], component: ProfsComponent },
+  { path: 'eni/fingerprint_pointing/etudiants', canActivate: [AuthGuard], component: EtudiantsComponent },
+  { path: 'eni/fingerprint_pointing/login', component: LoginComponent },
+  { path: 'eni/fingerprint_pointing/register', component: RegisterComponent },
+  { path: 'eni/fingerprint_pointing/forgot_pass', component: ForgotPassComponent },
+  { path: 'eni/fingerprint_pointing/administrations', canActivate:[AdminGuard], component: UsersComponent},
+  { path: '', redirectTo: 'eni/fingerprint_pointing/home', pathMatch: 'full' },
   { path: '**', canActivate: [AuthGuard], component: FourOhFourComponent }
 ];
 

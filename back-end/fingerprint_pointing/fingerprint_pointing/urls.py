@@ -18,5 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("eni/api/figerprint_pointing/", include('pointing.urls'))
+    path("eni/api/fingerprint_pointing/", include('pointing.urls'))
 ]
