@@ -20,3 +20,5 @@ bcrypt<br/>
 -migrate <strong>$python3 manage.py migrate</strong><br/>
 -run application <strong>$python3 manage.py runserver</strong>
 
+### PRESENCE
+TAFITASOA
