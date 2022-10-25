@@ -1,0 +1,17 @@
+.logo-src {
+   width: 200px;
+   height: 60px;
+   background-size: 200px 60px;
+}
+
+.app-header.header-text-light .app-header__logo .logo-src {
+ 	width: 200px;
+   	height: 60px;
+   	background-size: 200px 60px;
+}
+
+.app-header.header-text-dark .app-header__logo .logo-src {
+	width: 200px;
+   	height: 60px;
+   	background-size: 200px 60px;
+}
