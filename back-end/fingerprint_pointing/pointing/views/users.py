@@ -21,9 +21,9 @@ def getUserById(request, id):
         serialisation = UserSerializer(user, many=False)
         res = serialisation.data
     except ValidationError:
-        res = {'status': 'error', 'message': 'Invalid id'}
+        res = {'status': 'error', 'message': 'Identifiant Invalide'}
     except:
-            es = {'status': 'warn', 'message': 'Not found'}
+            es = {'status': 'warn', 'message': 'Utilisateur introuvable'}
     return Response(res)
 
 # CREATE NEW USER
@@ -32,31 +32,35 @@ def addUser(request):
     try:
         request.data['password'] = make_password(password=request.data['password'], salt=None, hasher='default')
         serialisation = UserSerializer(data=request.data, many=False)
+        res = None;
+        print(serialisation);
         if serialisation.is_valid():
             serialisation.save()
             res = serialisation.data
         else:
-            res = {'status': 'error', 'message': 'Invalid input'}
+            res = {'status': 'error', 'message': "Nom d'utilisateur ou email déjà utilisés"}
     except:
-        res = {'status': 'error', 'message': 'Fail, Not saved'}
+        res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
     return Response(res)
 
 # UPDATE A USER
 @api_view(['PUT'])
 def updateUser(request, id):
     try:
-        user = User.objects.get(userId=id)
-        request.data['password'] = user.password
+        user = User.objects.get(userId=id);
+        request.data['password'] = user.password;
+        request.data['role'] = user.role;
+        request.data['created_at'] = user.created_at;
         serialisation = UserSerializer(instance=user, data=request.data)
         if serialisation.is_valid():
             serialisation.save()
-            res = serialisation.data
+            res = {'status': 'success', "user": serialisation.data, "message": "Mis à jour des infos réussi"}
         else:
-            res  = {'status': 'error', 'message': 'Invalid input'}
+            res  = {'status': 'error', 'message': "Nom d'utilisateur ou email déjà utilisés"}
     except ValidationError:
-        res = {'status': 'error', 'message': 'Invalid id'}
+        res = {'status': 'error', 'message': "Utilisateur introuvable"}
     except:
-        res = {'status': 'error', 'message': 'Fail, Not saved'}
+        res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
     return Response(res)
 
 # CHANGE PASSWORD
@@ -64,16 +68,16 @@ def updateUser(request, id):
 def changePwd(request, id):
     try:
         user = User.objects.get(userId=id)
-        if(check_password(password=request.data['old'], encoded = compte.password)):
+        if(check_password(password=request.data['old'], encoded = user.password)):
             user.password = make_password(password=request.data['new'], salt=None, hasher='default')
-            compte.save()
-            res = {'status': 'success', 'message': 'Password changed, successfuly'}
+            user.save()
+            res = {'status': 'success', 'message': 'Mot de passe bien changé'}
         else:
-            res = {'status': 'warn', 'message': 'Incorrect old password'}
+            res = {'status': 'warning', 'message': 'Ancien mot de passe incorrect'}
     except ValidationError:
-        res = {'status': 'error', 'message': 'Invalid input'}
+        res = {'status': 'error', 'message': "Utilisateur introuvable"}
     except:
-        res = {'status': 'error', 'message': 'Fail, password not changed'}
+        res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
     return Response(res)
 
 # DELETE USER
@@ -82,11 +86,11 @@ def deleteUser(request, id):
     try:
         user = User.objects.get(userId=id)
         user.delete()
-        res = {'status': 'success', 'message': 'User deleted, successfuly'}
+        res = {'status': 'success', 'message': 'Suppression d\'Utilisateur reussi'}
     except ValidationError:
-        res = {'status': 'warn', 'message': 'Invalid id'}
+        res = {'status': 'error', 'message': "Utilisateur introuvable"}
     except:
-        res = {'status': 'error', 'message': 'Fail, user not deleted'}
+        res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
     return Response(res)
 
 #AUTHENTICATION
@@ -94,11 +98,11 @@ def deleteUser(request, id):
 def authentification(request, username, password):
     try:
         user = User.objects.get(username = username)
-        if(check_password(password= password, encoded = user.comptePassword)):
-            user = CompteSerializer(user, many=False)
+        if(check_password(password= password, encoded = user.password)):
+            user = UserSerializer(user, many=False)
             res = {'status': 'success', 'user': user.data}
         else:
-            res = {'status': 'warn', 'message': 'Password or username incorrects'}
+            res = {'status': 'error', 'message': 'Password or username incorrects'}
     except:
-        res = {'status': 'error', 'message': 'User not found'}
+        res = {'status': 'error', 'message': "Utilisateur introuvable"}
     return Response(res)

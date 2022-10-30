@@ -1,99 +1,205 @@
 <div class="app-header header-shadow">
-            <div class="app-header__logo">
-                <div class="logo-src">
-                		
-                </div>
-                <div class="header__pane ml-auto">
-                    <div>
-                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
+    <div class="app-header__logo">
+        <div class="logo-src">
+
+        </div>
+        <div class="header__pane ml-auto">
+            <div>
+                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                    data-class="closed-sidebar">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
             </div>
-            <div class="app-header__mobile-menu">
-                <div>
-                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
-                        <span class="hamburger-box">
-                            <span class="hamburger-inner"></span>
-                        </span>
-                    </button>
-                </div>
-            </div>
-            <div class="app-header__menu">
-                <span>
-                    <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
-                        <span class="btn-icon-wrapper">
-                            <i class="fa fa-ellipsis-v fa-w-6"></i>
-                        </span>
-                    </button>
+        </div>
+    </div>
+    <div class="app-header__mobile-menu">
+        <div>
+            <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
                 </span>
-            </div>    <div class="app-header__content">
-                <div class="app-header-left">
-                    <div class="search-wrapper">
-                        <div class="input-holder">
-                            <input type="text" class="search-input" placeholder="Type to search">
-                            <button class="search-icon"><span></span></button>
-                        </div>
-                        <button class="close"></button>
-                    </div>
-                    <ul class="header-menu nav">
-                        <li class="nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-database"> </i>
-                                Statistics
-                            </a>
-                        </li>
-                        <li class="btn-group nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-edit"></i>
-                                Projects
-                            </a>
-                        </li>
-                        <li class="dropdown nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-cog"></i>
-                                Settings
-                            </a>
-                        </li>
-                    </ul>        </div>
-                <div class="app-header-right">
-                    <div class="header-btn-lg pr-0">
-                        <div class="widget-content p-0">
-                            <div class="widget-content-wrapper">
-                                <div class="widget-content-left">
-                                    <div class="btn-group">
-                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
-                                            <i class="fa fa-angle-down ml-2 opacity-8"></i>
-                                        </a>
-                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <button type="button" tabindex="0" class="dropdown-item">User Account</button>
-                                            <button type="button" tabindex="0" class="dropdown-item">Settings</button>
-                                            <h6 tabindex="-1" class="dropdown-header">Header</h6>
-                                            <button type="button" tabindex="0" class="dropdown-item">Actions</button>
-                                            <div tabindex="-1" class="dropdown-divider"></div>
-                                            <button type="button" tabindex="0" class="dropdown-item">Dividers</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading">
-                                        Alina Mclourd
-                                    </div>
-                                    <div class="widget-subheading">
-                                        VP People Manager
-                                    </div>
-                                </div>
-                                <div class="widget-content-right header-user-info ml-3">
-                                    <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
-                                        <i class="fa text-white fa-calendar pr-1 pl-1"></i>
-                                    </button>
+            </button>
+        </div>
+    </div>
+    <div class="app-header__menu">
+        <span>
+            <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                <span class="btn-icon-wrapper">
+                    <i class="fa fa-ellipsis-v fa-w-6"></i>
+                </span>
+            </button>
+        </span>
+    </div>
+    <div class="app-header__content">
+        <div class="app-header-left">
+            <div class="search-wrapper">
+                <div class="input-holder">
+                    <input type="text" class="search-input" placeholder="Type to search">
+                    <button class="search-icon"><span></span></button>
+                </div>
+                <button class="close"></button>
+            </div>
+            <ul class="header-menu nav">
+                <li class="nav-item">
+                    <button class="nav-link">
+                        <i class="nav-link-icon fa fa-database"> </i>
+                        Statistiques
+                    </button>
+                </li>
+                <li class="btn-group nav-item ml-2">
+                    <button class="nav-link">
+                        <i class="nav-link-icon fa fa-edit"></i>
+                        Projets
+                    </button>
+                </li>
+                <li class="dropdown nav-item ml-2">
+                    <button class="nav-link btn-open-options">
+                        <i class="nav-link-icon fa fa-cog"></i>
+                        Paramètres
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="app-header-right">
+            <div class="header-btn-lg pr-0">
+                <div class="widget-content p-0">
+                    <div class="widget-content-wrapper">
+                        <div class="widget-content-left">
+                            <div class="btn-group">
+                                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                    <img width="42" class="rounded-circle" src="assets/images/avatar.png" alt="">
+                                    <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                                </a>
+                                <div tabindex="-1" role="menu" aria-hidden="true"
+                                    class="dropdown-menu dropdown-menu-right text-center">
+                                    <img width="42" class="rounded-circle" src="assets/images/avatar.png" alt="">
+                                    <h5 class="text-success">{{ session.nom | uppercase }}</h5>
+                                    <h6 tabindex="-1" class="dropdown-header">Parametres</h6>
+                                    <button type="button" data-toggle="modal" data-target="#infos" tabindex="0" class="dropdown-item"><i class="pe-7s-id"> </i>&nbsp; Informations</button>
+                                    <button type="button" data-toggle="modal" data-target="#modification" tabindex="0" class="dropdown-item"><i class="pe-7s-pen"> </i>&nbsp; Mis à jour des infos</button>
+                                    <button type="button" data-toggle="modal" data-target="#change_pwd" tabindex="0" class="dropdown-item"><i class="pe-7s-key"> </i>&nbsp; Changement de mot de passe</button>
+                                    <div tabindex="-1" class="dropdown-divider"></div>
+                                    <button (click)="deconnexion()" type="button" data-toggle="modal" data-target="#deconnexion" tabindex="0" class="btn btn-danger form-control"><i class="pe-7s-power"> </i>&nbsp; Deconnexion</button>
                                 </div>
                             </div>
                         </div>
-                    </div>        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- INFO -->
+<div class="modal" id="infos" tabindex="-1" role="dialog" aria-labelledby="INFORMATIONS" aria-modal="true">
+    <div class="modal-dialog animated zoomInDown">
+        <div class="modal-content">
+            <div class="modal-body card card-body text-center">
+              <div *ngIf="user != null">
+                <h5 class="card-title">Information de l'utilisateur</h5>
+                <img width="42" class="rounded-circle" src="assets/images/avatar.png" alt="">
+                <h6 class="text-success">{{ user.username | uppercase }}</h6>
+                <h6>{{ user.fullname | uppercase }}</h6>
+                <h6 class="text-info">{{ user.email }}</h6>
+                <h6 class="text-success">{{ user.role }}</h6>
+                <button type="button" class="btn btn-danger form-control mt-3" data-dismiss="modal">Fermer</button>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODIFICATION -->
+<div class="modal" id="modification" tabindex="-1" role="dialog" aria-labelledby="MODIFICATION" aria-modal="true">
+    <div class="modal-dialog animated zoomInDown">
+        <form [formGroup]="updateForm" (ngSubmit)="onSubmitUpdateForm()" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">MIS A JOUR DES INFORMATIONS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control" id="username" formControlName="username" placeholder="Nom d'utilisateur">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control" id="fullname" formControlName="fullname" placeholder="Nom Complet">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeModification" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary" [disabled]="updateForm.invalid">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- CHANGE PWD -->
+<div class="modal" id="change_pwd" tabindex="-1" role="dialog" aria-labelledby="CHANGEPWD" aria-modal="true">
+    <div class="modal-dialog modal-sm animated rubberBand">
+        <form [formGroup]="pwdForm" (ngSubmit)="onSubmitPwdForm()" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">MOT DE PASSE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="password" class="form-control" id="old" formControlName="old" placeholder="Ancien mot de passe">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="password" class="form-control" id="new" formControlName="new" placeholder="Nouveau mot de passe">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="password" class="form-control" id="fullname" formControlName="conf" placeholder="Confirmer votre nouveau mot de passe">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closePwd" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary" [disabled]="pwdForm.invalid">Changer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- DECONNEXION -->
+<div class="modal" id="deconnexion" tabindex="-1" role="dialog" aria-labelledby="DECONNEXION" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">DECONNEXION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6><i class="fa fa-warning"></i> Voulez vous vraiment deconnecter?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="button" (click)="deconnecter()" class="btn btn-primary">Deconnecter</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<notifier-container></notifier-container>

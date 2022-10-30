@@ -8,5 +8,5 @@ urlpatterns = [
     path('users/<id>/update', views.updateUser),
     path('users/<id>/change_pwd', views.changePwd),
     path('users/<id>/delete', views.deleteUser),
-    path('auth/users/<username>/password/<password>', views.authentification)
+    path('auth/user/<username>/password/<password>', views.authentification)
 ]

@@ -1,0 +1,25 @@
+<div class="login-content">
+  <div class="nk-block toggled">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="nk-form">
+        <a class="btn btn-login-user btn-success btn-float"><i class="pe-7s-user"></i></a>
+        <div class="input-group">
+            <div class="nk-int-st">
+                <input type="text" class="form-control" id="nom" formControlName="nom" placeholder="Username">
+            </div>
+        </div>
+        <div class="input-group mg-t-15">
+            <div class="nk-int-st">
+                <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-login btn-success btn-float"><i class="pe-7s-angle-right-circle"></i></button>
+        <div id="traitement" class="text-center"></div>
+        <p id="alert"></p>
+    </form>
+
+    <div class="nk-navigation nk-lg-ic">
+        <a [routerLink]="['/eni/figerprint_pointing/register']" title="Registration"><i class="fa fa-plus ml-2 mt-2"></i></a>
+        <a [routerLink]="['/eni/figerprint_pointing/forgot_pass']" title="Mot de passe oublié"><i class="fa fa-question ml-2 mt-2"></i></a>
+    </div>
+  </div>
+</div>

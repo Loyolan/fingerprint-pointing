@@ -1,1 +1,177 @@
 /* You can add global styles to this file, and also import other style files */
+.login-content, .error-page-area {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    box-sizing: border-box;
+    min-height: 100vh;
+    text-align: center;
+    background-color: #330000;
+}
+
+.nk-block {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    box-sizing: border-box;
+    max-width: 500px;
+    padding: 20px 0;
+    width: 80%;
+    position: relative;
+    margin: 0 auto;
+    vertical-align: middle;
+    display: inline-block;
+    animation-name: rollIn;
+    animation-duration: .9s;
+    animation-fill-mode: both;
+    z-index: 10;
+    margin-top: 100px;
+}
+
+.nk-block, .login-content:before, .error-page-wrap, .error-page-area:before {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.nk-form {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    border-radius: 2px;
+    padding: 40px;
+}
+
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.nk-int-st:not(.form-group) {
+    display: inline-block;
+    width: 100%;
+}
+
+.nk-int-st {
+    position: relative;
+    vertical-align: top;
+}
+
+.nk-int-st input[type="text"], .nk-int-st input[type="password"], .nk-int-st input[type="email"], .nk-int-st input[type="number"] {
+    box-shadow: none;
+    border-top: 0px solid #ccc;
+    border-left: 0px solid #ccc;
+    border-right: 0px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 0px;
+    resize: none;
+    border-radius: 0px;
+}
+
+.nk-int-st input[type="text"]:focus, .nk-int-st input[type="password"]:focus, .nk-int-st input[type="email"]:focus, .nk-int-st input[type="number"]:focus {
+	box-shadow: none;
+    border-top: 0px solid #ccc;
+    border-left: 0px solid #ccc;
+    border-right: 0px solid #ccc;
+    border-bottom: 2px solid #330000;
+}
+
+.mg-t-15 {
+    margin-top: 15px;
+}
+
+.fm-checkbox {
+    margin: 15px 0 0 41px;
+    text-align: left;
+}
+
+.nk-block .btn-login {
+    top: 50%;
+    margin-top: -50px;
+    right: -25px;
+}
+
+.btn-login-user.btn-success {
+	top: -10px;
+	left: -10px;
+	background-color: #330000;
+    border-color: #330000;
+    border: 0px solid #ccc;
+    outline: none;
+    box-shadow: none;
+    border-radius: 50%;
+}
+
+.btn-login.btn-success, .images-cropper-pro .btn, .images-action-pro .btn, .notika-todo-btn .btn, .btn.notika-add-todo, .btn.notika-chat-btn {
+    background-color: #330000;
+    border-color: #330000;
+    border: 0px solid #ccc;
+    outline: none;
+    box-shadow: none;
+    border-radius: 50%;
+}
+
+
+.btn-login-user.btn-success:hover, .btn-login.btn-success:hover {
+	background-color: white;
+}
+
+.btn-login-user.btn-success:hover i, .btn-login.btn-success:hover i{
+	color: #330000;
+}
+
+.btn-float:not(.m-btn) {
+    position: absolute!important;
+}
+
+.btn-float {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    line-height: 46px!important;
+}
+
+.btn-login i, .btn-login-user>i{
+	font-size: 20px;
+	color: white;
+}
+
+.nk-navigation a {
+    color: #fff;
+    background: rgba(255,255,255,.2);
+    margin: 0 1px;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    white-space: nowrap;
+    text-align: left;
+}
+
+
+.nk-navigation a {
+    vertical-align: center;
+    display: inline-block;
+}
+
+.nk-navigation a:hover {
+    background-color: white;
+
+}
