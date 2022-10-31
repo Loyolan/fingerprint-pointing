@@ -18,6 +18,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
 
 import { UsersService } from './services/users.service';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UsersService } from './services/users.service';
     SettingsComponent,
     LoginComponent,
     RegisterComponent,
-    ForgotPassComponent
+    ForgotPassComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

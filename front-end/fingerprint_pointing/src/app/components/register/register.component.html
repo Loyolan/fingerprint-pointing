@@ -1,41 +1,43 @@
 <div class="login-content">
   <div class="nk-block" id="l-register">
-    <div class="nk-form">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegisterForm()" class="nk-form">
         <div class="input-group">
             <div class="nk-int-st">
-                <input type="text" class="form-control" placeholder="Nom d'utilisateur">
+                <input type="text" class="form-control" id="username" formControlName="username" placeholder="Nom d'utilisateur">
             </div>
         </div>
 
         <div class="input-group mg-t-15">
             <div class="nk-int-st">
-                <input type="email" class="form-control" placeholder="Adresse Email">
+                <input type="email" class="form-control" id="email" formControlName="email" placeholder="Adresse Email">
             </div>
         </div>
 
         <div class="input-group mg-t-15">
             <div class="nk-int-st">
-                <input type="text" class="form-control" placeholder="Nom complet">
+                <input type="text" class="form-control" id="fullname" formControlName="fullname" placeholder="Nom complet">
             </div>
         </div>
 
         <div class="input-group mg-t-15">
             <div class="nk-int-st">
-                <input type="password" class="form-control" placeholder="Mot de passe">
+                <input type="password" class="form-control" id="password" formControlName="password" placeholder="Mot de passe">
             </div>
         </div>
 
         <div class="input-group mg-t-15">
             <div class="nk-int-st">
-                <input type="password" class="form-control" placeholder="Confirmation mot de passe">
+                <input type="password" class="form-control" id="conf" formControlName="conf" placeholder="Confirmation mot de passe">
             </div>
         </div>
 
-        <a href="#l-login" class="btn btn-login btn-success btn-float"><i class="pe-7s-add-user"></i></a>
-    </div>
+        <button type="submit" class="btn btn-login btn-success btn-float"><i class="pe-7s-add-user"></i></button>
+    </form>
 
     <div class="nk-navigation rg-ic-stl">
         <a [routerLink]="['/eni/figerprint_pointing/login']" ><i class="fa fa-angle-left mt-2 ml-2" title="Login"></i></a>
     </div>
   </div>
 </div>
+
+<notifier-container></notifier-container>

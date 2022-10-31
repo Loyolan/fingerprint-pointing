@@ -20,5 +20,13 @@ bcrypt<br/>
 -migrate <strong>$python3 manage.py migrate</strong><br/>
 -run application <strong>$python3 manage.py runserver</strong>
 
-### PRESENCE
+## FRONTEND (ANGULAR/CLI)
+### REQUIREMENTS
+node v18.7.0 <br/>
+npm v8.19.2 <br/>
+angular v14.2.6 <br/>
+angular-notifier
+
+
+## COLLABORATORS
 TAFITASOAMOOMS27

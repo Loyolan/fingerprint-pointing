@@ -1,0 +1,258 @@
+<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+    <app-navbar></app-navbar>
+    <app-settings></app-settings>
+    <div class="app-main">
+        <app-sidebar></app-sidebar>
+        <div class="app-main__outer">
+            <div class="app-main__inner">
+                <div class="app-page-title">
+                    <div class="page-title-wrapper">
+                        <div class="page-title-heading">
+                            <div class="page-title-icon">
+                                <i class="pe-7s-tools icon-gradient bg-mean-fruit">
+                                </i>
+                            </div>
+                            <div>Gestion des utilisateurs de l'applicaitons
+                                <div class="page-title-subheading">
+                                    Réservée aux administrateurs
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-title-actions">
+                            <div class="d-inline-block dropdown">
+                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    class="btn-shadow dropdown-toggle btn btn-info">
+                                    <span class="btn-icon-wrapper pr-2 opacity-7">
+                                        <i class="fa fa-business-time fa-w-20"></i>
+                                    </span>
+                                    Stats
+                                </button>
+                                <div tabindex="-1" role="menu" aria-hidden="true"
+                                    class="dropdown-menu dropdown-menu-right">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a href="javascript:void(0);" class="nav-link">
+                                                <i class="nav-link-icon lnr-inbox"></i>
+                                                <span>
+                                                    Administrateurs
+                                                </span>
+                                                <div class="ml-auto badge badge-pill badge-succes">{{ admins.length }}</div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="javascript:void(0);" class="nav-link">
+                                                <i class="nav-link-icon lnr-book"></i>
+                                                <span>
+                                                    Utilisateurs confirmés
+                                                </span>
+                                                <div class="ml-auto badge badge-pill badge-primary">{{ users.length }}</div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="javascript:void(0);" class="nav-link">
+                                                <i class="nav-link-icon lnr-picture"></i>
+                                                <span>
+                                                    Demande en attente
+                                                </span>
+                                                <div class="ml-auto badge badge-pill badge-danger">{{ demandes.length }}</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ADMIN -->
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="page-title-heading">
+                            <div class="page-title-icon">
+                                <h5><b><i class="pe-7s-diamond">
+                                </i>
+                            ADMINISTRATEURS </b></h5>
+                                <div class="page-title-subheading">
+                                    Administrateurs de l'application
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngFor="let a of admins" >
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="card mb-3 widget-content">
+                            <div class="widget-content-outer">
+                                <div class="widget-content-wrapper">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">{{ a.username | uppercase }}</div>
+                                        <div class="widget-subheading">{{a.fullname}}</div>
+                                        <div class="widget-subheading text-info">{{a.email}}</div>
+                                    </div>
+                                    <div class="widget-content-right" *ngIf="a.userId != session.id">
+                                        <div data-toggle="modal" data-target="#delete" (click)="showDeleteUser(a.userId, a.role)" class="widget-numbers animated bounceInLeft text-danger">
+                                            <i class="pe-7s-trash"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <!-- END ADMIN -->
+                <!-- USERS -->
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="page-title-heading">
+                            <div class="page-title-icon">
+                                <h5><i class="pe-7s-users">
+                                </i>
+                                UTILISATEURS
+                                </h5>
+                                <div class="page-title-subheading">
+                                    Utilisateurs de l'application
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngFor="let a of users" >
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="card mb-3 widget-content">
+                            <div class="widget-content-outer">
+                                <div class="widget-content-wrapper">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">{{ a.username | uppercase }}</div>
+                                        <div class="widget-subheading">{{a.fullname}}</div>
+                                        <div class="widget-subheading text-info">{{a.email}}</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div data-toggle="modal" data-target="#user-2-admin" (click)="userToAdmin(a.userId)" class="widget-numbers animated bounceInLeft text-primary">
+                                            <i class="pe-7s-diamond"></i>
+                                        </div>
+                                        <div data-toggle="modal" data-target="#delete" (click)="showDeleteUser(a.userId, a.role)" class="widget-numbers animated bounceInLeft text-danger">
+                                            <i class="pe-7s-trash"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <!-- END USERS -->
+                <!-- DEMANDE -->
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="page-title-heading">
+                            <div class="page-title-icon">
+                                <h5><b>
+                                <i class="pe-7s-shield">
+                                </i>
+                                DEMANDES </b></h5>
+                                <div class="page-title-subheading">
+                                    Demande en attente
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngFor="let a of demandes" >
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="card mb-3 widget-content">
+                            <div class="widget-content-outer">
+                                <div class="widget-content-wrapper">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">{{ a.username | uppercase }}</div>
+                                        <div class="widget-subheading">{{a.fullname}}</div>
+                                        <div class="widget-subheading text-info">{{a.email}}</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div data-toggle="modal" data-target="#confirm-demande" (click)="confirmDemande(a.userId)" class="widget-numbers animated bounceInLeft text-primary">
+                                            <i class="pe-7s-add-user"></i>
+                                        </div>
+                                        <div data-toggle="modal" data-target="#delete" (click)="showDeleteUser(a.userId, a.role)" class="widget-numbers animated bounceInLeft text-danger">
+                                            <i class="pe-7s-trash"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <!-- END DEMANDE -->
+            </div>
+            <app-footer></app-footer>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE -->
+<div class="modal" id="delete" tabindex="-1" role="dialog" aria-labelledby="SUPPRESSION" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CONFIRMATION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6><i class="fa fa-warning"></i> Voulez vous vraiment le supprimer?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeDelete" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                <button type="button" (click)="deleteUser()" class="btn btn-danger">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- USER TO ADMIN -->
+<div class="modal" id="user-2-admin" tabindex="-1" role="dialog" aria-labelledby="USET2ADMIN" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CONFIRMATION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6><i class="fa fa-warning"></i> Voulez vous vraiment lui donner ce privilège?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeU2A" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                <button type="button" (click)="toAdmin()" class="btn btn-danger">Confirmer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONFIRMATION DE DEMANDE -->
+<div class="modal" id="confirm-demande" tabindex="-1" role="dialog" aria-labelledby="USET2ADMIN" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CONFIRMATION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6><i class="fa fa-warning"></i> Voulez vous vraiment confirmer ce demande?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeConfirm" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                <button type="button" (click)="confirmer()" class="btn btn-danger">Confirmer</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,1 @@
-from .users import allUsers, getUserById, addUser, updateUser, changePwd, deleteUser, authentification
+from .users import allUsers, getUserById, addUser, updateUser, changePwd, deleteUser, authentification, confirmDemande, userToAdmin

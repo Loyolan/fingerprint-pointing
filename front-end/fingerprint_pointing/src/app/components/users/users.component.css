@@ -1,0 +1,11 @@
+.widget-content-wrapper:hover .widget-content-right {
+	display: block;
+}
+
+.widget-content-right {
+	display: none;
+}
+
+.widget-numbers {
+	cursor: pointer;
+}

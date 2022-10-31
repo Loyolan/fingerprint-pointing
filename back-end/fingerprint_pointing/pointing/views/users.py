@@ -23,7 +23,7 @@ def getUserById(request, id):
     except ValidationError:
         res = {'status': 'error', 'message': 'Identifiant Invalide'}
     except:
-            es = {'status': 'warn', 'message': 'Utilisateur introuvable'}
+        res = {'status': 'warn', 'message': 'Utilisateur introuvable'}
     return Response(res)
 
 # CREATE NEW USER
@@ -33,12 +33,11 @@ def addUser(request):
         request.data['password'] = make_password(password=request.data['password'], salt=None, hasher='default')
         serialisation = UserSerializer(data=request.data, many=False)
         res = None;
-        print(serialisation);
         if serialisation.is_valid():
             serialisation.save()
-            res = serialisation.data
+            res = {'status': 'success', 'user': serialisation.data, 'message': 'Registration effectuée' }
         else:
-            res = {'status': 'error', 'message': "Nom d'utilisateur ou email déjà utilisés"}
+            res = {'status': 'warning', 'message': "Nom d'utilisateur ou email déjà utilisés"}
     except:
         res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
     return Response(res)
@@ -86,9 +85,37 @@ def deleteUser(request, id):
     try:
         user = User.objects.get(userId=id)
         user.delete()
-        res = {'status': 'success', 'message': 'Suppression d\'Utilisateur reussi'}
+        res = {'status': 'success', 'message': 'Suppression d\'Utilisateur réussi'}
     except ValidationError:
-        res = {'status': 'error', 'message': "Utilisateur introuvable"}
+        res = {'status': 'warning', 'message': "Utilisateur introuvable"}
+    except:
+        res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
+    return Response(res)
+
+# USER TO ADMIN
+@api_view(['GET'])
+def userToAdmin(request, id):
+    try:
+        user = User.objects.get(userId=id)
+        user.role = "ADMIN"
+        user.save()
+        res = {'status': 'success', 'message': 'Modification de droit d\'accés réussi'}
+    except ValidationError:
+        res = {'status': 'warning', 'message': "Utilisateur introuvable"}
+    except:
+        res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
+    return Response(res)
+
+# CONFIRM DEMANDE
+@api_view(['GET'])
+def confirmDemande(request, id):
+    try:
+        user = User.objects.get(userId=id)
+        user.role = "USER"
+        user.save()
+        res = {'status': 'success', 'message': 'Confirmation d\'une demande d\'accés réussi'}
+    except ValidationError:
+        res = {'status': 'warning', 'message': "Utilisateur introuvable"}
     except:
         res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
     return Response(res)
@@ -102,7 +129,7 @@ def authentification(request, username, password):
             user = UserSerializer(user, many=False)
             res = {'status': 'success', 'user': user.data}
         else:
-            res = {'status': 'error', 'message': 'Password or username incorrects'}
+            res = {'status': 'error', 'message': 'Nom d\'Utilisateur ou mot de passe incorrect'}
     except:
         res = {'status': 'error', 'message': "Utilisateur introuvable"}
     return Response(res)

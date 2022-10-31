@@ -71,7 +71,7 @@ export class UsersService {
     );
   }
 
-  /** Update an user */
+  /** Change pass an user */
   changePasswordUser(id: string, pwd: any): Observable<any> {
     return this.http.put(`${endpoint}/users/${id}/change_pwd`, JSON.stringify(pwd), this.httpOptions).pipe(
       map((data) => {
@@ -83,13 +83,34 @@ export class UsersService {
 
   /** Delete an user */
   deleteUser(id: string): Observable<any> {
-    return this.http.delete(`${endpoint}/users/${id}`).pipe(
+    return this.http.delete(`${endpoint}/users/${id}/delete`).pipe(
       map((data) => {
         return data;
       }),
       catchError(this.handleError('DELETE user', []))
     );
   }
+
+  /** USERS TO ADMIN */
+  userToAdmin(id: string): Observable<any> {
+    return this.http.get(`${endpoint}/users/${id}/to_admin`).pipe(
+      map((data)=>{
+        return data;
+      }),
+      catchError(this.handleError('', []))
+    )
+  }
+
+  /** CONFIRM REQUEST AS USER */
+  confirmDemande(id: string): Observable<any> {
+    return this.http.get(`${endpoint}/users/${id}/confirm`).pipe(
+      map((data)=>{
+        return data;
+      }),
+      catchError(this.handleError('', []))
+    )
+  }
+
 
   authentification(n: string, p: string): Observable<any> {
     return this.http.get(`${endpoint}/auth/user/${n}/password/${p}`).pipe(

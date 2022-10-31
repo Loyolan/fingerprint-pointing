@@ -37,15 +37,10 @@
                 <li>
                     <a [routerLink]="['#']" class="mm-active">
                         <i class="metismenu-icon text-info pe-7s-graph3"></i>
-                        Etudiants
-                    </a>
-                <li>
-                    <a [routerLink]="['#']">
-                        <i class="metismenu-icon text-info pe-7s-graph1"></i>
-                        Enseignant
+                        Statistiques
                     </a>
                 </li>
-                <li class="app-sidebar__heading">Pointage</li>
+                <li class="app-sidebar__heading">Gestion de Pointage</li>
                 <li>
                     <a href="#">
                         <i class="metismenu-icon text-info pe-7s-id"></i>
@@ -100,7 +95,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="app-sidebar__heading">ETUDIANTS</li>
+                <li class="app-sidebar__heading">GESTION DES ETUDIANTS</li>
                 <li>
                     <a href="#">
                         <i class="metismenu-icon text-info pe-7s-study"></i>
@@ -190,8 +185,8 @@
                     </a>
                 </li>
                 <li class="app-sidebar__heading">ADMINISTRATION</li>
-                <li>
-                    <a href="https://dashboardpack.com/theme-details/architectui-dashboard-html-pro/" target="_blank">
+                <li *ngIf="user.role == 'ADMIN'">
+                    <a [routerLink]="['/eni/figerprint_pointing/administrations']">
                         <i class="metismenu-icon text-info pe-7s-users">
                         </i>
                         Utilisateurs
