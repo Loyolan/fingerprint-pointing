@@ -89,9 +89,10 @@
                                         <div class="widget-heading">{{ a.username | uppercase }}</div>
                                         <div class="widget-subheading">{{a.fullname}}</div>
                                         <div class="widget-subheading text-info">{{a.email}}</div>
+                                        <div class="widget-subheading text-muted">Créé le {{ a.created_at }}</div>
                                     </div>
                                     <div class="widget-content-right" *ngIf="a.userId != session.id">
-                                        <div data-toggle="modal" data-target="#delete" (click)="showDeleteUser(a.userId, a.role)" class="widget-numbers animated bounceInLeft text-danger">
+                                        <div data-toggle="modal" data-target="#delete" (click)="showDeleteUser(a.userId, a.role)" class="widget-numbers animated zoomInLeft text-danger">
                                             <i class="pe-7s-trash"></i>
                                         </div>
                                     </div>
@@ -129,12 +130,13 @@
                                         <div class="widget-heading">{{ a.username | uppercase }}</div>
                                         <div class="widget-subheading">{{a.fullname}}</div>
                                         <div class="widget-subheading text-info">{{a.email}}</div>
+                                        <div class="widget-subheading text-muted">Créé le {{ a.created_at }}</div>
                                     </div>
                                     <div class="widget-content-right">
-                                        <div data-toggle="modal" data-target="#user-2-admin" (click)="userToAdmin(a.userId)" class="widget-numbers animated bounceInLeft text-primary">
+                                        <div data-toggle="modal" data-target="#user-2-admin" (click)="userToAdmin(a.userId)" class="widget-numbers animated zoomInLeft text-primary">
                                             <i class="pe-7s-diamond"></i>
                                         </div>
-                                        <div data-toggle="modal" data-target="#delete" (click)="showDeleteUser(a.userId, a.role)" class="widget-numbers animated bounceInLeft text-danger">
+                                        <div data-toggle="modal" data-target="#delete" (click)="showDeleteUser(a.userId, a.role)" class="widget-numbers animated zoomInLeft text-danger">
                                             <i class="pe-7s-trash"></i>
                                         </div>
                                     </div>
@@ -172,12 +174,13 @@
                                         <div class="widget-heading">{{ a.username | uppercase }}</div>
                                         <div class="widget-subheading">{{a.fullname}}</div>
                                         <div class="widget-subheading text-info">{{a.email}}</div>
+                                        <div class="widget-subheading text-muted">Créé le {{ a.created_at }}</div>
                                     </div>
                                     <div class="widget-content-right">
-                                        <div data-toggle="modal" data-target="#confirm-demande" (click)="confirmDemande(a.userId)" class="widget-numbers animated bounceInLeft text-primary">
+                                        <div data-toggle="modal" data-target="#confirm-demande" (click)="confirmDemande(a.userId)" class="widget-numbers animated zoomInLeft text-primary">
                                             <i class="pe-7s-add-user"></i>
                                         </div>
-                                        <div data-toggle="modal" data-target="#delete" (click)="showDeleteUser(a.userId, a.role)" class="widget-numbers animated bounceInLeft text-danger">
+                                        <div data-toggle="modal" data-target="#delete" (click)="showDeleteUser(a.userId, a.role)" class="widget-numbers animated zoomInLeft text-danger">
                                             <i class="pe-7s-trash"></i>
                                         </div>
                                     </div>

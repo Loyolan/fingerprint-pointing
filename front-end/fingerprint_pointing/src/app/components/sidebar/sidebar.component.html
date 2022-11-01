@@ -42,7 +42,7 @@
                 </li>
                 <li class="app-sidebar__heading">Gestion de Pointage</li>
                 <li>
-                    <a href="#">
+                    <a>
                         <i class="metismenu-icon text-info pe-7s-id"></i>
                         L1
                         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
@@ -97,7 +97,7 @@
                 </li>
                 <li class="app-sidebar__heading">GESTION DES ETUDIANTS</li>
                 <li>
-                    <a href="#">
+                    <a>
                         <i class="metismenu-icon text-info pe-7s-study"></i>
                         L1
                         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
@@ -185,8 +185,8 @@
                     </a>
                 </li>
                 <li class="app-sidebar__heading">ADMINISTRATION</li>
-                <li *ngIf="user.role == 'ADMIN'">
-                    <a [routerLink]="['/eni/figerprint_pointing/administrations']">
+                <li>
+                    <a *ngIf="isAdmin" [routerLink]="['/eni/figerprint_pointing/administrations']">
                         <i class="metismenu-icon text-info pe-7s-users">
                         </i>
                         Utilisateurs
