@@ -1,4 +1,3 @@
-import uuid
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from pointing.serializers import UserSerializer
@@ -23,7 +22,7 @@ def getUserById(request, id):
     except ValidationError:
         res = {'status': 'error', 'message': 'Identifiant Invalide'}
     except:
-        res = {'status': 'warn', 'message': 'Utilisateur introuvable'}
+        res = {'status': 'warning', 'message': 'Utilisateur introuvable'}
     return Response(res)
 
 # CREATE NEW USER

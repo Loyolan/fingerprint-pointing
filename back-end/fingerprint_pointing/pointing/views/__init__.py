@@ -1,1 +1,8 @@
-from .users import allUsers, getUserById, addUser, updateUser, changePwd, deleteUser, authentification, confirmDemande, userToAdmin
+from .users import *
+from .annee_univ import *
+from .etudiant import *
+from .matieres import *
+from .enseignant import *
+from .niveau import *
+from .parcours import *
+from .envent import *
