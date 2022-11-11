@@ -8,6 +8,9 @@ mariadb 10.6+<br/>
 mysqlclient<br/>
 uuid<br/>
 bcrypt<br/>
+numpy<br/>
+pandas<br/>
+openxl<br/>
 
 ### CONFIGURATIONS
 -create virtual environment <strong>$python3 -m venv 'path'</strong> <br/>

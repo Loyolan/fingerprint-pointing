@@ -35,7 +35,7 @@ class Etudiant(models.Model):
     etudiantId= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     etudiantNum= models.IntegerField(null=False)
     etudiantMatricule= models.CharField(max_length=7, null=False, unique=True)
-    etudiantNomComplet= models.CharField(max_length=255, null=False)
+    etudiantNomComplet= models.CharField(max_length=255,null=False)
     anneeUniv= models.ForeignKey(AnneeUniv, on_delete=models.CASCADE, null=True)
     niveau= models.ForeignKey(Niveau, on_delete=models.CASCADE, null=True)
     parcours= models.ForeignKey(Parcours, on_delete=models.CASCADE, null=True)
