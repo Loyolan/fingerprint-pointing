@@ -6,6 +6,35 @@ from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 #import pandas as pd
 
+# GET ALL ETUDIANT D'UNE ANNEE UNIV
+@api_view(['GET'])
+def allEtudiantsAnneeUniv(request, id_annee):
+    try:
+        annee = AnneeUniv.objects.get(anneeUnivId=id_annee)
+        etudiants  = Etudiant.objects.all().filter(anneeUniv=annee.anneeUnivId).order_by('etudiantNomComplet')
+        serialisation = EtudiantSerializer(etudiants, many=True)
+        res = serialisation.data
+    except ValidationError:
+        res = {'status': 'warning', 'message': 'Invalide annee ou niveau'}
+    except:
+        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+    return Response(res)
+
+# GET ALL ETUDIANT D'UN PARCOURS & D'UNE ANNEE UNIV
+@api_view(['GET'])
+def allEtudiantsAnneeUnivParcours(request, id_annee, id_parcours):
+    try:
+        annee = AnneeUniv.objects.get(anneeUnivId=id_annee)
+        parcours = Parcours.objects.get(parcoursId=id_parcours)
+        etudiants  = Etudiant.objects.all().filter(anneeUniv=annee.anneeUnivId).filter(parcours=parcours.parcoursId).order_by('etudiantNomComplet')
+        serialisation = EtudiantSerializer(etudiants, many=True)
+        res = serialisation.data
+    except ValidationError:
+        res = {'status': 'warning', 'message': 'Invalide annee ou niveau'}
+    except:
+        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+    return Response(res)
+
 # GET ALL ETUDIANT D'UN NIVEAU & D'UNE ANNEE UNIV
 @api_view(['GET'])
 def allEtudiantsAnneeUnivNiveau(request, id_annee, id_niveau):

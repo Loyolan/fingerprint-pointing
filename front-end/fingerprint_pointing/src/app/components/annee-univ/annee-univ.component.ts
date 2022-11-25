@@ -141,4 +141,15 @@ export class AnneeUnivComponent implements OnInit {
       }
     })
   }
+
+  activate(id: string) {
+    this.service.activateAnneeUniv(id).subscribe((data) => {
+      if (data) {
+        this.notifier.notify(data.status, data.message);
+        this.getAllAnneeUniv();
+      } else {
+        this.notifier.notify('error', 'Erreur inattendue viens du serveur, Réessayez plus tard!');
+      }
+    })
+  }
 }

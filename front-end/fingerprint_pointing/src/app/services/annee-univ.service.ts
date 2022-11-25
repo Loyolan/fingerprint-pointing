@@ -71,6 +71,16 @@ export class AnneeUnivService {
     );
   }
 
+  /** Activate an annee_univs */
+  activateAnneeUniv(id: string): Observable<any> {
+    return this.http.put(`${endpoint}/annee_univs/${id}/activate`, this.httpOptions).pipe(
+      map((data) => {
+        return data;
+      }),
+      catchError(this.handleError('activate annee_univs', []))
+    );
+  }
+
   /** Delete an annee_univs */
   deleteAnneeUniv(id: string): Observable<any> {
     return this.http.delete(`${endpoint}/annee_univs/${id}/delete`).pipe(

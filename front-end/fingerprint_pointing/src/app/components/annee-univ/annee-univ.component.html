@@ -43,6 +43,14 @@
                                             </span>
                                             <span class="col-md-2 right">
                                                 <div role="group" class="btn-group-sm btn-group btn-group-toggle">
+                                                    <label *ngIf="a.anneeEncours" class="btn btn-success">
+                                                        <i class="fa fa-history"></i>
+                                                    </label>
+                                                    <label *ngIf="!a.anneeEncours"
+                                                        (click)="activate(a.anneeUnivId)" class="btn btn-secondary">
+                                                        <i class="fa fa-history"></i>
+                                                    </label>
+
                                                     <label data-toggle="modal" data-target="#modal-edit"
                                                         (click)="editAnneeUniv(a.anneeUnivId)" class="btn btn-primary">
                                                         <i class="fa fa-edit"></i>

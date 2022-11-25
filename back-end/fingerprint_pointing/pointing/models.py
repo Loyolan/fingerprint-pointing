@@ -29,6 +29,7 @@ class Niveau(models.Model):
 class AnneeUniv(models.Model):
     anneeUnivId= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     anneeUnivDesc= models.CharField(max_length=9, unique=True)
+    anneeEncours= models.BooleanField(default=False);
 
 # ETUDIANT
 class Etudiant(models.Model):

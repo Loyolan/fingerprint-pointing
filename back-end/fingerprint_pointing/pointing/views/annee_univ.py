@@ -57,6 +57,23 @@ def updateAnneeUniv(request, id):
         res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
     return Response(res)
 
+# ACTIVATE ANNEE UNIV
+@api_view(['PUT'])
+def activateAnneeUniv(request, id):
+    try:
+        currentAnnee = AnneeUniv.objects.get(anneeEncours=True)
+        currentAnnee.anneeEncours = False
+        currentAnnee.save()
+        anneeUniv = AnneeUniv.objects.get(anneeUnivId=id);
+        anneeUniv.anneeEncours = True
+        anneeUniv.save()
+        res = {'status': 'success', "message": "Changement de l'annee encours reussi"}
+    except ValidationError:
+        res = {'status': 'error', 'message': "AnneeUniv introuvable introuvable"}
+    except:
+        res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
+    return Response(res)
+
 # DELETE ANNEE UNIV
 @api_view(['DELETE'])
 def deleteAnneeUniv(request, id):

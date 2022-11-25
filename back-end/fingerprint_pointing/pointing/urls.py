@@ -16,6 +16,7 @@ urlpatterns = [
     path('annee_univs/<id>/', views.getAnneeUnivById),
     path('annee_univs/add', views.addAnneeUniv),
     path('annee_univs/<id>/update', views.updateAnneeUniv),
+    path('annee_univs/<id>/activate', views.activateAnneeUniv),
     path('annee_univs/<id>/delete', views.deleteAnneeUniv),
 
     path('parcours/', views.allParcours),
@@ -44,6 +45,8 @@ urlpatterns = [
     path('matieres/<id>/update', views.updateMatiere),
     path('matieres/<id>/delete', views.deleteMatiere),
 
+    path('etudiants/annee_univs/<id_annee>', views.allEtudiantsAnneeUniv),
+    path('etudiants/annee_univs/<id_annee>/parcours/<id_parcours>', views.allEtudiantsAnneeUnivParcours),
     path('etudiants/annee_univs/<id_annee>/niveaux/<id_niveau>', views.allEtudiantsAnneeUnivNiveau),
     path('etudiants/annee_univs/<id_annee>/niveaux/<id_niveau>/parcours/<id_parcours>', views.allEtudiantsAnneeUnivNiveauParcours),
     path('etudiants/<id>/', views.getEtudiantById),

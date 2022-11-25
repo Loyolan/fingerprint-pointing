@@ -31,9 +31,39 @@ export class EtudiantService {
     };
   }
 
-  /** Get etudiant */
-  allEtudiants(): Observable<any> {
-    return this.http.get(endpoint + '/etudiants/').pipe(
+  /** Get etudiant ANNEE UNIV*/
+  allEtudiantsAnneeUniv(id_annee: string): Observable<any> {
+    return this.http.get(endpoint + `/etudiants/annee_univs/${id_annee}`).pipe(
+      map(data => {
+        return data;
+      }),
+      catchError(this.handleError('List etudiants', []))
+    );
+  }
+
+  /** Get etudiant ANNEE UNIV (PARCOURS) */
+  allEtudiantsAnneeUnivParcours(id_annee: string, id_parcours: string): Observable<any> {
+    return this.http.get(endpoint + `/etudiants/annee_univs/${id_annee}/parcours/${id_parcours}`).pipe(
+      map(data => {
+        return data;
+      }),
+      catchError(this.handleError('List etudiants', []))
+    );
+  }
+
+  /** Get etudiant ANNEE UNIV (NIVEAUX) */
+  allEtudiantsAnneeUnivNiveau(id_annee: string, id_niveau: string): Observable<any> {
+    return this.http.get(endpoint + `/etudiants/annee_univs/${id_annee}/niveaux/${id_niveau}`).pipe(
+      map(data => {
+        return data;
+      }),
+      catchError(this.handleError('List etudiants', []))
+    );
+  }
+
+  /** Get etudiant ANNEE UNIV (NIVEAUX/PARCOURS) */
+  allEtudiantsAnneeUnivNiveauParcours(id_annee: string, id_niveau: string, id_parcours: string): Observable<any> {
+    return this.http.get(endpoint + `/etudiants/annee_univs/${id_annee}/niveaux/${id_niveau}/parcours/${id_parcours}`).pipe(
       map(data => {
         return data;
       }),

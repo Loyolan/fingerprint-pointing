@@ -24,44 +24,19 @@
                                     <span class="btn-icon-wrapper pr-2 opacity-7">
                                         <i class="fa fa-business-time fa-w-20"></i>
                                     </span>
-                                    Recents
+                                    {{selectedAnnee.anneeUnivDesc}}
                                 </button>
                                 <div tabindex="-1" role="menu" aria-hidden="true"
                                     class="dropdown-menu dropdown-menu-right">
                                     <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
+                                        <li *ngFor="let a of annees" class="nav-item">
+                                            <span (click)="changeAnnee(a.anneeUnivId)" class="nav-link">
                                                 <i class="nav-link-icon lnr-inbox"></i>
                                                 <span>
-                                                    Inbox
+                                                    {{a.anneeUnivDesc}}
                                                 </span>
-                                                <div class="ml-auto badge badge-pill badge-secondary">86</div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                <i class="nav-link-icon lnr-book"></i>
-                                                <span>
-                                                    Book
-                                                </span>
-                                                <div class="ml-auto badge badge-pill badge-danger">5</div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                <i class="nav-link-icon lnr-picture"></i>
-                                                <span>
-                                                    Picture
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a disabled href="javascript:void(0);" class="nav-link disabled">
-                                                <i class="nav-link-icon lnr-file-empty"></i>
-                                                <span>
-                                                    File Disabled
-                                                </span>
-                                            </a>
+                                                <div *ngIf="a.anneeEncours" class="ml-auto badge badge-pill badge-success">encours</div>
+                                            </span>
                                         </li>
                                     </ul>
                                 </div>
@@ -73,51 +48,66 @@
                     <div class="col-md-12">
                             <div @fade class="main-card mb-3 card">
                                 <div class="card-body">
-                                    <h5 class="card-title">PREMIERE ANNEE DE LICENCE</h5>
+                                    <h5 class="card-title">{{titre}}</h5>
                                     <div style="float: right; margin-top: -40px" class="mb-3">
                                         <div class="d-inline-block dropdown">
                                             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                                 class="btn-shadow dropdown-toggle btn btn-primary">
                                                 <span class="btn-icon-wrapper pr-2 opacity-7">
-                                                    <i class="fa fa-business-time fa-w-20"></i>
+                                                    <i class="pe-7s-next fa-w-20"></i>
                                                 </span>
-                                                Recents
+                                                {{selectedNiveau.niveauCode}}
                                             </button>
                                             <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item">
-                                                        <a href="javascript:void(0);" class="nav-link">
+                                                        <span (click)="onChangeDetectN('TOUT')" class="nav-link">
                                                             <i class="nav-link-icon lnr-inbox"></i>
                                                             <span>
-                                                                Inbox
+                                                                TOUT
                                                             </span>
                                                             <div class="ml-auto badge badge-pill badge-secondary">86</div>
-                                                        </a>
+                                                        </span>
                                                     </li>
-                                                    <li class="nav-item">
-                                                        <a href="javascript:void(0);" class="nav-link">
-                                                            <i class="nav-link-icon lnr-book"></i>
+                                                    <li *ngFor="let n of niveaux" class="nav-item">
+                                                        <span (click)="onChangeDetectN(n.niveauId)" class="nav-link">
+                                                            <i class="nav-link-icon lnr-inbox"></i>
                                                             <span>
-                                                                Book
+                                                                {{n.niveauCode}}
                                                             </span>
-                                                            <div class="ml-auto badge badge-pill badge-danger">5</div>
-                                                        </a>
+                                                            <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                                        </span>
                                                     </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="d-inline-block ml-1 dropdown">
+                                            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                class="btn-shadow dropdown-toggle btn btn-primary">
+                                                <span class="btn-icon-wrapper pr-2 opacity-7">
+                                                    <i class="pe-7s-shuffle fa-w-20"></i>
+                                                </span>
+                                                {{selectedParcours.parcoursCode}}
+                                            </button>
+                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                                <ul class="nav flex-column">
                                                     <li class="nav-item">
-                                                        <a href="javascript:void(0);" class="nav-link">
-                                                            <i class="nav-link-icon lnr-picture"></i>
+                                                        <span (click)="onChangeDetectP('TOUT')" class="nav-link">
+                                                            <i class="nav-link-icon lnr-inbox"></i>
                                                             <span>
-                                                                Picture
+                                                                TOUT
                                                             </span>
-                                                        </a>
+                                                            <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                                        </span>
                                                     </li>
-                                                    <li class="nav-item">
-                                                        <a disabled href="javascript:void(0);" class="nav-link disabled">
-                                                            <i class="nav-link-icon lnr-file-empty"></i>
+                                                    <li *ngFor="let p of parcours" class="nav-item">
+                                                        <span (click)="onChangeDetectP(p.parcoursId)" class="nav-link">
+                                                            <i class="nav-link-icon lnr-inbox"></i>
                                                             <span>
-                                                                File Disabled
+                                                                {{p.parcoursCode}}
                                                             </span>
-                                                        </a>
+                                                            <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                                        </span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -129,25 +119,32 @@
                                                 <th>#</th>
                                                 <th>Matricule</th>
                                                 <th>Nom et Prenoms</th>
+                                                <th>Niveau</th>
                                                 <th>Parcours</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>01</td>
-                                                <td>875HF</td>
-                                                <td>Kiady LOYOLAN</td>
-                                                <td>IG</td>
-                                            </tr>
-                                            <tr>
-                                                <td>02</td>
-                                                <td>865HF</td>
-                                                <td>YRANN Kiad</td>
-                                                <td>IG</td>
+                                            <tr *ngFor="let e of etudiants">
+                                                <td>{{e.etudiantNum}}</td>
+                                                <td>{{e.etudiantMatricule}}</td>
+                                                <td>{{e.etudiantNomComplet}}</td>
+                                                <td>{{e.niveauCode}}</td>
+                                                <td>{{e.parcoursCode}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <h5 class="card-title text-info mt-3">NOMBRE TOTAL </h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            
+                                        </div>
+                                        <div class="col-md-4 text-right">
+                                            <h5 class="card-title text-info mt-3">NOMBRE TOTAL: </h5>
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            <h5 class="card-title text-info mt-3">{{etudiants.length}} ELEVE(S)</h5>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="text-right">
                                         <button class="btn btn-danger"><i class="fa fa-file-excel"></i> Importer</button>
                                         <button class="btn btn-success ml-2"><i class="fa fa-file-excel"></i> Exporter</button>
