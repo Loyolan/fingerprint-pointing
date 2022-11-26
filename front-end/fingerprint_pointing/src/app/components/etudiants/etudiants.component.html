@@ -18,7 +18,8 @@
                             </div>
                         </div>
                         <div class="page-title-actions">
-                            <div class="d-inline-block dropdown">
+                            
+                            <div class="d-inline-block ml-1 dropdown">
                                 <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     class="btn-shadow dropdown-toggle btn btn-info">
                                     <span class="btn-icon-wrapper pr-2 opacity-7">
@@ -50,6 +51,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{titre}}</h5>
                                     <div style="float: right; margin-top: -40px" class="mb-3">
+                                        
                                         <div class="d-inline-block dropdown">
                                             <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                                 class="btn-shadow dropdown-toggle btn btn-primary">
@@ -66,7 +68,7 @@
                                                             <span>
                                                                 TOUT
                                                             </span>
-                                                            <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                                            <div class="ml-auto badge badge-pill badge-secondary"></div>
                                                         </span>
                                                     </li>
                                                     <li *ngFor="let n of niveaux" class="nav-item">
@@ -75,7 +77,7 @@
                                                             <span>
                                                                 {{n.niveauCode}}
                                                             </span>
-                                                            <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                                            <div class="ml-auto badge badge-pill badge-info">{{n.nb}}</div>
                                                         </span>
                                                     </li>
                                                 </ul>
@@ -97,7 +99,7 @@
                                                             <span>
                                                                 TOUT
                                                             </span>
-                                                            <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                                            <div class="ml-auto badge badge-pill badge-secondary"></div>
                                                         </span>
                                                     </li>
                                                     <li *ngFor="let p of parcours" class="nav-item">
@@ -106,12 +108,16 @@
                                                             <span>
                                                                 {{p.parcoursCode}}
                                                             </span>
-                                                            <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                                            <div class="ml-auto badge badge-pill badge-info">{{p.nb}}</div>
                                                         </span>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
+                                        <button *ngIf="selectedNiveau.niveauId != 'TOUT' && selectedParcours.parcoursId != 'TOUT'" type="button" data-toggle="modal" data-target="#modal-add" class="btn btn-success ml-1 animated zoomInLeft"><i
+                                            class="pe-7s-plus"></i> Ajouter</button>
+                                        <button *ngIf="selectedNiveau.niveauId != 'TOUT' && selectedParcours.parcoursId != 'TOUT'" (click)="deleteAllEtudiant()" type="button" data-toggle="modal" data-target="#modal-del-all" class="btn btn-danger ml-1 animated zoomInLeft"><i
+                                                class="pe-7s-trash"></i> Supprimer</button>
                                     </div>
                                     <table class="mb-0 table">
                                         <thead>
@@ -121,6 +127,7 @@
                                                 <th>Nom et Prenoms</th>
                                                 <th>Niveau</th>
                                                 <th>Parcours</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -130,6 +137,16 @@
                                                 <td>{{e.etudiantNomComplet}}</td>
                                                 <td>{{e.niveauCode}}</td>
                                                 <td>{{e.parcoursCode}}</td>
+                                                <td class="text-right">
+                                                    <label data-toggle="modal" data-target="#modal-edit"
+                                                        (click)="editEtudiant(e.etudiantId)" class="btn btn-primary">
+                                                        <i class="fa fa-edit"></i>
+                                                    </label>
+                                                    <label data-toggle="modal" data-target="#modal-delete"
+                                                        (click)="deleteEtudiant(e.etudiantId)" class="btn btn-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </label>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -155,6 +172,126 @@
                 </div>
             </div>
             <app-footer></app-footer>
+        </div>
+    </div>
+</div>
+
+<!-- AJOUT -->
+<div class="modal" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="AJOUT" aria-modal="true">
+    <div class="modal-dialog animated zoomInDown">
+        <form [formGroup]="addForm" (ngSubmit)="onSubmitAddForm()" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">AJOUT ({{selectedNiveau.niveauCode}} - {{selectedParcours.parcoursCode}})</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control"
+                            formControlName="etudiantNum" placeholder="Numero">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control"  formControlName="etudiantMatricule"
+                            placeholder="Numero d'inscription">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control"  formControlName="etudiantNomComplet"
+                            placeholder="Nom complet">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeAdd" class="btn btn-secondary"
+                    data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary" [disabled]="addForm.invalid">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODIFICATION -->
+<div class="modal" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="MODIFICATION" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <form [formGroup]="updateForm" (ngSubmit)="onSubmitUpdateForm()" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">MIS A JOUR</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control"
+                            formControlName="etudiantNum" placeholder="Numero">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control"  formControlName="etudiantMatricule"
+                            placeholder="Numero d'inscription">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control"  formControlName="etudiantNomComplet"
+                            placeholder="Nom complet">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeEdit" class="btn btn-secondary"
+                    data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary" [disabled]="updateForm.invalid">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- DELETE -->
+<div class="modal" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="SUPPRESSION" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CONFIRMATION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6><i class="fa fa-warning"></i> Voulez vous vraiment le supprimer?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeDelete" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                <button type="button" (click)="deleteEtudiantData()" class="btn btn-danger">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE ALL -->
+<div class="modal" id="modal-del-all" tabindex="-1" role="dialog" aria-labelledby="SUPPRESSION" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">AVERTISSEMENT</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6 class="text-danger"><i class="fa fa-warning"></i> Voulez vous vraiment le supprimer tous les etudiants {{selectedNiveau.niveauCode}} - {{selectedParcours.parcoursCode}} de l'annee universitaire {{ selectedAnnee.anneeUnivDesc }}?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeDeleteAll" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                <button type="button" (click)="deleteAllEtudiantData()" class="btn btn-danger">Supprimer</button>
+            </div>
         </div>
     </div>
 </div>

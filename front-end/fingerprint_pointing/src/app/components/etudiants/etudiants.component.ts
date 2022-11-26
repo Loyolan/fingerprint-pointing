@@ -5,6 +5,7 @@ import { ParcoursService } from '../../services/parcours.service';
 import { NiveauService } from '../../services/niveau.service';
 import { EtudiantService } from '../../services/etudiant.service';
 import { NotifierService } from 'angular-notifier';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-etudiants',
@@ -29,19 +30,32 @@ export class EtudiantsComponent implements OnInit {
   selectedParcours: any = {"parcoursCode": "PARCOURS", "parcoursId": "TOUT"};
   selectedNiveau: any = {"niveauCode": "NIVEAUX", "niveauId": "TOUT"};
   titre: string = "LISTE DE TOUS LES ETUDIANTS";
+  addForm: FormGroup;
+  updateForm: FormGroup;
+  selected: string = "";
 
   constructor(
     private service: EtudiantService,
     private anneeService: AnneeUnivService,
     private parcoursService: ParcoursService,
     private niveauService: NiveauService,
-    private notifier: NotifierService
-  ) { }
+    private notifier: NotifierService,
+    private fb: FormBuilder
+  ) {
+    this.addForm = this.fb.group({
+      etudiantNum: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(3)]],
+      etudiantNomComplet: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(255)]],
+      etudiantMatricule: ['', [Validators.required, Validators.minLength(6)]]
+    });
+    this.updateForm = this.fb.group({
+      etudiantNum: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(3)]],
+      etudiantNomComplet: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(255)]],
+      etudiantMatricule: ['', [Validators.required, Validators.minLength(6)]]
+    })
+  }
 
   ngOnInit(): void {
     this.getAllAnneeUnivs();
-    this.getAllNiveaux();
-    this.getAllParcours();
   }
 
   /** GET ALL ANNEE */
@@ -53,6 +67,8 @@ export class EtudiantsComponent implements OnInit {
           this.selectedAnnee = this.annees[i];
           this.notifier.notify("info", "Chargement encours du requête...")
           setTimeout(()=>{
+            this.getAllParcours(this.annees[i].anneeUnivId);
+            this.getAllNiveaux(this.annees[i].anneeUnivId);
             this.getAllEtudiants(this.annees[i].anneeUnivId);
           }, 2000);
         }
@@ -61,16 +77,26 @@ export class EtudiantsComponent implements OnInit {
   }
 
   /** GET ALL PARCOURS */
-  getAllParcours() {
+  getAllParcours(id_annee: string) {
     this.parcoursService.allParcours().subscribe((data) => {
       this.parcours = data;
+      for(let i = 0; i < this.parcours.length; i++) {
+        this.service.allEtudiantsAnneeUnivParcours(id_annee, this.parcours[i].parcoursId).subscribe((data) => {
+          this.parcours[i].nb = data.length;
+        })
+      }
     });
   }
 
   /** GET ALL NIVEAUX */
-  getAllNiveaux() {
+  getAllNiveaux(id_annee: string) {
     this.niveauService.allNiveaus().subscribe((data) => {
       this.niveaux = data;
+      for(let i = 0; i < this.niveaux.length; i++) {
+        this.service.allEtudiantsAnneeUnivNiveau(id_annee, this.niveaux[i].niveauId).subscribe((data) => {
+          this.niveaux[i].nb = data.length;
+        })
+      }
     });
   }
 
@@ -201,4 +227,115 @@ export class EtudiantsComponent implements OnInit {
     }
   }
 
+  onSubmitAddForm(){
+    const etudiant = this.addForm.value;
+    this.service.addEtudiant(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId, this.selectedParcours.parcoursId, etudiant).subscribe((data)=> {
+      if (data) {
+        if (data.status == 'success') {
+          let c = document.getElementById('closeAdd');
+          c!.click();
+          this.notifier.notify('success', data.message);
+          this.getAllEtudiantsNP(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId, this.selectedParcours.parcoursId);
+        } else {
+          this.notifier.notify(data.status, data.message);
+        }
+      } else {
+        this.notifier.notify('error', 'Erreur inattendue viens du serveur, Réessayez plus tard!')
+      }
+    });
+  }
+
+  editEtudiant(id: string) {
+    this.service.getOneEtudiant(id).subscribe((data)=>{
+      if (data) {
+        this.selected = data.etudiantId;
+        this.updateForm.setValue({
+          etudiantNum: data.etudiantNum,
+          etudiantNomComplet: data.etudiantNomComplet,
+          etudiantMatricule: data.etudiantMatricule
+        });
+      } else {
+        this.notifier.notify('error', 'Erreur inattendue viens du serveur, Réessayez plus tard!')
+      }
+    })
+  }
+
+  deleteEtudiant(id: string) {
+    this.selected = id;
+  }
+
+  onSubmitUpdateForm() {
+    const etudiant = this.updateForm.value;
+    this.service.updateEtudiant(this.selected, etudiant).subscribe((data)=> {
+      if (data) {
+        if (data.status == 'success') {
+          let c = document.getElementById('closeEdit');
+          c!.click();
+          this.notifier.notify('success', data.message);
+          if (this.selectedParcours.parcoursId != 'TOUT' && this.selectedNiveau.niveauId != 'TOUT') {
+            this.getAllEtudiantsNP(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId, this.selectedParcours.parcoursId);
+          } else if (this.selectedParcours.parcoursId == 'TOUT' && this.selectedNiveau.niveauId != 'TOUT') {
+            this.getAllEtudiantsN(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId);
+          } else if(this.selectedParcours.parcoursId != 'TOUT' && this.selectedNiveau.niveauId == 'TOUT') {
+            this.getAllEtudiantsP(this.selectedAnnee.anneeUnivId, this.selectedParcours.parcoursId);
+          } else {
+            this.getAllEtudiants(this.selectedAnnee.anneeUnivId);
+          }
+        } else {
+          this.notifier.notify(data.status, data.message);
+        }
+      } else {
+        this.notifier.notify('error', 'Erreur inattendue viens du serveur, Réessayez plus tard!')
+      }
+    });
+  }
+
+  deleteEtudiantData() {
+    this.service.deleteEtudiant(this.selected).subscribe((data)=> {
+      if (data) {
+        if (data.status == 'success') {
+          let c = document.getElementById('closeDelete');
+          c!.click();
+          this.notifier.notify('success', data.message);
+          if (this.selectedParcours.parcoursId != 'TOUT' && this.selectedNiveau.niveauId != 'TOUT') {
+            this.getAllEtudiantsNP(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId, this.selectedParcours.parcoursId);
+          } else if (this.selectedParcours.parcoursId == 'TOUT' && this.selectedNiveau.niveauId != 'TOUT') {
+            this.getAllEtudiantsN(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId);
+          } else if(this.selectedParcours.parcoursId != 'TOUT' && this.selectedNiveau.niveauId == 'TOUT') {
+            this.getAllEtudiantsP(this.selectedAnnee.anneeUnivId, this.selectedParcours.parcoursId);
+          } else {
+            this.getAllEtudiants(this.selectedAnnee.anneeUnivId);
+          }
+        } else {
+          this.notifier.notify(data.status, data.message);
+        }
+      } else {
+        this.notifier.notify('error', 'Erreur inattendue viens du serveur, Réessayez plus tard!')
+      }
+    });
+  }
+
+  deleteAllEtudiant() {
+    this.notifier.notify('error', 'Suppression des donnees multiples');
+    setTimeout(()=>{
+      this.notifier.notify('warning', 'L\'operation est irreversible');
+    }, 3000)
+  }
+
+  deleteAllEtudiantData() {
+    this.service.deleteEtudiantNP(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId, this.selectedParcours.parcoursId).subscribe((data)=>{
+      if (data) {
+        if (data.status == 'success') {
+          let c = document.getElementById('closeDeleteAll');
+          c!.click();
+          this.notifier.notify('success', data.message);
+          this.getAllEtudiantsNP(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId, this.selectedParcours.parcoursId);
+        } else {
+          this.notifier.notify(data.status, data.message);
+        }
+      } else {
+        this.notifier.notify('error', 'Erreur inattendue viens du serveur, Réessayez plus tard!');
+      }
+    });
+  }
 }

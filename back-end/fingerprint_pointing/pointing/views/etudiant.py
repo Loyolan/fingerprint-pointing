@@ -105,8 +105,9 @@ def addEtudiant(request, id_annee, id_niveau, id_parcours):
 def updateEtudiant(request, id):
     try:
         etudiant = Etudiant.objects.get(etudiantId=id);
-        etudiant.matricule = request.data['etudiantMatricule']
-        etudiant.nomComplet = request.data['etudiantNomComplet']
+        etudiant.etudiantNum = request.data['etudiantNum'];
+        etudiant.etudiantMatricule = request.data['etudiantMatricule']
+        etudiant.etudiantNomComplet = request.data['etudiantNomComplet']
         etudiant.save()
         res = {'status': 'success',  "message": "Mis à jour des infos réussi"}
     except ValidationError:
@@ -122,21 +123,6 @@ def deleteEtudiant(request, id):
         etudiant = Etudiant.objects.get(etudiantId=id)
         etudiant.delete()
         res = {'status': 'success', 'message': 'Suppression d\'un etudiant réussi'}
-    except ValidationError:
-        res = {'status': 'warning', 'message': "Etudiant introuvable"}
-    except:
-        res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
-    return Response(res)
-
-# DELETE ALL ETUDIANT OF A NIVEAU IN AN YEAR
-@api_view(['DELETE'])
-def deleteAllEtudiantAnneeUnivNiveau(request, id_annee, id_niveau):
-    try:
-        annee = AnneeUniv.objects.get(anneeUnivId=id_annee)
-        niveau = Niveau.objects.get(niveauId=id_niveau)
-        etudiants  = Etudiant.objects.all().filter(anneUniv=annee.anneeUnivId).filter(niveau=niveau.niveauId)
-        etudiants.delete()
-        res = {'status': 'success', 'message': 'Suppression des etudiants en {0} de l\'annee {1} réussi'.format(niveau.niveauCode, annee.anneeUnivDesc)}
     except ValidationError:
         res = {'status': 'warning', 'message': "Etudiant introuvable"}
     except:

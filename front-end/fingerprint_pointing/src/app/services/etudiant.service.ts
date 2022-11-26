@@ -82,8 +82,8 @@ export class EtudiantService {
   }
 
   /** Add new etudiant */
-  addEtudiant(etudiant: any): Observable<any> {
-    return this.http.post(`${endpoint}/etudiants/add`, JSON.stringify(etudiant), this.httpOptions).pipe(
+  addEtudiant(id_annee: string, id_niveau: string, id_parcours: string, etudiant: any): Observable<any> {
+    return this.http.post(`${endpoint}/etudiants/annee_univs/${id_annee}/niveaux/${id_niveau}/parcours/${id_parcours}/add`, JSON.stringify(etudiant), this.httpOptions).pipe(
       map((data) => {
         return data;
       }),
@@ -110,4 +110,16 @@ export class EtudiantService {
       catchError(this.handleError('DELETE etudiant', []))
     );
   }
+
+  /** Delete all etudiant (PARCOURS/NIVEAUX)*/
+  deleteEtudiantNP(id_annee: string, id_niveau: string, id_parcours: string): Observable<any> {
+    return this.http.delete(`${endpoint}/etudiants/annee_univs/${id_annee}/niveaux/${id_niveau}/parcours/${id_parcours}/delete`).pipe(
+      map((data) => {
+        return data;
+      }),
+      catchError(this.handleError('DELETE etudiant', []))
+    );
+  }
+
+ 
 }
