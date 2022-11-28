@@ -163,7 +163,7 @@
                                     </div>
                                     
                                     <div class="text-right">
-                                        <button class="btn btn-danger"><i class="fa fa-file-excel"></i> Importer</button>
+                                        <button *ngIf="selectedNiveau.niveauId != 'TOUT' && selectedParcours.parcoursId != 'TOUT'" data-toggle="modal" data-target="#modal-add-excel" class="btn btn-danger animated zoomInLeft"><i class="fa fa-file-excel"></i> Importer</button>
                                         <button class="btn btn-success ml-2"><i class="fa fa-file-excel"></i> Exporter</button>
                                     </div>
                                 </div>
@@ -210,6 +210,36 @@
                 <button type="button" id="closeAdd" class="btn btn-secondary"
                     data-dismiss="modal">Annuler</button>
                 <button type="submit" class="btn btn-primary" [disabled]="addForm.invalid">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- AJOUT VIA EXCEL DATA -->
+<div class="modal" id="modal-add-excel" tabindex="-1" role="dialog" aria-labelledby="AJOUT" aria-modal="true">
+    <div class="modal-dialog animated zoomInDown">
+        <form [formGroup]="addExcelForm" (ngSubmit)="onSubmitAddExcelForm()" class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title" id="exampleModalLongTitle">AJOUT [{{selectedAnnee.anneeUnivDesc }}] ({{selectedNiveau.niveauCode}} - {{selectedParcours.parcoursCode}})</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input style="border: none;" class="form-control" formControlName="fileSource" placeholder="Name">
+                    </div>
+                    <div class="nk-int-st">
+                        <input type="file" style="border: none;" class="form-control"
+                           (change)="onFileChange($event)" formControlName="file" placeholder="Excel Data">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeAddExcel" class="btn btn-secondary"
+                    data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary" [disabled]="addExcelForm.invalid">Enregistrer</button>
             </div>
         </form>
     </div>

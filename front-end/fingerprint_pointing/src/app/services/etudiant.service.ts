@@ -13,6 +13,14 @@ export class EtudiantService {
     */
   httpOptions = {
     headers: new HttpHeaders({
+      'content-type': 'multiparrt/form-data',
+      'Accept': 'application/json',
+      'X-CSRFToken': 'TqXf7sEvC3uKNYocBxhSRcI64KprmjzB'
+    })
+  };
+
+  httpOptionsFile = {
+    headers: new HttpHeaders({
       'content-type': 'application/json',
       'X-CSRFToken': 'TqXf7sEvC3uKNYocBxhSRcI64KprmjzB'
     })
@@ -91,6 +99,16 @@ export class EtudiantService {
     );
   }
 
+  /** Add new etudiant VIA EXCEL DATA */
+  addEtudiantViaExcelData(id_annee: string, id_niveau: string, id_parcours: string, etudiant: any): Observable<any> {
+    return this.http.post(`${endpoint}/etudiants/annee_univs/${id_annee}/niveaux/${id_niveau}/parcours/${id_parcours}/add_via_excel`, etudiant, this.httpOptionsFile).pipe(
+      map((data) => {
+        return data;
+      }),
+      catchError(this.handleError('POST etudiant', []))
+    );
+  }
+
   /** Update an etudiant */
   updateEtudiant(id: string, etudiant: any): Observable<any> {
     return this.http.put(`${endpoint}/etudiants/${id}/update`, JSON.stringify(etudiant), this.httpOptions).pipe(
@@ -120,6 +138,4 @@ export class EtudiantService {
       catchError(this.handleError('DELETE etudiant', []))
     );
   }
-
- 
 }

@@ -31,6 +31,7 @@ export class EtudiantsComponent implements OnInit {
   selectedNiveau: any = {"niveauCode": "NIVEAUX", "niveauId": "TOUT"};
   titre: string = "LISTE DE TOUS LES ETUDIANTS";
   addForm: FormGroup;
+  addExcelForm: FormGroup;
   updateForm: FormGroup;
   selected: string = "";
 
@@ -42,11 +43,16 @@ export class EtudiantsComponent implements OnInit {
     private notifier: NotifierService,
     private fb: FormBuilder
   ) {
+    
     this.addForm = this.fb.group({
       etudiantNum: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(3)]],
       etudiantNomComplet: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(255)]],
       etudiantMatricule: ['', [Validators.required, Validators.minLength(6)]]
     });
+    this.addExcelForm = this.fb.group({
+      file: [null, [Validators.required]],
+      fileSource: ['', [Validators.required]],
+    })
     this.updateForm = this.fb.group({
       etudiantNum: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(3)]],
       etudiantNomComplet: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(255)]],
@@ -233,6 +239,39 @@ export class EtudiantsComponent implements OnInit {
       if (data) {
         if (data.status == 'success') {
           let c = document.getElementById('closeAdd');
+          c!.click();
+          this.notifier.notify('success', data.message);
+          this.getAllEtudiantsNP(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId, this.selectedParcours.parcoursId);
+        } else {
+          this.notifier.notify(data.status, data.message);
+        }
+      } else {
+        this.notifier.notify('error', 'Erreur inattendue viens du serveur, Réessayez plus tard!')
+      }
+    });
+  }
+
+  onFileChange(e: Event) {
+    const element = event?.target as HTMLInputElement;
+    let files : FileList | null = element.files;
+    if(files) { 
+      this.addExcelForm.patchValue({
+        fileSource: files[0]
+      });
+      this.addExcelForm.get('fileSource')?.updateValueAndValidity();
+    }
+  }
+
+  onSubmitAddExcelForm(){
+    const formData: any = new FormData();
+    const file = this.addExcelForm.get('fileSource')?.value;
+    console.log(file);
+    formData.append('file', file);
+    console.log(formData);
+    this.service.addEtudiantViaExcelData(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId, this.selectedParcours.parcoursId, formData).subscribe((data)=> {
+      if (data) {
+        if (data.status == 'success') {
+          let c = document.getElementById('closeAddExcel');
           c!.click();
           this.notifier.notify('success', data.message);
           this.getAllEtudiantsNP(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId, this.selectedParcours.parcoursId);
