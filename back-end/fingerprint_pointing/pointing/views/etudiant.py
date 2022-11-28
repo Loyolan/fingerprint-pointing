@@ -37,7 +37,7 @@ def allEtudiantsAnneeUnivParcours(request, id_annee, id_parcours):
 
 # GET ALL ETUDIANT D'UN NIVEAU & D'UNE ANNEE UNIV
 @api_view(['GET'])
-def allEtudiantsAnneeUnivNiveau(request, id_annee, id_niveau):
+def  allEtudiantsAnneeUnivNiveau(request, id_annee, id_niveau):
     try:
         annee = AnneeUniv.objects.get(anneeUnivId=id_annee)
         niveau = Niveau.objects.get(niveauId=id_niveau)

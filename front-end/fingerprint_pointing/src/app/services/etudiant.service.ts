@@ -11,15 +11,14 @@ export class EtudiantService {
   /**
     * HTTP OPTIONS
     */
-  httpOptions = {
+  httpOptionsFile = {
     headers: new HttpHeaders({
-      'content-type': 'multiparrt/form-data',
       'Accept': 'application/json',
       'X-CSRFToken': 'TqXf7sEvC3uKNYocBxhSRcI64KprmjzB'
     })
   };
 
-  httpOptionsFile = {
+  httpOptions = {
     headers: new HttpHeaders({
       'content-type': 'application/json',
       'X-CSRFToken': 'TqXf7sEvC3uKNYocBxhSRcI64KprmjzB'

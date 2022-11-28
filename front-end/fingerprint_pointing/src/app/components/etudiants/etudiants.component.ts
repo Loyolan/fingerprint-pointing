@@ -263,11 +263,9 @@ export class EtudiantsComponent implements OnInit {
   }
 
   onSubmitAddExcelForm(){
-    const formData: any = new FormData();
-    const file = this.addExcelForm.get('fileSource')?.value;
-    console.log(file);
+    const formData: FormData = new FormData();
+    const file = this.addExcelForm.value['fileSource'];
     formData.append('file', file);
-    console.log(formData);
     this.service.addEtudiantViaExcelData(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId, this.selectedParcours.parcoursId, formData).subscribe((data)=> {
       if (data) {
         if (data.status == 'success') {
