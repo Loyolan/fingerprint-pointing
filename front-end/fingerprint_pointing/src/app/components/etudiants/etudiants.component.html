@@ -125,6 +125,7 @@
                                                 <th>#</th>
                                                 <th>Matricule</th>
                                                 <th>Nom et Prenoms</th>
+                                                <th>Genre</th>
                                                 <th>Niveau</th>
                                                 <th>Parcours</th>
                                                 <th></th>
@@ -135,6 +136,10 @@
                                                 <td>{{e.etudiantNum}}</td>
                                                 <td>{{e.etudiantMatricule}}</td>
                                                 <td>{{e.etudiantNomComplet}}</td>
+                                                <td>
+                                                    <span class="badge badge-primary" *ngIf="e.etudiantSexe == 1">M</span>
+                                                    <span class="badge badge-secondary" *ngIf="e.etudiantSexe == 2">F</span>
+                                                </td>
                                                 <td>{{e.niveauCode}}</td>
                                                 <td>{{e.parcoursCode}}</td>
                                                 <td class="text-right">
@@ -164,7 +169,7 @@
                                     
                                     <div class="text-right">
                                         <button *ngIf="selectedNiveau.niveauId != 'TOUT' && selectedParcours.parcoursId != 'TOUT'" data-toggle="modal" data-target="#modal-add-excel" class="btn btn-danger animated zoomInLeft"><i class="fa fa-file-excel"></i> Importer</button>
-                                        <button class="btn btn-success ml-2"><i class="fa fa-file-excel"></i> Exporter</button>
+                                        <button *ngIf="selectedNiveau.niveauId != 'TOUT' && selectedParcours.parcoursId != 'TOUT'" data-toggle="modal" data-target="#modal-export-excel" class="btn btn-success ml-2"><i class="fa fa-file-excel"></i> Exporter</button>
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +209,15 @@
                         <input type="text" class="form-control"  formControlName="etudiantNomComplet"
                             placeholder="Nom complet">
                     </div>
+                </div><div class="input-group mt-2">
+                    <div class="nk-int-st">
+                        <select class="form-control"  formControlName="etudiantSexe">
+                            <option value="1">MASCULIN</option>
+                            <option value="2">FEMININ</option>
+                        </select>
+                    </div>
                 </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" id="closeAdd" class="btn btn-secondary"
@@ -229,7 +242,7 @@
                 <div class="input-group">
                     
                     <div class="nk-int-st">
-                        <input type="file" style="border: none;" class="form-control"
+                        <input type="file" accept=".xlsx" style="border: none;" class="form-control"
                            (change)="onFileChange($event)" formControlName="file" placeholder="Excel Data">
                     </div>
                 </div>
@@ -303,7 +316,7 @@
     </div>
 </div>
 
-<!-- DELETE ALL -->
+<!-- EXPORT EXCEL -->
 <div class="modal" id="modal-del-all" tabindex="-1" role="dialog" aria-labelledby="SUPPRESSION" aria-modal="true">
     <div class="modal-dialog modal-sm animated zoomInDown">
         <div class="modal-content">
@@ -321,5 +334,39 @@
                 <button type="button" (click)="deleteAllEtudiantData()" class="btn btn-danger">Supprimer</button>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- DELETE ALL -->
+<div class="modal" id="modal-export-excel" tabindex="-1" role="dialog" aria-labelledby="SUPPRESSION" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <form [formGroup]="exportDataForm" (ngSubmit)="onSubmitExportDataForm()" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">EXPORTATION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6 class="text-danger"><i class="fa fa-warning"></i> Exportation {{selectedNiveau.niveauCode}}-{{selectedParcours.parcoursCode}} ({{ selectedAnnee.anneeUnivDesc }})</h6>
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="date" class="form-control"  formControlName="eff_time"
+                            >
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="nk-int-st">
+                        <input type="date" class="form-control"  formControlName="exp"
+                            >
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeExportExcel" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary" [disabled]="exportDataForm.invalid">Get Link</button>
+                <button type="button" *ngIf="link != ''" (click)="afterDowload()" class="btn btn-success animated zoomInLeft">Dowload</button>
+            </div>
+        </form>
     </div>
 </div>

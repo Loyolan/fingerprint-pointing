@@ -33,10 +33,11 @@ class AnneeUniv(models.Model):
 
 # ETUDIANT
 class Etudiant(models.Model):
-    etudiantId= models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    etudiantId= models.AutoField(primary_key=True)
     etudiantNum= models.IntegerField(null=False)
     etudiantMatricule= models.CharField(max_length=7, null=False, unique=True)
     etudiantNomComplet= models.CharField(max_length=255,null=False)
+    etudiantSexe= models.IntegerField(default=1)
     anneeUniv= models.ForeignKey(AnneeUniv, on_delete=models.CASCADE, null=True)
     niveau= models.ForeignKey(Niveau, on_delete=models.CASCADE, null=True)
     parcours= models.ForeignKey(Parcours, on_delete=models.CASCADE, null=True)
@@ -53,3 +54,16 @@ class Matiere(models.Model):
     matiereCode= models.CharField(max_length=12, unique=True)
     matiereDesc= models.CharField(max_length=50)
     enseignant= models.ForeignKey(Enseignant, on_delete=models.CASCADE, null=True)
+
+# EVENTS LOGS
+class EventLog(models.Model):
+    id= models.IntegerField(primary_key=True, db_index=True)
+    datetime= models.DateTimeField()
+    date= models.DateField()
+    time= models.TimeField()
+    direction= models.CharField(max_length=255)
+    devicename= models.CharField(max_length=255)
+    devicesn= models.CharField(max_length=255)
+    person = models.CharField(max_length=255)
+    card= models.CharField(max_length=255)
+    personId = models.ForeignKey(Etudiant, null=True, on_delete=models.CASCADE)

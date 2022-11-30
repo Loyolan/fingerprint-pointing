@@ -61,9 +61,12 @@ def updateAnneeUniv(request, id):
 @api_view(['PUT'])
 def activateAnneeUniv(request, id):
     try:
-        currentAnnee = AnneeUniv.objects.get(anneeEncours=True)
-        currentAnnee.anneeEncours = False
-        currentAnnee.save()
+        try:
+            currentAnnee = AnneeUniv.objects.get(anneeEncours=True)
+            currentAnnee.anneeEncours = False
+            currentAnnee.save()
+        except:
+            pass
         anneeUniv = AnneeUniv.objects.get(anneeUnivId=id);
         anneeUniv.anneeEncours = True
         anneeUniv.save()

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
+import { GlobalService } from './global.service';
 
-const endpoint = "http://127.0.0.1:8000/eni/api/fingerprint_pointing";
+const endpoint: string = GlobalService.backDomain + GlobalService.backApiPath;
 @Injectable({
   providedIn: 'root'
 })

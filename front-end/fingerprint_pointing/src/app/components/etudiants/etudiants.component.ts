@@ -33,6 +33,8 @@ export class EtudiantsComponent implements OnInit {
   addForm: FormGroup;
   addExcelForm: FormGroup;
   updateForm: FormGroup;
+  exportDataForm: FormGroup;
+  link: string = "";
   selected: string = "";
 
   constructor(
@@ -47,7 +49,8 @@ export class EtudiantsComponent implements OnInit {
     this.addForm = this.fb.group({
       etudiantNum: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(3)]],
       etudiantNomComplet: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(255)]],
-      etudiantMatricule: ['', [Validators.required, Validators.minLength(6)]]
+      etudiantMatricule: ['', [Validators.required, Validators.minLength(6)]],
+      etudiantSexe: [1, [Validators.required]]
     });
     this.addExcelForm = this.fb.group({
       file: [null, [Validators.required]],
@@ -58,6 +61,14 @@ export class EtudiantsComponent implements OnInit {
       etudiantNomComplet: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(255)]],
       etudiantMatricule: ['', [Validators.required, Validators.minLength(6)]]
     })
+    const deb = new Date();
+    const fin = deb.getTime() + 31536000000;
+    const d = deb.toISOString().slice(0, 10);
+    const f = new Date(fin).toISOString().slice(0, 10);
+    this.exportDataForm = this.fb.group({
+      eff_time: [d, [Validators.required]],
+      exp: [f, [Validators.required]]
+    });
   }
 
   ngOnInit(): void {
@@ -374,5 +385,30 @@ export class EtudiantsComponent implements OnInit {
         this.notifier.notify('error', 'Erreur inattendue viens du serveur, Réessayez plus tard!');
       }
     });
+  }
+
+  onSubmitExportDataForm() {
+    this.notifier.notify('info', 'Preparation du lien!!!');
+    const date = this.exportDataForm.value;
+    const eff = date.eff_time;
+    const exp = date.exp;
+    setTimeout(()=> {
+      this.notifier.notify('info', 'Votre lien de telechargement sera pret dans 5s');
+      setTimeout(()=>{
+        this.link = this.service.getExportData(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId, this.selectedParcours.parcoursId, eff, exp);
+      }, 5000);
+    }, 3000)
+  }
+
+  afterDowload() {
+    setTimeout(()=>{
+      this.notifier.notify('success', 'Exportation des etudiants effectuée');
+      window.open(this.link);
+      setTimeout(()=>{
+        let c = document.getElementById('closeExportExcel');
+        c!.click();
+        this.link = '';
+      }, 1000)
+    }, 3000)
   }
 }

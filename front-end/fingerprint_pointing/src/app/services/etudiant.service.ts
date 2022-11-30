@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
+import { GlobalService } from './global.service';
 
-const endpoint = "http://127.0.0.1:8000/eni/api/fingerprint_pointing";
+const endpoint: string = GlobalService.backDomain + GlobalService.backApiPath;
 @Injectable({
   providedIn: 'root'
 })
@@ -36,6 +37,11 @@ export class EtudiantService {
       console.log(error);
       return of(result as ['']);
     };
+  }
+
+  /** GET EXPORT EXCEL DATA */
+  getExportData(id_annee: string, id_niveau: string, id_parcours: string, effective_time:string, exp: string) {
+    return endpoint + `/etudiants/annee_univs/${id_annee}/niveaux/${id_niveau}/parcours/${id_parcours}/effective_time/${effective_time}/expiries/${exp}/export_data_to_excel`
   }
 
   /** Get etudiant ANNEE UNIV*/

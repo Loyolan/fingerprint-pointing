@@ -4,7 +4,9 @@ from pointing.serializers import EtudiantSerializer
 from pointing.models import Etudiant, AnneeUniv, Niveau, Parcours
 from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
+from django.http.response import FileResponse, HttpResponseRedirect
 import pandas as pd
+import mimetypes
 
 # GET ALL ETUDIANT D'UNE ANNEE UNIV
 @api_view(['GET'])
@@ -169,6 +171,7 @@ def addEtudiantViaExcelData(request, id_annee, id_niveau, id_parcours):
                 etudiantNum = int(data['Numero'][i]), 
                 etudiantMatricule = data['Matricule'][i],
                 etudiantNomComplet = data['Nom et Prenoms'][i],
+                etudiantSexe = data['Genre'][i],
                 anneeUniv = annee,
                 niveau = niveau,
                 parcours = parcours
@@ -177,4 +180,67 @@ def addEtudiantViaExcelData(request, id_annee, id_niveau, id_parcours):
         res = {'status': 'success', 'uploaded_file_url': uploaded_file_url, 'message': 'Creation de {0} etudiants, niveau {1}, parcours {2}, annee {3} effectuée'.format(data.shape[0], niveau.niveauCode, parcours.parcoursCode, annee.anneeUnivDesc) }
     except:
         res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
+    return Response(res)
+
+def exportDataToExcel(request, id_annee, id_niveau, id_parcours, eff_t, exp):
+    try:
+        annee = AnneeUniv.objects.get(anneeUnivId=id_annee)
+        niveau = Niveau.objects.get(niveauId=id_niveau)
+        parcours = Parcours.objects.get(parcoursId=id_parcours)
+        etudiants  = Etudiant.objects.all().filter(anneeUniv=annee.anneeUnivId).filter(niveau=niveau.niveauId).filter(parcours=parcours.parcoursId).order_by('etudiantNum')
+        identifiants = []
+        organisations = []
+        persons = []
+        genders = []
+        contacts = []
+        emails = []
+        eff_times = []
+        expiries = []
+        cards = []
+        rooms = []
+        floors = []
+        organisation = ('{0}/{1}'.format(niveau.niveauCode, parcours.parcoursCode))
+        eff_time = eff_t
+        expiry = exp
+        vide = ''
+        for etudiant in etudiants:
+            identifiants.append(etudiant.etudiantId)
+            organisations.append(organisation)
+            persons.append(etudiant.etudiantNomComplet)
+            genders.append(etudiant.etudiantSexe)
+            contacts.append(vide)
+            emails.append(vide)
+            eff_times.append(eff_time)
+            expiries.append(expiry)
+            cards.append(vide)
+            rooms.append(vide)
+            floors.append(vide)
+        data = {
+            '*Person ID': identifiants,
+            '*Organizations': organisations,
+            '*Person': persons,
+            '*Gender': genders,
+            'Contact': contacts,
+            'Email': emails,
+            'Effective Time': eff_times,
+            'Expiry': expiries,
+            'Card No.': cards,
+            'Room No.': rooms,
+            'Floor No.': floors
+        }
+        df = pd.DataFrame(data)
+        fs = FileSystemStorage('media/export_data')
+        f_name = 'Exported_'+ niveau.niveauCode +'_'+ parcours.parcoursCode +'_'+ annee.anneeUnivDesc +'.xlsx'
+        df.to_excel(fs.path(f_name), index=False)
+        fl_path = fs.path(f_name)
+        fl = open(fl_path, 'rb')
+        res = FileResponse(fl)
+        return res
+    except:
+        url = request.get_host() +'eni/api/errors'
+        return HttpResponseRedirect(redirect_to=url)
+        
+@api_view(['GET'])
+def error(request):
+    res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
     return Response(res)

@@ -51,8 +51,12 @@ urlpatterns = [
     path('etudiants/annee_univs/<id_annee>/niveaux/<id_niveau>/parcours/<id_parcours>', views.allEtudiantsAnneeUnivNiveauParcours),
     path('etudiants/<id>/', views.getEtudiantById),
     path('etudiants/annee_univs/<id_annee>/niveaux/<id_niveau>/parcours/<id_parcours>/add', views.addEtudiant),
-    path('etudiants/annee_univs/<id_annee>/niveaux/<id_niveau>/parcours/<id_parcours>/add_via_excel', views.addEtudiantViaExcelData),
     path('etudiants/<id>/update', views.updateEtudiant),
     path('etudiants/<id>/delete', views.deleteEtudiant),
-    path('etudiants/annee_univs/<id_annee>/niveaux/<id_niveau>/parcours/<id_parcours>/delete', views.deleteAllEtudiantAnneeUnivNiveauParcours)
+    path('etudiants/annee_univs/<id_annee>/niveaux/<id_niveau>/parcours/<id_parcours>/delete', views.deleteAllEtudiantAnneeUnivNiveauParcours),
+
+    path('etudiants/annee_univs/<id_annee>/niveaux/<id_niveau>/parcours/<id_parcours>/add_via_excel', views.addEtudiantViaExcelData),
+    path('etudiants/annee_univs/<id_annee>/niveaux/<id_niveau>/parcours/<id_parcours>/effective_time/<eff_t>/expiries/<exp>/export_data_to_excel', views.exportDataToExcel),
+
+    path('errors', views.error)
 ]
