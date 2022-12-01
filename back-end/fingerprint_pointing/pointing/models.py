@@ -66,4 +66,6 @@ class EventLog(models.Model):
     devicesn= models.CharField(max_length=255)
     person = models.CharField(max_length=255)
     card= models.CharField(max_length=255)
-    personId = models.ForeignKey(Etudiant, null=True, on_delete=models.CASCADE)
+    saved = models.BooleanField(default=False)
+    etudiant= models.ForeignKey(Etudiant, on_delete=models.CASCADE, null=True)
+    matiere= models.ForeignKey(Matiere, on_delete=models.CASCADE, null=True)

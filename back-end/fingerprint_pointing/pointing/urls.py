@@ -58,5 +58,11 @@ urlpatterns = [
     path('etudiants/annee_univs/<id_annee>/niveaux/<id_niveau>/parcours/<id_parcours>/add_via_excel', views.addEtudiantViaExcelData),
     path('etudiants/annee_univs/<id_annee>/niveaux/<id_niveau>/parcours/<id_parcours>/effective_time/<eff_t>/expiries/<exp>/export_data_to_excel', views.exportDataToExcel),
 
+    path('events/', views.getAllEventsLogs),
+    path('events/saved', views.getAllEventsSaved),
+    path('events/not_saved', views.getAllEventsNotSaved),
+    path('events/date/<date>', views.getAllEventsDate),
+    path('events/date/<date>/time/<time>', views.getAllEventsDateTime),
+
     path('errors', views.error)
 ]

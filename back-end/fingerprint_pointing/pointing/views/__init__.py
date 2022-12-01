@@ -5,4 +5,4 @@ from .matieres import *
 from .enseignant import *
 from .niveau import *
 from .parcours import *
-from .envent import *
+from .eventlog import *

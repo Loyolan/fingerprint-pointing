@@ -6,7 +6,6 @@ from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from django.http.response import FileResponse, HttpResponseRedirect
 import pandas as pd
-import mimetypes
 
 # GET ALL ETUDIANT D'UNE ANNEE UNIV
 @api_view(['GET'])
@@ -147,6 +146,17 @@ def deleteAllEtudiantAnneeUnivNiveauParcours(request, id_annee, id_niveau, id_pa
         res = {'status': 'error', 'message': 'Erreur, Veuillez essayer plus tard'}
     return Response(res)
 
+def convertMat(mat):
+    m = ''
+    if(len(mat) == 1):
+        m = '000'+ mat
+    elif(len(mat) == 2):
+        m = '00' + mat
+    elif(len(mat) == 3):
+        m = '0' + mat
+    else:
+        m = mat
+    return m
 
 @api_view(['POST'])
 def addEtudiantViaExcelData(request, id_annee, id_niveau, id_parcours):
@@ -163,15 +173,20 @@ def addEtudiantViaExcelData(request, id_annee, id_niveau, id_parcours):
         f_name = niveau.niveauCode +'_'+ parcours.parcoursCode +'_'+ annee.anneeUnivDesc +'.xlsx'
         if(fs.exists(f_name)):
             fs.delete(f_name)
-        filename = fs.save(f_name, myfile)
+        fs.save(f_name, myfile)
         uploaded_file_url = "/media/excel_data/"+ f_name
         data = pd.read_excel(fs.path(f_name))
+        data['Matricule'] = data['Matricule'].astype(str)
+        print(data.head())
         for i in data.index:
+            genre = 1;
+            if data['Genre'][i] == 'F':
+                genre = 2
             etudiant = Etudiant.objects.create(
                 etudiantNum = int(data['Numero'][i]), 
-                etudiantMatricule = data['Matricule'][i],
+                etudiantMatricule = convertMat(data['Matricule'][i]),
                 etudiantNomComplet = data['Nom et Prenoms'][i],
-                etudiantSexe = data['Genre'][i],
+                etudiantSexe = genre,
                 anneeUniv = annee,
                 niveau = niveau,
                 parcours = parcours

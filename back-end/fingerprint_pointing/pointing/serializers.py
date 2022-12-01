@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Parcours, Niveau, AnneeUniv, Etudiant, Enseignant, Matiere
+from .models import User, Parcours, Niveau, AnneeUniv, Etudiant, Enseignant, Matiere, EventLog
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,4 +40,9 @@ class MatiereSerializer(serializers.ModelSerializer):
 class EtudiantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Etudiant
+        fields = '__all__'
+
+class EventLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EventLog
         fields = '__all__'
