@@ -1,0 +1,145 @@
+<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+    <app-navbar></app-navbar>
+    <div class="app-main">
+        <app-sidebar></app-sidebar>
+        <div class="app-main__outer">
+            <div class="app-main__inner">
+                <div class="app-page-title">
+                    <div class="page-title-wrapper">
+                        <div class="page-title-heading">
+                            <div class="page-title-icon">
+                                <i class="fa fa-database icon-gradient bg-mean-fruit">
+                                </i>
+                            </div>
+                            <div>Tableau de bord d'analyse
+                                <div class="page-title-subheading">
+                                    Representation graphique des analyses
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-title-actions">
+                            <div class="d-inline-block dropdown">
+                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    class="btn-shadow dropdown-toggle btn btn-info">
+                                    <span class="btn-icon-wrapper pr-2 opacity-7">
+                                        <i class="fa fa-business-time fa-w-20"></i>
+                                    </span>
+                                    Recents
+                                </button>
+                                <div tabindex="-1" role="menu" aria-hidden="true"
+                                    class="dropdown-menu dropdown-menu-right">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a href="javascript:void(0);" class="nav-link">
+                                                <i class="nav-link-icon lnr-inbox"></i>
+                                                <span>
+                                                    Inbox
+                                                </span>
+                                                <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="javascript:void(0);" class="nav-link">
+                                                <i class="nav-link-icon lnr-book"></i>
+                                                <span>
+                                                    Book
+                                                </span>
+                                                <div class="ml-auto badge badge-pill badge-danger">5</div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="javascript:void(0);" class="nav-link">
+                                                <i class="nav-link-icon lnr-picture"></i>
+                                                <span>
+                                                    Picture
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a disabled href="javascript:void(0);" class="nav-link disabled">
+                                                <i class="nav-link-icon lnr-file-empty"></i>
+                                                <span>
+                                                    File Disabled
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="main-card mb-3 card">
+                            <div class="card-header">Tous les evenements
+                                <div class="btn-actions-pane-right">
+                                    <div role="group" class="btn-group-sm btn-group">
+                                        <button class="btn btn-focus">Lundi</button>
+                                        <button class="btn btn-focus">Mardi</button>
+                                        <button class="btn btn-focus">Mercredi</button>
+                                        <button class="btn btn-focus">Jeudi</button>
+                                        <button class="btn btn-focus">Vendredi</button>
+                                        <button class="btn btn-focus">Samedi</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th>Etudiant</th>
+                                            <th class="text-center">Date</th>
+                                            <th class="text-center">Heure</th>
+                                            <th class="text-center">Flux</th>
+                                            <th class="text-right">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let e of events">
+                                            <td class="text-center text-muted">{{e.event.id}}</td>
+                                            <td>
+                                                <div class="widget-content p-0">
+                                                    <div class="widget-content-wrapper">
+                                                        <div class="widget-content-left mr-3">
+                                                            <div class="widget-content-left">
+                                                                <img width="40" class="rounded-circle"
+                                                                    src="assets/images/avatar.png" alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-content-left flex2">
+                                                            <div class="widget-heading">{{e.etudiant.etudiantNomComplet}}</div>
+                                                            <div class="widget-subheading opacity-7">{{e.etudiant.etudiantMatricule}} - {{e.niveau.niveauCode}}/{{e.parcours.parcoursCode}}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">{{e.event.date}}</td>
+                                            <td class="text-center">{{e.event.time}}</td>
+                                            <td class="text-center">
+                                                <div *ngIf="e.event.direction == 'IN'" class="badge badge-info">{{e.event.direction}}</div>
+                                                <div *ngIf="e.event.direction == 'OUT'" class="badge badge-success">{{e.event.direction}}</div>
+                                                <div *ngIf="e.event.direction == ''" class="badge badge-secondary">{{e.event.direction}}</div>
+                                            </td>
+                                            <td>
+                                                <div *ngIf="!e.event.saved" class="badge badge-danger">Non enregistré</div>
+                                                <div *ngIf="e.event.saved" class="badge badge-success">Enregistré</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-block text-center card-footer">
+                                <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger"><i
+                                        class="pe-7s-trash btn-icon-wrapper"> </i></button>
+                                <button class="btn-wide btn btn-success">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-footer></app-footer>
+        </div>
+    </div>
+</div>

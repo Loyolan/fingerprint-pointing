@@ -121,14 +121,6 @@ export class EtudiantsComponent implements OnInit {
   getAllEtudiants(id_annee: string) {
     this.service.allEtudiantsAnneeUniv(id_annee).subscribe((data) => {
       this.etudiants = data;
-      for(let i = 0; i < this.etudiants.length; i++) {
-        this.niveauService.getOneNiveau(this.etudiants[i].niveau).subscribe((data) => {
-          this.etudiants[i].niveauCode = data.niveauCode;
-        });
-        this.parcoursService.getOneParcours(this.etudiants[i].parcours).subscribe((data) => {
-          this.etudiants[i].parcoursCode = data.parcoursCode;
-        });
-      }
     })
   }
 
@@ -136,14 +128,6 @@ export class EtudiantsComponent implements OnInit {
   getAllEtudiantsP(id_annee: string, id_parcours: string) {
     this.service.allEtudiantsAnneeUnivParcours(id_annee, id_parcours).subscribe((data) => {
       this.etudiants = data;
-      for(let i = 0; i < this.etudiants.length; i++) {
-        this.niveauService.getOneNiveau(this.etudiants[i].niveau).subscribe((data) => {
-          this.etudiants[i].niveauCode = data.niveauCode;
-        });
-        this.parcoursService.getOneParcours(this.etudiants[i].parcours).subscribe((data) => {
-          this.etudiants[i].parcoursCode = data.parcoursCode;
-        });
-      }
     })
   }
 
@@ -151,14 +135,6 @@ export class EtudiantsComponent implements OnInit {
   getAllEtudiantsN(id_annee: string, id_niveau: string) {
     this.service.allEtudiantsAnneeUnivNiveau(id_annee, id_niveau).subscribe((data) => {
       this.etudiants = data;
-      for(let i = 0; i < this.etudiants.length; i++) {
-        this.niveauService.getOneNiveau(this.etudiants[i].niveau).subscribe((data) => {
-          this.etudiants[i].niveauCode = data.niveauCode;
-        });
-        this.parcoursService.getOneParcours(this.etudiants[i].parcours).subscribe((data) => {
-          this.etudiants[i].parcoursCode = data.parcoursCode;
-        });
-      }
     })
   }
 
@@ -166,14 +142,6 @@ export class EtudiantsComponent implements OnInit {
   getAllEtudiantsNP(id_annee: string, id_niveau: string, id_parcours: string) {
     this.service.allEtudiantsAnneeUnivNiveauParcours(id_annee, id_niveau, id_parcours).subscribe((data) => {
       this.etudiants = data;
-      for(let i = 0; i < this.etudiants.length; i++) {
-        this.niveauService.getOneNiveau(this.etudiants[i].niveau).subscribe((data) => {
-          this.etudiants[i].niveauCode = data.niveauCode;
-        });
-        this.parcoursService.getOneParcours(this.etudiants[i].parcours).subscribe((data) => {
-          this.etudiants[i].parcoursCode = data.parcoursCode;
-        });
-      }
     })
   }
 

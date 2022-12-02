@@ -1,7 +1,6 @@
 import uuid
 import datetime
 from django.db import models
-from rest_framework.validators import UniqueValidator
 
 # Create your models here.
 class User(models.Model):
@@ -67,5 +66,3 @@ class EventLog(models.Model):
     person = models.CharField(max_length=255)
     card= models.CharField(max_length=255)
     saved = models.BooleanField(default=False)
-    etudiant= models.ForeignKey(Etudiant, on_delete=models.CASCADE, null=True)
-    matiere= models.ForeignKey(Matiere, on_delete=models.CASCADE, null=True)

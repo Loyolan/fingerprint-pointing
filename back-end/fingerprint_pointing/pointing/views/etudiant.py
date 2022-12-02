@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from pointing.serializers import EtudiantSerializer
+from pointing.serializers import EtudiantSerializer, ParcoursSerializer, NiveauSerializer
 from pointing.models import Etudiant, AnneeUniv, Niveau, Parcours
 from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
@@ -13,8 +13,15 @@ def allEtudiantsAnneeUniv(request, id_annee):
     try:
         annee = AnneeUniv.objects.get(anneeUnivId=id_annee)
         etudiants  = Etudiant.objects.all().filter(anneeUniv=annee.anneeUnivId).order_by('etudiantNomComplet')
-        serialisation = EtudiantSerializer(etudiants, many=True)
-        res = serialisation.data
+        res = []
+        for etudiant in etudiants:
+            parcours = Parcours.objects.get(parcoursId=etudiant.parcours.parcoursId)
+            niveau = Niveau.objects.get(niveauId=etudiant.niveau.niveauId)
+            parcoursData = ParcoursSerializer(parcours, many=False).data
+            niveauData = NiveauSerializer(niveau, many=False).data
+            etudiantData = EtudiantSerializer(etudiant, many=False).data
+            et = {'etudiant': etudiantData, 'niveau': niveauData, 'parcours': parcoursData}
+            res.append(et)
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide annee ou niveau'}
     except:
@@ -27,9 +34,15 @@ def allEtudiantsAnneeUnivParcours(request, id_annee, id_parcours):
     try:
         annee = AnneeUniv.objects.get(anneeUnivId=id_annee)
         parcours = Parcours.objects.get(parcoursId=id_parcours)
+        parcoursData = ParcoursSerializer(parcours, many=False).data
         etudiants  = Etudiant.objects.all().filter(anneeUniv=annee.anneeUnivId).filter(parcours=parcours.parcoursId).order_by('etudiantNomComplet')
-        serialisation = EtudiantSerializer(etudiants, many=True)
-        res = serialisation.data
+        res = []
+        for etudiant in etudiants:
+            niveau = Niveau.objects.get(niveauId=etudiant.niveau.niveauId)
+            niveauData = NiveauSerializer(niveau, many=False).data
+            etudiantData = EtudiantSerializer(etudiant, many=False).data
+            et = {'etudiant': etudiantData, 'niveau': niveauData, 'parcours': parcoursData}
+            res.append(et)
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide annee ou niveau'}
     except:
@@ -42,9 +55,15 @@ def  allEtudiantsAnneeUnivNiveau(request, id_annee, id_niveau):
     try:
         annee = AnneeUniv.objects.get(anneeUnivId=id_annee)
         niveau = Niveau.objects.get(niveauId=id_niveau)
+        niveauData = NiveauSerializer(niveau, many=False).data
         etudiants  = Etudiant.objects.all().filter(anneeUniv=annee.anneeUnivId).filter(niveau=niveau.niveauId).order_by('etudiantNum')
-        serialisation = EtudiantSerializer(etudiants, many=True)
-        res = serialisation.data
+        res = []
+        for etudiant in etudiants:
+            parcours = Parcours.objects.get(parcoursId=etudiant.parcours.parcoursId)
+            parcoursData = ParcoursSerializer(parcours, many=False).data
+            etudiantData = EtudiantSerializer(etudiant, many=False).data
+            et = {'etudiant': etudiantData, 'niveau': niveauData, 'parcours': parcoursData}
+            res.append(et)
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide annee ou niveau'}
     except:
@@ -57,10 +76,15 @@ def allEtudiantsAnneeUnivNiveauParcours(request, id_annee, id_niveau, id_parcour
     try:
         annee = AnneeUniv.objects.get(anneeUnivId=id_annee)
         niveau = Niveau.objects.get(niveauId=id_niveau)
+        niveauData = NiveauSerializer(niveau, many=False).data
         parcours = Parcours.objects.get(parcoursId=id_parcours)
+        parcoursData = ParcoursSerializer(parcours, many=False).data
         etudiants  = Etudiant.objects.all().filter(anneeUniv=annee.anneeUnivId).filter(niveau=niveau.niveauId).filter(parcours=parcours.parcoursId).order_by('etudiantNum')
-        serialisation = EtudiantSerializer(etudiants, many=True)
-        res = serialisation.data
+        res = []
+        for etudiant in etudiants:
+            etudiantData = EtudiantSerializer(etudiant, many=False).data
+            et = {'etudiant': etudiantData, 'niveau': niveauData, 'parcours': parcoursData}
+            res.append(et)
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide annee ou niveau ou bien parcours'}
     except:

@@ -1,15 +1,27 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from pointing.serializers import EventLogSerializer
-from pointing.models import Etudiant, EventLog
+from pointing.serializers import EventLogSerializer, EtudiantSerializer, ParcoursSerializer, NiveauSerializer
+from pointing.models import Etudiant, EventLog, AnneeUniv, Parcours, Niveau
 from django.core.exceptions import ValidationError
 
 @api_view(['GET'])
 def getAllEventsLogs(request):
     try:
         events  = EventLog.objects.all().order_by('datetime')
-        serialisation = EventLogSerializer(events, many=True)
-        res = serialisation.data
+        res = []
+        for ev in events:
+            eventData = EventLogSerializer(ev, many=False).data
+            annee = AnneeUniv.objects.get(anneeEncours= True)
+            
+            etudiant = Etudiant.objects.filter(etudiantNomComplet=ev.person).filter(anneeUniv=annee.anneeUnivId).get()
+            print(etudiant.etudiantNomComplet)
+            parcours = Parcours.objects.get(parcoursId=etudiant.parcours.parcoursId)
+            niveau = Niveau.objects.get(niveauId=etudiant.niveau.niveauId)
+            etudiantData = EtudiantSerializer(etudiant, many=False).data
+            parcoursData = ParcoursSerializer(parcours, many=False).data
+            niveauData = NiveauSerializer(niveau, many=False).data
+            event = {'event': eventData, 'etudiant': etudiantData, 'parcours': parcoursData, 'niveau': niveauData}
+            res.append(event)
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
@@ -20,8 +32,20 @@ def getAllEventsLogs(request):
 def getAllEventsSaved(request):
     try:
         events = EventLog.objects.all().filter(saved=True).order_by('datetime')
-        serialisation = EventLogSerializer(events, many=True)
-        res = serialisation.data
+        res = []
+        for ev in events:
+            eventData = EventLogSerializer(ev, many=False).data
+            annee = AnneeUniv.objects.get(anneeEncours= True)
+            
+            etudiant = Etudiant.objects.filter(etudiantNomComplet=ev.person).filter(anneeUniv=annee.anneeUnivId).get()
+            print(etudiant.etudiantNomComplet)
+            parcours = Parcours.objects.get(parcoursId=etudiant.parcours.parcoursId)
+            niveau = Niveau.objects.get(niveauId=etudiant.niveau.niveauId)
+            etudiantData = EtudiantSerializer(etudiant, many=False).data
+            parcoursData = ParcoursSerializer(parcours, many=False).data
+            niveauData = NiveauSerializer(niveau, many=False).data
+            event = {'event': eventData, 'etudiant': etudiantData, 'parcours': parcoursData, 'niveau': niveauData}
+            res.append(event)
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
@@ -32,8 +56,20 @@ def getAllEventsSaved(request):
 def getAllEventsNotSaved(request):
     try:
         events = EventLog.objects.all().filter(saved=False).order_by('datetime')
-        serialisation = EventLogSerializer(events, many=True)
-        res = serialisation.data
+        res = []
+        for ev in events:
+            eventData = EventLogSerializer(ev, many=False).data
+            annee = AnneeUniv.objects.get(anneeEncours= True)
+            
+            etudiant = Etudiant.objects.filter(etudiantNomComplet=ev.person).filter(anneeUniv=annee.anneeUnivId).get()
+            print(etudiant.etudiantNomComplet)
+            parcours = Parcours.objects.get(parcoursId=etudiant.parcours.parcoursId)
+            niveau = Niveau.objects.get(niveauId=etudiant.niveau.niveauId)
+            etudiantData = EtudiantSerializer(etudiant, many=False).data
+            parcoursData = ParcoursSerializer(parcours, many=False).data
+            niveauData = NiveauSerializer(niveau, many=False).data
+            event = {'event': eventData, 'etudiant': etudiantData, 'parcours': parcoursData, 'niveau': niveauData}
+            res.append(event)
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
@@ -44,8 +80,20 @@ def getAllEventsNotSaved(request):
 def getAllEventsDate(request, date):
     try:
         events = EventLog.objects.all().filter(date=date).order_by('datetime')
-        serialisation = EventLogSerializer(events, many=True)
-        res = serialisation.data
+        res = []
+        for ev in events:
+            eventData = EventLogSerializer(ev, many=False).data
+            annee = AnneeUniv.objects.get(anneeEncours= True)
+            
+            etudiant = Etudiant.objects.filter(etudiantNomComplet=ev.person).filter(anneeUniv=annee.anneeUnivId).get()
+            print(etudiant.etudiantNomComplet)
+            parcours = Parcours.objects.get(parcoursId=etudiant.parcours.parcoursId)
+            niveau = Niveau.objects.get(niveauId=etudiant.niveau.niveauId)
+            etudiantData = EtudiantSerializer(etudiant, many=False).data
+            parcoursData = ParcoursSerializer(parcours, many=False).data
+            niveauData = NiveauSerializer(niveau, many=False).data
+            event = {'event': eventData, 'etudiant': etudiantData, 'parcours': parcoursData, 'niveau': niveauData}
+            res.append(event)
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
@@ -56,8 +104,20 @@ def getAllEventsDate(request, date):
 def getAllEventsDateTime(request, date, time):
     try:
         events = EventLog.objects.all().filter(date=date).filter(time=time).order_by('datetime')
-        serialisation = EventLogSerializer(events, many=True)
-        res = serialisation.data
+        res = []
+        for ev in events:
+            eventData = EventLogSerializer(ev, many=False).data
+            annee = AnneeUniv.objects.get(anneeEncours= True)
+            
+            etudiant = Etudiant.objects.filter(etudiantNomComplet=ev.person).filter(anneeUniv=annee.anneeUnivId).get()
+            print(etudiant.etudiantNomComplet)
+            parcours = Parcours.objects.get(parcoursId=etudiant.parcours.parcoursId)
+            niveau = Niveau.objects.get(niveauId=etudiant.niveau.niveauId)
+            etudiantData = EtudiantSerializer(etudiant, many=False).data
+            parcoursData = ParcoursSerializer(parcours, many=False).data
+            niveauData = NiveauSerializer(niveau, many=False).data
+            event = {'event': eventData, 'etudiant': etudiantData, 'parcours': parcoursData, 'niveau': niveauData}
+            res.append(event)
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:

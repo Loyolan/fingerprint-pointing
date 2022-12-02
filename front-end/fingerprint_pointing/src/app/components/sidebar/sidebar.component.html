@@ -35,12 +35,17 @@
             <ul class="vertical-nav-menu">
                 <li class="app-sidebar__heading">Gestion de Pointage</li>
                 <li>
-                    <a href="forms-controls.html">
+                    <a [routerLink]="['/eni/fingerprint_pointing/events']">
                         <i class="metismenu-icon text-info pe-7s-bell">
                         </i>Control d'Evènements
                     </a>
                 </li>
-                
+                <li>
+                    <a [routerLink]="['/eni/fingerprint_pointing/pointages']">
+                        <i class="metismenu-icon text-info pe-7s-check">
+                        </i>Control de Pointage
+                    </a>
+                </li>
                 <li class="app-sidebar__heading">GESTION DES ETUDIANTS</li>
                 <li>
                     <a [routerLink]="['/eni/fingerprint_pointing/etudiants']" routerLinkActive="router-link-active" >
@@ -57,7 +62,7 @@
                     </a>
                 </li>
                 <li>
-                    <a [routerLink]="['//eni/fingerprint_pointing/matieres']" routerLinkActive="router-link-active">
+                    <a [routerLink]="['/eni/fingerprint_pointing/matieres']" routerLinkActive="router-link-active">
                         <i class="metismenu-icon text-info pe-7s-keypad">
                         </i>Matieres
                     </a>

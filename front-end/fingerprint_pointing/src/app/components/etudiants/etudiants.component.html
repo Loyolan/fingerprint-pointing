@@ -133,22 +133,22 @@
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let e of etudiants">
-                                                <td>{{e.etudiantNum}}</td>
-                                                <td>{{e.etudiantMatricule}}</td>
-                                                <td>{{e.etudiantNomComplet}}</td>
+                                                <td>{{e.etudiant.etudiantNum}}</td>
+                                                <td>{{e.etudiant.etudiantMatricule}}</td>
+                                                <td>{{e.etudiant.etudiantNomComplet}}</td>
                                                 <td>
-                                                    <span class="badge badge-primary" *ngIf="e.etudiantSexe == 1">M</span>
-                                                    <span class="badge badge-secondary" *ngIf="e.etudiantSexe == 2">F</span>
+                                                    <span class="badge badge-primary" *ngIf="e.etudiant.etudiantSexe == 1">M</span>
+                                                    <span class="badge badge-secondary" *ngIf="e.etudiant.etudiantSexe == 2">F</span>
                                                 </td>
-                                                <td>{{e.niveauCode}}</td>
-                                                <td>{{e.parcoursCode}}</td>
+                                                <td>{{e.niveau.niveauCode}}</td>
+                                                <td>{{e.parcours.parcoursCode}}</td>
                                                 <td class="text-right">
                                                     <label data-toggle="modal" data-target="#modal-edit"
-                                                        (click)="editEtudiant(e.etudiantId)" class="btn btn-primary">
+                                                        (click)="editEtudiant(e.etudiant.etudiantId)" class="btn btn-primary">
                                                         <i class="fa fa-edit"></i>
                                                     </label>
                                                     <label data-toggle="modal" data-target="#modal-delete"
-                                                        (click)="deleteEtudiant(e.etudiantId)" class="btn btn-danger">
+                                                        (click)="deleteEtudiant(e.etudiant.etudiantId)" class="btn btn-danger">
                                                         <i class="fa fa-trash"></i>
                                                     </label>
                                                 </td>

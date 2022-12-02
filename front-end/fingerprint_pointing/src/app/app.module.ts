@@ -32,6 +32,8 @@ import { MatieresComponent } from './components/matieres/matieres.component';
 import { AnneeUnivComponent } from './components/annee-univ/annee-univ.component';
 import { ParcoursComponent } from './components/parcours/parcours.component';
 import { NiveauComponent } from './components/niveau/niveau.component';
+import { EventsComponent } from './components/events/events.component';
+import { PointageComponent } from './components/pointage/pointage.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { NiveauComponent } from './components/niveau/niveau.component';
     MatieresComponent,
     AnneeUnivComponent,
     ParcoursComponent,
-    NiveauComponent
+    NiveauComponent,
+    EventsComponent,
+    PointageComponent
   ],
   imports: [
     BrowserModule,

@@ -16,6 +16,8 @@ import { AnneeUnivComponent } from './components/annee-univ/annee-univ.component
 import { NiveauComponent } from './components/niveau/niveau.component';
 import { ParcoursComponent } from './components/parcours/parcours.component';
 import { MatieresComponent } from './components/matieres/matieres.component';
+import { EventsComponent } from './components/events/events.component';
+import { PointageComponent } from './components/pointage/pointage.component';
 
 const routes: Routes = [
   { path: 'eni/fingerprint_pointing/home', canActivate:[AuthGuard], component: HomeComponent },
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: 'eni/fingerprint_pointing/matieres', canActivate: [AuthGuard], component: MatieresComponent },
   { path: 'eni/fingerprint_pointing/profs', canActivate: [AuthGuard], component: ProfsComponent },
   { path: 'eni/fingerprint_pointing/etudiants', canActivate: [AuthGuard], component: EtudiantsComponent },
+  { path: 'eni/fingerprint_pointing/events', canActivate: [AuthGuard], component: EventsComponent },
+  { path: 'eni/fingerprint_pointing/pointages', canActivate: [AuthGuard], component: PointageComponent },
   { path: 'eni/fingerprint_pointing/login', component: LoginComponent },
   { path: 'eni/fingerprint_pointing/register', component: RegisterComponent },
   { path: 'eni/fingerprint_pointing/forgot_pass', component: ForgotPassComponent },
