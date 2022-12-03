@@ -33,5 +33,4 @@ angular-notifier
 
 ## COLLABORATORS
 TAFITASOAMOOMS27
-SAMUEL
-NAMBININA
+lionRakotondravao
