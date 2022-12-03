@@ -15,7 +15,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
     trigger('fade', [
       transition('void => *', [
         style({backgroundColor: 'black', opacity: 0}),
-        animate(2000, style({backgroundColor: 'white', opacity: 1}))
+        animate(1000, style({backgroundColor: 'white', opacity: 1}))
       ])
     ])
   ]
@@ -87,7 +87,7 @@ export class EtudiantsComponent implements OnInit {
             this.getAllParcours(this.annees[i].anneeUnivId);
             this.getAllNiveaux(this.annees[i].anneeUnivId);
             this.getAllEtudiants(this.annees[i].anneeUnivId);
-          }, 2000);
+          }, 1000);
         }
       }
     })
@@ -164,7 +164,7 @@ export class EtudiantsComponent implements OnInit {
           this.getAllEtudiantsP(this.selectedAnnee.anneeUnivId, this.selectedParcours.parcoursId);
           this.titre = `LISTE DES ETUDIANTS (${this.selectedParcours.parcoursCode})`;
         }
-      }, 2000);
+      }, 1000);
     } else {
       this.niveauService.getOneNiveau(id).subscribe((data)=>{
         this.selectedNiveau = data;
@@ -177,7 +177,7 @@ export class EtudiantsComponent implements OnInit {
             this.getAllEtudiantsNP(this.selectedAnnee.anneeUnivId, data.niveauId, this.selectedParcours.parcoursId);
             this.titre = `${data.niveauDesc} (${this.selectedParcours.parcoursCode})`;
           }
-        }, 2000);
+        }, 1000);
       })
     }
   }
@@ -194,7 +194,7 @@ export class EtudiantsComponent implements OnInit {
           this.getAllEtudiantsN(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId);
           this.titre = `${this.selectedNiveau.niveauDesc}`;
         }
-      }, 2000);
+      }, 1000);
     } else {
       this.parcoursService.getOneParcours(id).subscribe(data => {
         this.selectedParcours = data;
@@ -207,7 +207,7 @@ export class EtudiantsComponent implements OnInit {
             this.getAllEtudiantsNP(this.selectedAnnee.anneeUnivId, this.selectedNiveau.niveauId, data.parcoursId);
             this.titre = `${this.selectedNiveau.niveauDesc} (${data.parcoursCode})`;
           }
-        }, 2000);
+        }, 1000);
       });
     }
   }

@@ -60,9 +60,18 @@ class EventLog(models.Model):
     datetime= models.DateTimeField()
     date= models.DateField()
     time= models.TimeField()
-    direction= models.CharField(max_length=255)
+    direction= models.CharField(max_length=255, default='UKN')
     devicename= models.CharField(max_length=255)
     devicesn= models.CharField(max_length=255)
     person = models.CharField(max_length=255)
     card= models.CharField(max_length=255)
-    saved = models.BooleanField(default=False)
+
+# POINTAGE
+class Pointage(models.Model):
+    pointageId= models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
+    datetimeDebut= models.DateTimeField(null=True)
+    datetimeFin= models.DateTimeField(null=True)
+    pointageIn = models.CharField(max_length=3,default='UKN')
+    pointageOut = models.CharField(max_length=3, default='UKN')
+    etudiant= models.ForeignKey(Etudiant, on_delete=models.CASCADE, null=True)
+    matiere= models.ForeignKey(Matiere, on_delete=models.SET_NULL, null=True)

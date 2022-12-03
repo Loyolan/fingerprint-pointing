@@ -6,3 +6,4 @@ from .enseignant import *
 from .niveau import *
 from .parcours import *
 from .eventlog import *
+from .pointage import *

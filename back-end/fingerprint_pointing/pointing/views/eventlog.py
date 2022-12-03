@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from pointing.serializers import EventLogSerializer, EtudiantSerializer, ParcoursSerializer, NiveauSerializer
 from pointing.models import Etudiant, EventLog, AnneeUniv, Parcours, Niveau
 from django.core.exceptions import ValidationError
+from datetime import datetime
 
 @api_view(['GET'])
 def getAllEventsLogs(request):
@@ -14,7 +15,6 @@ def getAllEventsLogs(request):
             annee = AnneeUniv.objects.get(anneeEncours= True)
             
             etudiant = Etudiant.objects.filter(etudiantNomComplet=ev.person).filter(anneeUniv=annee.anneeUnivId).get()
-            print(etudiant.etudiantNomComplet)
             parcours = Parcours.objects.get(parcoursId=etudiant.parcours.parcoursId)
             niveau = Niveau.objects.get(niveauId=etudiant.niveau.niveauId)
             etudiantData = EtudiantSerializer(etudiant, many=False).data
@@ -29,16 +29,15 @@ def getAllEventsLogs(request):
     return Response(res)
 
 @api_view(['GET'])
-def getAllEventsSaved(request):
+def getAllEvents2DateTime(request, debut, fin):
     try:
-        events = EventLog.objects.all().filter(saved=True).order_by('datetime')
+        events = EventLog.objects.filter(datetime__range=(datetime.fromisoformat(debut), datetime.fromisoformat(fin))).order_by('datetime')
         res = []
         for ev in events:
             eventData = EventLogSerializer(ev, many=False).data
             annee = AnneeUniv.objects.get(anneeEncours= True)
             
             etudiant = Etudiant.objects.filter(etudiantNomComplet=ev.person).filter(anneeUniv=annee.anneeUnivId).get()
-            print(etudiant.etudiantNomComplet)
             parcours = Parcours.objects.get(parcoursId=etudiant.parcours.parcoursId)
             niveau = Niveau.objects.get(niveauId=etudiant.niveau.niveauId)
             etudiantData = EtudiantSerializer(etudiant, many=False).data
@@ -53,23 +52,23 @@ def getAllEventsSaved(request):
     return Response(res)
 
 @api_view(['GET'])
-def getAllEventsNotSaved(request):
+def getAllEventsNiveauParcours(request, id_niveau, id_parcours):
     try:
-        events = EventLog.objects.all().filter(saved=False).order_by('datetime')
+        events = EventLog.objects.filter().order_by('datetime')
         res = []
         for ev in events:
             eventData = EventLogSerializer(ev, many=False).data
             annee = AnneeUniv.objects.get(anneeEncours= True)
             
             etudiant = Etudiant.objects.filter(etudiantNomComplet=ev.person).filter(anneeUniv=annee.anneeUnivId).get()
-            print(etudiant.etudiantNomComplet)
             parcours = Parcours.objects.get(parcoursId=etudiant.parcours.parcoursId)
             niveau = Niveau.objects.get(niveauId=etudiant.niveau.niveauId)
             etudiantData = EtudiantSerializer(etudiant, many=False).data
             parcoursData = ParcoursSerializer(parcours, many=False).data
             niveauData = NiveauSerializer(niveau, many=False).data
             event = {'event': eventData, 'etudiant': etudiantData, 'parcours': parcoursData, 'niveau': niveauData}
-            res.append(event)
+            if str(etudiant.niveau.niveauId) == id_niveau and str(etudiant.parcours.parcoursId) == id_parcours:
+                res.append(event)
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
@@ -77,49 +76,51 @@ def getAllEventsNotSaved(request):
     return Response(res)
 
 @api_view(['GET'])
-def getAllEventsDate(request, date):
+def getAllEventsNiveauParcours2DateTime(request, id_niveau, id_parcours, debut, fin):
     try:
-        events = EventLog.objects.all().filter(date=date).order_by('datetime')
+        events = EventLog.objects.filter(datetime__range=(datetime.fromisoformat(debut), datetime.fromisoformat(fin))).order_by('datetime')
         res = []
         for ev in events:
             eventData = EventLogSerializer(ev, many=False).data
             annee = AnneeUniv.objects.get(anneeEncours= True)
             
             etudiant = Etudiant.objects.filter(etudiantNomComplet=ev.person).filter(anneeUniv=annee.anneeUnivId).get()
-            print(etudiant.etudiantNomComplet)
             parcours = Parcours.objects.get(parcoursId=etudiant.parcours.parcoursId)
             niveau = Niveau.objects.get(niveauId=etudiant.niveau.niveauId)
             etudiantData = EtudiantSerializer(etudiant, many=False).data
             parcoursData = ParcoursSerializer(parcours, many=False).data
             niveauData = NiveauSerializer(niveau, many=False).data
             event = {'event': eventData, 'etudiant': etudiantData, 'parcours': parcoursData, 'niveau': niveauData}
-            res.append(event)
+            if(str(etudiant.niveau.niveauId) == id_niveau and str(etudiant.parcours.parcoursId) == id_parcours):
+                res.append(event)
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
         res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
-@api_view(['GET'])
-def getAllEventsDateTime(request, date, time):
+@api_view(['DELETE'])
+def deleteAllEventsNiveauParcours2DateTime(request, id_niveau, id_parcours, debut, fin):
     try:
-        events = EventLog.objects.all().filter(date=date).filter(time=time).order_by('datetime')
-        res = []
+        events = EventLog.objects.filter(datetime__range=(datetime.fromisoformat(debut), datetime.fromisoformat(fin))).order_by('datetime')
         for ev in events:
-            eventData = EventLogSerializer(ev, many=False).data
             annee = AnneeUniv.objects.get(anneeEncours= True)
-            
             etudiant = Etudiant.objects.filter(etudiantNomComplet=ev.person).filter(anneeUniv=annee.anneeUnivId).get()
-            print(etudiant.etudiantNomComplet)
-            parcours = Parcours.objects.get(parcoursId=etudiant.parcours.parcoursId)
-            niveau = Niveau.objects.get(niveauId=etudiant.niveau.niveauId)
-            etudiantData = EtudiantSerializer(etudiant, many=False).data
-            parcoursData = ParcoursSerializer(parcours, many=False).data
-            niveauData = NiveauSerializer(niveau, many=False).data
-            event = {'event': eventData, 'etudiant': etudiantData, 'parcours': parcoursData, 'niveau': niveauData}
-            res.append(event)
+            if(str(etudiant.niveau.niveauId) == id_niveau and str(etudiant.parcours.parcoursId) == id_parcours):
+                ev.delete()
+            res = {'status': 'success', 'message': 'Suppression des evenements réussi'}
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
+    except:
+        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+    return Response(res)
+
+@api_view(['DELETE'])
+def deleteEvent(request, id):
+    try:
+        event = EventLog.objects.get(id=id)
+        event.delete()
+        res = {'status': 'success', 'message': 'Suppression des evenements réussi'}
     except:
         res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
     return Response(res)

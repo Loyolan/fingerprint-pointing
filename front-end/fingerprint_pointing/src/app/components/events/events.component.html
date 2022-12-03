@@ -11,58 +11,33 @@
                                 <i class="fa fa-database icon-gradient bg-mean-fruit">
                                 </i>
                             </div>
-                            <div>Tableau de bord d'analyse
+                            <div>Control d'evenements 
                                 <div class="page-title-subheading">
-                                    Representation graphique des analyses
+                                    Evenements non enregistrés
                                 </div>
                             </div>
                         </div>
                         <div class="page-title-actions">
-                            <div class="d-inline-block dropdown">
+                            <button class="btn-wide btn btn-danger animated zoomInLeft" data-toggle="modal" data-target="#modal-delete-all" *ngIf="niveauParcoursSelected.niveau.niveauId != 'TOUT' && !dateForm.invalid">Supprimer</button>
+                            <button class="btn-wide btn btn-success animated zoomInLeft ml-1" data-toggle="modal" data-target="#modal-save" (click)="save()" *ngIf="niveauParcoursSelected.niveau.niveauId != 'TOUT' && !dateForm.invalid">Enregistrer</button>
+                            <div class="d-inline-block dropdown ml-1">
                                 <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     class="btn-shadow dropdown-toggle btn btn-info">
                                     <span class="btn-icon-wrapper pr-2 opacity-7">
                                         <i class="fa fa-business-time fa-w-20"></i>
                                     </span>
-                                    Recents
+                                    {{this.niveauParcoursSelected.niveau.niveauCode}}/{{this.niveauParcoursSelected.parcours.parcoursCode}}
                                 </button>
                                 <div tabindex="-1" role="menu" aria-hidden="true"
                                     class="dropdown-menu dropdown-menu-right">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
+                                    <ul class="nav flex-column pl-2" style="height: 300px;">
+                                        <li *ngFor="let np of niveauxParcours" (click)="changeNiveauParcours(np.niveau.niveauId, np.parcours.parcoursId)" class="nav-item btn-sm btn-outline-info">
+                                            <span class="nav-link">
                                                 <i class="nav-link-icon lnr-inbox"></i>
-                                                <span>
-                                                    Inbox
-                                                </span>
-                                                <div class="ml-auto badge badge-pill badge-secondary">86</div>
-                                            </a>
+                                                <span >{{np.niveau.niveauCode}}/{{np.parcours.parcoursCode}}</span>
+                                            </span>
                                         </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                <i class="nav-link-icon lnr-book"></i>
-                                                <span>
-                                                    Book
-                                                </span>
-                                                <div class="ml-auto badge badge-pill badge-danger">5</div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                <i class="nav-link-icon lnr-picture"></i>
-                                                <span>
-                                                    Picture
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a disabled href="javascript:void(0);" class="nav-link disabled">
-                                                <i class="nav-link-icon lnr-file-empty"></i>
-                                                <span>
-                                                    File Disabled
-                                                </span>
-                                            </a>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -71,16 +46,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="main-card mb-3 card">
-                            <div class="card-header">Tous les evenements
+                        <div @fade class="main-card mb-3 card">
+                            <div class="card-header">{{titre}}
                                 <div class="btn-actions-pane-right">
-                                    <div role="group" class="btn-group-sm btn-group">
-                                        <button class="btn btn-focus">Lundi</button>
-                                        <button class="btn btn-focus">Mardi</button>
-                                        <button class="btn btn-focus">Mercredi</button>
-                                        <button class="btn btn-focus">Jeudi</button>
-                                        <button class="btn btn-focus">Vendredi</button>
-                                        <button class="btn btn-focus">Samedi</button>
+                                    <div [formGroup]="dateForm" role="group" class="btn-group-sm btn-group">
+                                        <input (change)="changeDebut()" class='form-control' type="datetime-local" formControlName="debut">
+                                        <input (change)="search2Datetime()" class='form-control ml-1' type="datetime-local" formControlName="fin">
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +64,7 @@
                                             <th class="text-center">Date</th>
                                             <th class="text-center">Heure</th>
                                             <th class="text-center">Flux</th>
-                                            <th class="text-right">Status</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -123,23 +94,101 @@
                                                 <div *ngIf="e.event.direction == ''" class="badge badge-secondary">{{e.event.direction}}</div>
                                             </td>
                                             <td>
-                                                <div *ngIf="!e.event.saved" class="badge badge-danger">Non enregistré</div>
-                                                <div *ngIf="e.event.saved" class="badge badge-success">Enregistré</div>
+                                                <button (click)="deleteEvent(e.event.id)" data-toggle="modal" data-target="#modal-delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="d-block text-center card-footer">
-                                <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger"><i
-                                        class="pe-7s-trash btn-icon-wrapper"> </i></button>
-                                <button class="btn-wide btn btn-success">Save</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <app-footer></app-footer>
+        </div>
+    </div>
+</div>
+
+<!-- AJOUT -->
+<div class="modal" id="modal-save" tabindex="-1" role="dialog" aria-labelledby="AJOUT" aria-modal="true">
+    <div class="modal-dialog animated zoomInDown">
+        <form [formGroup]="saveForm" (ngSubmit)="onSubmitSaveForm()" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">SAVE EVENTS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-info card-header">(*)Date et heure précis</p>
+                <div class="input-group mt-1">
+                    <div class="nk-int-st">
+                        <input type="datetime-local" class="form-control"
+                            formControlName="datetimeDebut">
+                    </div>
+                </div>
+                <div class="input-group mt-1">
+                    <div class="nk-int-st">
+                        <input type="datetime-local" class="form-control"  
+                            formControlName="datetimeFin">
+                    </div>
+                </div>
+                <div class="input-group mt-1">
+                    <div class="nk-int-st">
+                        <select type="text" class="form-control" formControlName="matiere">
+                            <option *ngFor="let m of matieres" value="{{ m.matiereId}}">{{ m.matiereCode }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeSave" class="btn btn-secondary"
+                    data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary" [disabled]="saveForm.invalid">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- DELETE ALL -->
+<div class="modal" id="modal-delete-all" tabindex="-1" role="dialog" aria-labelledby="SUPPRESSION" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CONFIRMATION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6><i class="fa fa-warning"></i> Suppression massives des pointages. <br> Etes vous sûr??</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeDeleteAll" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                <button type="button" (click)="deleteAllEvents()" class="btn btn-danger">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE -->
+<div class="modal" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="SUPPRESSION" aria-modal="true">
+    <div class="modal-dialog modal-sm animated zoomInDown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CONFIRMATION</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6><i class="fa fa-warning"></i> Suppression d'un pointage. <br> Etes vous sûr??</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeDelete" class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                <button type="button" (click)="deleteEventData()" class="btn btn-danger">Supprimer</button>
+            </div>
         </div>
     </div>
 </div>

@@ -39,47 +39,67 @@ export class EventsService {
       map(data => {
         return data;
       }),
-      catchError(this.handleError('List matieres', []))
-    );
-  }
-
-  /** Get events not saved */
-  allEventsNotSaved(): Observable<any> {
-    return this.http.get(endpoint + '/events/not_saved').pipe(
-      map(data => {
-        return data;
-      }),
-      catchError(this.handleError('List matieres', []))
-    );
-  }
-
-  /** Get events not saved */
-  allEventsSaved(): Observable<any> {
-    return this.http.get(endpoint + '/events/not_saved').pipe(
-      map(data => {
-        return data;
-      }),
-      catchError(this.handleError('List matieres', []))
+      catchError(this.handleError('List events', []))
     );
   }
 
   /** Get events Date */
-  allEventsDate(date: string): Observable<any> {
-    return this.http.get(endpoint + `/events/date/${date}`).pipe(
+  allEventsDate(debut: string, fin: string): Observable<any> {
+    return this.http.get(endpoint + `/events/debut/${debut}/fin/${fin}`).pipe(
       map(data => {
         return data;
       }),
-      catchError(this.handleError('List matieres', []))
+      catchError(this.handleError('List events', []))
     );
   }
 
-  /** Get events Date */
-  allEventsDateTime(date: string, time: string): Observable<any> {
-    return this.http.get(endpoint + `/events/date/${date}/time/${time}`).pipe(
+  /** Get events N P */
+  allEventsNP(id_niveau: string, id_parcours: string): Observable<any> {
+    return this.http.get(endpoint + `/events/niveaux/${id_niveau}/parcours/${id_parcours}`).pipe(
       map(data => {
         return data;
       }),
-      catchError(this.handleError('List matieres', []))
+      catchError(this.handleError('List events', []))
+    );
+  }
+
+  /** Get events Date NP */
+  allEventsNPDate(id_niveau: string, id_parcours: string, debut: string, fin: string): Observable<any> {
+    return this.http.get(endpoint + `/events/niveaux/${id_niveau}/parcours/${id_parcours}/debut/${debut}/fin/${fin}`).pipe(
+      map(data => {
+        return data;
+      }),
+      catchError(this.handleError('List events', []))
+    );
+  }
+
+  /** SAVE EVENTS */
+  savePointages(id_niveau: string, id_parcours: string, debut: string, fin: string, event: any): Observable<any> {
+    return this.http.post(endpoint + `/events/niveaux/${id_niveau}/parcours/${id_parcours}/debut/${debut}/fin/${fin}/save`, JSON.stringify(event), this.httpOptions).pipe(
+      map(data => {
+        return data;
+      }),
+      catchError(this.handleError('List pointages', []))
+    );
+  }
+
+  /** delete events Date NP */
+  deleteAllEventsNPDate(id_niveau: string, id_parcours: string, debut: string, fin: string): Observable<any> {
+    return this.http.delete(endpoint + `/events/niveaux/${id_niveau}/parcours/${id_parcours}/debut/${debut}/fin/${fin}/delete`).pipe(
+      map(data => {
+        return data;
+      }),
+      catchError(this.handleError('delete events', []))
+    );
+  }
+
+  /** delete event */
+  deleteEvent(id: string): Observable<any> {
+    return this.http.delete(endpoint + `/events/${id}/delete`).pipe(
+      map(data => {
+        return data;
+      }),
+      catchError(this.handleError('delete event', []))
     );
   }
 }
