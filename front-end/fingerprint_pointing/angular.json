@@ -35,7 +35,8 @@
               "src/assets/css/main.css"
             ],
             "scripts": [
-              "src/assets/scripts/main.js"
+              "src/assets/scripts/main.js",
+              "./node_modules/apexcharts/dist/apexcharts.min.js"
             ]
           },
           "configurations": {

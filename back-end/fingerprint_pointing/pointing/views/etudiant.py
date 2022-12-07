@@ -25,7 +25,7 @@ def allEtudiantsAnneeUniv(request, id_annee):
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide annee ou niveau'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 # GET ALL ETUDIANT D'UN PARCOURS & D'UNE ANNEE UNIV
@@ -46,7 +46,7 @@ def allEtudiantsAnneeUnivParcours(request, id_annee, id_parcours):
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide annee ou niveau'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 # GET ALL ETUDIANT D'UN NIVEAU & D'UNE ANNEE UNIV
@@ -67,7 +67,7 @@ def  allEtudiantsAnneeUnivNiveau(request, id_annee, id_niveau):
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide annee ou niveau'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 # GET ALL ETUDIANT D'UN PARCOURS, D'UN NIVEAU & D'UNE ANNEE UNIV

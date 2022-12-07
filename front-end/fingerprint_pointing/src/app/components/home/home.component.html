@@ -70,61 +70,285 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-xl-4">
-                        <div class="card mb-3 widget-content bg-midnight-bloom">
-                            <div class="widget-content-wrapper text-white">
-                                <div class="widget-content-left">
-                                    <div class="widget-heading">Total Orders</div>
-                                    <div class="widget-subheading">Last year expenses</div>
+                    <div class="col-md-12">
+                        <div class="mb-3 card">
+                            <div class="card-header-tab card-header-tab-animation card-header">
+                                <div class="card-header-title">
+                                    <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
+                                    AGILITE DES ETUDIANTS
                                 </div>
-                                <div class="widget-content-right">
-                                    <div class="widget-numbers text-white"><span>1896</span></div>
-                                </div>
+                                <ul class="nav">
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'jan' )"
+                                        [class.active]="activeOptionButton=='jan'" ><i
+                                        class="pe-7s-calendar"></i> JAN </span>
+                                    </li>
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'feb' )"
+                                        [class.active]="activeOptionButton=='feb'" ><i
+                                        class="pe-7s-calendar"></i> FEV </span>
+                                    </li>
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'mar' )"
+                                        [class.active]="activeOptionButton=='mar'" ><i
+                                        class="pe-7s-calendar"></i> MARS </span>
+                                    </li>
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'apr' )"
+                                        [class.active]="activeOptionButton=='apr'" ><i
+                                        class="pe-7s-calendar"></i> AVR </span>
+                                    </li>
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'may' )"
+                                        [class.active]="activeOptionButton=='may'" ><i
+                                        class="pe-7s-calendar"></i> MAI </span>
+                                    </li>
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'jun' )"
+                                        [class.active]="activeOptionButton=='jun'" ><i
+                                        class="pe-7s-calendar"></i> JUIN </span>
+                                    </li>
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'jul' )"
+                                        [class.active]="activeOptionButton=='jul'" ><i
+                                        class="pe-7s-calendar"></i> JUIL </span>
+                                    </li>
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'aug' )"
+                                        [class.active]="activeOptionButton=='aug'" ><i
+                                        class="pe-7s-calendar"></i> AOUT </span>
+                                    </li>
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'sep' )"
+                                        [class.active]="activeOptionButton=='sep'" ><i
+                                        class="pe-7s-calendar"></i> SEP </span>
+                                    </li>
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'oct' )"
+                                        [class.active]="activeOptionButton=='oct'" ><i
+                                        class="pe-7s-calendar"></i> OCT </span>
+                                    </li>
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'nov' )"
+                                        [class.active]="activeOptionButton=='nov'" ><i
+                                        class="pe-7s-calendar"></i> NOV </span>
+                                    </li>
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'dec' )"
+                                        [class.active]="activeOptionButton=='dec'" ><i
+                                        class="pe-7s-calendar"></i> DEC </span>
+                                    </li>
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'jan-jun' )"
+                                        [class.active]="activeOptionButton=='jan-jun'" ><i
+                                        class="pe-7s-calendar"></i> SEM </span>
+                                    </li>
+                                    
+                                    <li class="nav-item  animated zoomInLeft">
+                                        <span class="nav-link" (click)="updateOptions( 'all' )"
+                                        [class.active]="activeOptionButton=='all'" ><i
+                                        class="pe-7s-calendar"></i> {{annee}}</span>
+                                    </li>
+                                </ul>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-4">
-                        <div class="card mb-3 widget-content bg-arielle-smile">
-                            <div class="widget-content-wrapper text-white">
-                                <div class="widget-content-left">
-                                    <div class="widget-heading">Clients</div>
-                                    <div class="widget-subheading">Total Clients Profit</div>
-                                </div>
-                                <div class="widget-content-right">
-                                    <div class="widget-numbers text-white"><span>$ 568</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-4">
-                        <div class="card mb-3 widget-content bg-grow-early">
-                            <div class="widget-content-wrapper text-white">
-                                <div class="widget-content-left">
-                                    <div class="widget-heading">Followers</div>
-                                    <div class="widget-subheading">People Interested</div>
-                                </div>
-                                <div class="widget-content-right">
-                                    <div class="widget-numbers text-white"><span>46%</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-xl-none d-lg-block col-md-6 col-xl-4">
-                        <div class="card mb-3 widget-content bg-premium-dark">
-                            <div class="widget-content-wrapper text-white">
-                                <div class="widget-content-left">
-                                    <div class="widget-heading">Products Sold</div>
-                                    <div class="widget-subheading">Revenue streams</div>
-                                </div>
-                                <div class="widget-content-right">
-                                    <div class="widget-numbers text-warning"><span>$14M</span></div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="tabs-eg-77">
+                                        <div class="card mb-3 widget-chart widget-chart2 text-left w-100">
+                                            <div *ngIf="chartDatetimeOptions" class="widget-chat-wrapper-outer">
+                                                <div 
+                                                *ngIf="
+                                                chartDatetimeOptions.series && 
+                                                chartDatetimeOptions.chart && 
+                                                chartDatetimeOptions.xaxis && 
+                                                chartDatetimeOptions.stroke && 
+                                                chartDatetimeOptions.tooltip && 
+                                                chartDatetimeOptions.dataLabels &&
+                                                chartDatetimeOptions.yaxis &&
+                                                chartDatetimeOptions.markers &&
+                                                chartDatetimeOptions.annotations &&
+                                                chartDatetimeOptions.grid"
+                                                class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0" id="chartDatetime">
+                                                   
+                                                      <apx-chart
+                                                        #chartDatetime
+                                                        [series]="chartDatetimeOptions.series"
+                                                        [chart]="chartDatetimeOptions.chart"
+                                                        [yaxis]="chartDatetimeOptions.yaxis"
+                                                        [dataLabels]="chartDatetimeOptions.dataLabels"
+                                                        [markers]="chartDatetimeOptions.markers"
+                                                        [stroke]="chartDatetimeOptions.stroke"
+                                                        [grid]="chartDatetimeOptions.grid"
+                                                        [xaxis]="chartDatetimeOptions.xaxis"
+                                                        [tooltip]="chartDatetimeOptions.tooltip"
+                                                        [annotations]="chartDatetimeOptions.annotations"
+                                                      ></apx-chart>
+                                                      
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h6 class="text-muted text-uppercase font-size-md opacity-5 font-weight-normal">
+                                            ETUDIANT</h6>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-lg-6">
+                    <div class="col-md-12">
+                        <div class="mb-3 card">
+                            <div class="card-header-tab card-header-tab-animation card-header">
+                                <div class="card-header-title">
+                                    <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
+                                    COMPARAISON DES ETUDIANTS PRESENTS ET ABSENTS
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="tabs-eg-77">
+                                        <div class="card mb-3 widget-chart widget-chart2 text-left w-100">
+                                            <div *ngIf="chartOptions" class="widget-chat-wrapper-outer">
+                                                <div *ngIf="
+                                                chartOptions.series && 
+                                                chartOptions.chart && 
+                                                chartOptions.xaxis && 
+                                                chartOptions.stroke && 
+                                                chartOptions.tooltip && 
+                                                chartOptions.dataLabels"
+                                                    class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0" id="chart">
+                                                    
+                                                    <apx-chart 
+                                                    [series]="chartOptions.series" 
+                                                    [chart]="chartOptions.chart" 
+                                                    [xaxis]="chartOptions.xaxis"
+                                                    [stroke]="chartOptions.stroke" 
+                                                    [tooltip]="chartOptions.tooltip" 
+                                                    [dataLabels]="chartOptions.dataLabels">
+                                                    </apx-chart>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h6 class="text-muted text-uppercase font-size-md opacity-5 font-weight-normal">
+                                            ETUDIANT</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3 card">
+                            <div class="card-header-tab card-header-tab-animation card-header">
+                                <div class="card-header-title">
+                                    <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
+                                    AGILITE DES ENSEIGNANTS
+                                </div>
+                                <ul class="nav">
+                                    <li class="nav-item"><a href="javascript:void(0);" class="active nav-link">Last</a>
+                                    </li>
+                                    <li class="nav-item"><a href="javascript:void(0);"
+                                            class="nav-link second-tab-toggle">Current</a></li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="tabs-eg-77">
+                                        <div class="card mb-3 widget-chart widget-chart2 text-left w-100">
+                                            <div class="widget-chat-wrapper-outer">
+                                                <div *ngIf="
+                                                chartLineOptions.series && 
+                                                chartLineOptions.chart && 
+                                                chartLineOptions.xaxis && 
+                                                chartLineOptions.stroke && 
+                                                chartLineOptions.dataLabels &&
+                                                chartLineOptions.legend &&
+                                                chartLineOptions.markers &&
+                                                chartLineOptions.grid &&
+                                                chartLineOptions.yaxis &&
+                                                chartLineOptions.title"
+                                                    class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0" id="chartLine">
+                                                    <apx-chart
+                                                        [series]="chartLineOptions.series"
+                                                        [chart]="chartLineOptions.chart"
+                                                        [xaxis]="chartLineOptions.xaxis"
+                                                        [stroke]="chartLineOptions.stroke"
+                                                        [dataLabels]="chartLineOptions.dataLabels"
+                                                        [legend]="chartLineOptions.legend"
+                                                        [markers]="chartLineOptions.markers"
+                                                        [grid]="chartLineOptions.grid"
+                                                        [yaxis]="chartLineOptions.yaxis"
+                                                        [title]="chartLineOptions.title"
+                                                    ></apx-chart>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h6 class="text-muted text-uppercase font-size-md opacity-5 font-weight-normal">
+                                            ENSEIGNANTS</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3 card">
+                            <div class="card-header-tab card-header-tab-animation card-header">
+                                <div class="card-header-title">
+                                    <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
+                                    CLASSIFICATION PAR MATIERES
+                                </div>
+                                <ul class="nav">
+                                    <li class="nav-item"><a href="javascript:void(0);" class="active nav-link">Last</a>
+                                    </li>
+                                    <li class="nav-item"><a href="javascript:void(0);"
+                                            class="nav-link second-tab-toggle">Current</a></li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="tabs-eg-77">
+                                        <div class="card mb-3 widget-chart widget-chart2 text-left w-100">
+                                            <div class="widget-chat-wrapper-outer">
+                                                <div *ngIf="
+                                                chartDashedOptions.series && 
+                                                chartDashedOptions.chart && 
+                                                chartDashedOptions.xaxis && 
+                                                chartDashedOptions.stroke && 
+                                                chartDashedOptions.tooltip &&
+                                                chartDashedOptions.dataLabels &&
+                                                chartDashedOptions.legend &&
+                                                chartDashedOptions.markers &&
+                                                chartDashedOptions.grid &&
+                                                chartDashedOptions.title"
+                                                    class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0" id="chartDashed">
+                                                    <apx-chart
+                                                        [series]="chartDashedOptions.series"
+                                                        [chart]="chartDashedOptions.chart"
+                                                        [xaxis]="chartDashedOptions.xaxis"
+                                                        [stroke]="chartDashedOptions.stroke"
+                                                        [tooltip]="chartDashedOptions.tooltip"
+                                                        [dataLabels]="chartDashedOptions.dataLabels"
+                                                        [legend]="chartDashedOptions.legend"
+                                                        [markers]="chartDashedOptions.markers"
+                                                        [grid]="chartDashedOptions.grid"
+                                                        [title]="chartDashedOptions.title"
+                                                    ></apx-chart>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h6 class="text-muted text-uppercase font-size-md opacity-5 font-weight-normal">
+                                            MATIERES</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="mb-3 card">
                             <div class="card-header-tab card-header-tab-animation card-header">
                                 <div class="card-header-title">
@@ -143,9 +367,80 @@
                                     <div class="tab-pane fade show active" id="tabs-eg-77">
                                         <div class="card mb-3 widget-chart widget-chart2 text-left w-100">
                                             <div class="widget-chat-wrapper-outer">
-                                                <div
-                                                    class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0">
-                                                    <canvas id="canvas"></canvas>
+                                                <div *ngIf="
+                                                chartLCOptions.series && 
+                                                chartLCOptions.chart && 
+                                                chartLCOptions.yaxis &&
+                                                chartLCOptions.xaxis && 
+                                                chartLCOptions.labels &&
+                                                chartLCOptions.stroke && 
+                                                chartLCOptions.dataLabels &&
+                                                chartLCOptions.title"
+                                                    class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0" id="chartLC">
+                                                    <apx-chart
+                                                        [series]="chartLCOptions.series"
+                                                        [chart]="chartLCOptions.chart"
+                                                        [yaxis]="chartLCOptions.yaxis"
+                                                        [xaxis]="chartLCOptions.xaxis"
+                                                        [labels]="chartLCOptions.labels"
+                                                        [stroke]="chartLCOptions.stroke"
+                                                        [title]="chartLCOptions.title"
+                                                        [dataLabels]="chartLCOptions.dataLabels"
+                                                    ></apx-chart>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h6 class="text-muted text-uppercase font-size-md opacity-5 font-weight-normal">
+                                            Top Authors</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- LINE AREA COLUMN -->
+                <!-- <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3 card">
+                            <div class="card-header-tab card-header-tab-animation card-header">
+                                <div class="card-header-title">
+                                    <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
+                                    Sales Report
+                                </div>
+                                <ul class="nav">
+                                    <li class="nav-item"><a href="javascript:void(0);" class="active nav-link">Last</a>
+                                    </li>
+                                    <li class="nav-item"><a href="javascript:void(0);"
+                                            class="nav-link second-tab-toggle">Current</a></li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="tabs-eg-77">
+                                        <div class="card mb-3 widget-chart widget-chart2 text-left w-100">
+                                            <div class="widget-chat-wrapper-outer">
+                                                <div *ngIf="
+                                                chartLACOptions.series && 
+                                                chartLACOptions.chart && 
+                                                chartLACOptions.yaxis &&
+                                                chartLACOptions.xaxis && 
+                                                chartLACOptions.labels &&
+                                                chartLACOptions.stroke && 
+                                                chartLACOptions.dataLabels &&
+                                                chartLACOptions.title"
+                                                    class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0" id="chartLAC">
+                                                    <apx-chart
+                                                        [series]="chartLACOptions.series"
+                                                        [chart]="chartLACOptions.chart"
+                                                        [yaxis]="chartLACOptions.yaxis"
+                                                        [xaxis]="chartLACOptions.xaxis"
+                                                        [labels]="chartLACOptions.labels"
+                                                        [stroke]="chartLACOptions.stroke"
+                                                        [plotOptions]="chartLACOptions.plotOptions"
+                                                        [markers]="chartLACOptions.markers"
+                                                        [fill]="chartLACOptions.fill"
+                                                        [tooltip]="chartLACOptions.tooltip"
+                                                    ></apx-chart>
                                                 </div>
                                             </div>
                                         </div>
@@ -278,441 +573,50 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-lg-6">
-                        <div class="mb-3 card">
-                            <div class="card-header-tab card-header">
-                                <div class="card-header-title">
-                                    <i class="header-icon lnr-rocket icon-gradient bg-tempting-azure"> </i>
-                                    Bandwidth Reports
-                                </div>
-                                <div class="btn-actions-pane-right">
-                                    <div class="nav">
-                                        <a href="javascript:void(0);"
-                                            class="border-0 btn-pill btn-wide btn-transition active btn btn-outline-alternate">Tab
-                                            1</a>
-                                        <a href="javascript:void(0);"
-                                            class="ml-1 btn-pill btn-wide border-0 btn-transition  btn btn-outline-alternate second-tab-toggle-alt">Tab
-                                            2</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-content">
-                                <div class="tab-pane fade active show" id="tab-eg-55">
-                                    <div class="widget-chart p-3">
-                                        <div style="height: 350px">
-                                            <canvas id="line-chart"></canvas>
-                                        </div>
-                                        <div class="widget-chart-content text-center mt-5">
-                                            <div class="widget-description mt-0 text-warning">
-                                                <i class="fa fa-arrow-left"></i>
-                                                <span class="pl-1">175.5%</span>
-                                                <span class="text-muted opacity-8 pl-1">increased server
-                                                    resources</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="pt-2 card-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="widget-content">
-                                                    <div class="widget-content-outer">
-                                                        <div class="widget-content-wrapper">
-                                                            <div class="widget-content-left">
-                                                                <div class="widget-numbers fsize-3 text-muted">63%</div>
-                                                            </div>
-                                                            <div class="widget-content-right">
-                                                                <div class="text-muted opacity-6">Generated Leads</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="widget-progress-wrapper mt-1">
-                                                            <div
-                                                                class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                <div class="progress-bar bg-danger" role="progressbar"
-                                                                    aria-valuenow="63" aria-valuemin="0"
-                                                                    aria-valuemax="100" style="width: 63%;"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="widget-content">
-                                                    <div class="widget-content-outer">
-                                                        <div class="widget-content-wrapper">
-                                                            <div class="widget-content-left">
-                                                                <div class="widget-numbers fsize-3 text-muted">32%</div>
-                                                            </div>
-                                                            <div class="widget-content-right">
-                                                                <div class="text-muted opacity-6">Submitted Tickers
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="widget-progress-wrapper mt-1">
-                                                            <div
-                                                                class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                <div class="progress-bar bg-success" role="progressbar"
-                                                                    aria-valuenow="32" aria-valuemin="0"
-                                                                    aria-valuemax="100" style="width: 32%;"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="widget-content">
-                                                    <div class="widget-content-outer">
-                                                        <div class="widget-content-wrapper">
-                                                            <div class="widget-content-left">
-                                                                <div class="widget-numbers fsize-3 text-muted">71%</div>
-                                                            </div>
-                                                            <div class="widget-content-right">
-                                                                <div class="text-muted opacity-6">Server Allocation
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="widget-progress-wrapper mt-1">
-                                                            <div
-                                                                class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                <div class="progress-bar bg-primary" role="progressbar"
-                                                                    aria-valuenow="71" aria-valuemin="0"
-                                                                    aria-valuemax="100" style="width: 71%;"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="widget-content">
-                                                    <div class="widget-content-outer">
-                                                        <div class="widget-content-wrapper">
-                                                            <div class="widget-content-left">
-                                                                <div class="widget-numbers fsize-3 text-muted">41%</div>
-                                                            </div>
-                                                            <div class="widget-content-right">
-                                                                <div class="text-muted opacity-6">Generated Leads</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="widget-progress-wrapper mt-1">
-                                                            <div
-                                                                class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                <div class="progress-bar bg-warning" role="progressbar"
-                                                                    aria-valuenow="41" aria-valuemin="0"
-                                                                    aria-valuemax="100" style="width: 41%;"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-xl-4">
-                        <div class="card mb-3 widget-content">
-                            <div class="widget-content-outer">
-                                <div class="widget-content-wrapper">
-                                    <div class="widget-content-left">
-                                        <div class="widget-heading">Total Orders</div>
-                                        <div class="widget-subheading">Last year expenses</div>
-                                    </div>
-                                    <div class="widget-content-right">
-                                        <div class="widget-numbers text-success">1896</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-4">
-                        <div class="card mb-3 widget-content">
-                            <div class="widget-content-outer">
-                                <div class="widget-content-wrapper">
-                                    <div class="widget-content-left">
-                                        <div class="widget-heading">Products Sold</div>
-                                        <div class="widget-subheading">Revenue streams</div>
-                                    </div>
-                                    <div class="widget-content-right">
-                                        <div class="widget-numbers text-warning">$3M</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-xl-4">
-                        <div class="card mb-3 widget-content">
-                            <div class="widget-content-outer">
-                                <div class="widget-content-wrapper">
-                                    <div class="widget-content-left">
-                                        <div class="widget-heading">Followers</div>
-                                        <div class="widget-subheading">People Interested</div>
-                                    </div>
-                                    <div class="widget-content-right">
-                                        <div class="widget-numbers text-danger">45,9%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-xl-none d-lg-block col-md-6 col-xl-4">
-                        <div class="card mb-3 widget-content">
-                            <div class="widget-content-outer">
-                                <div class="widget-content-wrapper">
-                                    <div class="widget-content-left">
-                                        <div class="widget-heading">Income</div>
-                                        <div class="widget-subheading">Expected totals</div>
-                                    </div>
-                                    <div class="widget-content-right">
-                                        <div class="widget-numbers text-focus">$147</div>
-                                    </div>
-                                </div>
-                                <div class="widget-progress-wrapper">
-                                    <div class="progress-bar-sm progress-bar-animated-alt progress">
-                                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="54"
-                                            aria-valuemin="0" aria-valuemax="100" style="width: 54%;"></div>
-                                    </div>
-                                    <div class="progress-sub-label">
-                                        <div class="sub-label-left">Expenses</div>
-                                        <div class="sub-label-right">100%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div> -->
+
+                <!-- TIMELINE -->
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="main-card mb-3 card">
-                            <div class="card-header">Active Users
-                                <div class="btn-actions-pane-right">
-                                    <div role="group" class="btn-group-sm btn-group">
-                                        <button class="active btn btn-focus">Last Week</button>
-                                        <button class="btn btn-focus">All Month</button>
-                                    </div>
+                        <div class="mb-3 card">
+                            <div class="card-header-tab card-header-tab-animation card-header">
+                                <div class="card-header-title">
+                                    <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
+                                    Sales Report
                                 </div>
+                                <ul class="nav">
+                                    <li class="nav-item"><a href="javascript:void(0);" class="active nav-link">Last</a>
+                                    </li>
+                                    <li class="nav-item"><a href="javascript:void(0);"
+                                            class="nav-link second-tab-toggle">Current</a></li>
+                                </ul>
                             </div>
-                            <div class="table-responsive">
-                                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th>Name</th>
-                                            <th class="text-center">City</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center text-muted">#345</td>
-                                            <td>
-                                                <div class="widget-content p-0">
-                                                    <div class="widget-content-wrapper">
-                                                        <div class="widget-content-left mr-3">
-                                                            <div class="widget-content-left">
-                                                                <img width="40" class="rounded-circle"
-                                                                    src="assets/images/avatar.png" alt="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="widget-content-left flex2">
-                                                            <div class="widget-heading">John Doe</div>
-                                                            <div class="widget-subheading opacity-7">Web Developer</div>
-                                                        </div>
-                                                    </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="tabs-eg-77">
+                                        <div class="card mb-3 widget-chart widget-chart2 text-left w-100">
+                                            <div class="widget-chat-wrapper-outer">
+                                                <div *ngIf="
+                                                chartTimelineOptions.series && 
+                                                chartTimelineOptions.chart && 
+                                                chartTimelineOptions.xaxis && 
+                                                chartTimelineOptions.legend &&
+                                                chartTimelineOptions.dataLabels &&
+                                                chartTimelineOptions.plotOptions"
+                                                    class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0" id="chartLC">
+                                                    <apx-chart
+                                                    [series]="chartTimelineOptions.series"
+                                                    [chart]="chartTimelineOptions.chart"
+                                                    [dataLabels]="chartTimelineOptions.dataLabels"
+                                                    [plotOptions]="chartTimelineOptions.plotOptions"
+                                                    [xaxis]="chartTimelineOptions.xaxis"
+                                                    [legend]="chartTimelineOptions.legend"
+                                                    ></apx-chart>
                                                 </div>
-                                            </td>
-                                            <td class="text-center">Madrid</td>
-                                            <td class="text-center">
-                                                <div class="badge badge-warning">Pending</div>
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="button" id="PopoverCustomT-1"
-                                                    class="btn btn-primary btn-sm">Details</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center text-muted">#347</td>
-                                            <td>
-                                                <div class="widget-content p-0">
-                                                    <div class="widget-content-wrapper">
-                                                        <div class="widget-content-left mr-3">
-                                                            <div class="widget-content-left">
-                                                                <img width="40" class="rounded-circle"
-                                                                    src="assets/images/avatar.png" alt="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="widget-content-left flex2">
-                                                            <div class="widget-heading">Ruben Tillman</div>
-                                                            <div class="widget-subheading opacity-7">Etiam sit amet orci
-                                                                eget</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="text-center">Berlin</td>
-                                            <td class="text-center">
-                                                <div class="badge badge-success">Completed</div>
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="button" id="PopoverCustomT-2"
-                                                    class="btn btn-primary btn-sm">Details</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center text-muted">#321</td>
-                                            <td>
-                                                <div class="widget-content p-0">
-                                                    <div class="widget-content-wrapper">
-                                                        <div class="widget-content-left mr-3">
-                                                            <div class="widget-content-left">
-                                                                <img width="40" class="rounded-circle"
-                                                                    src="assets/images/avatar.png" alt="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="widget-content-left flex2">
-                                                            <div class="widget-heading">Elliot Huber</div>
-                                                            <div class="widget-subheading opacity-7">Lorem ipsum dolor
-                                                                sic</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="text-center">London</td>
-                                            <td class="text-center">
-                                                <div class="badge badge-danger">In Progress</div>
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="button" id="PopoverCustomT-3"
-                                                    class="btn btn-primary btn-sm">Details</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center text-muted">#55</td>
-                                            <td>
-                                                <div class="widget-content p-0">
-                                                    <div class="widget-content-wrapper">
-                                                        <div class="widget-content-left mr-3">
-                                                            <div class="widget-content-left">
-                                                                <img width="40" class="rounded-circle"
-                                                                    src="assets/images/avatar.png" alt="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="widget-content-left flex2">
-                                                            <div class="widget-heading">Vinnie Wagstaff</div>
-                                                            <div class="widget-subheading opacity-7">UI Designer</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="text-center">Amsterdam</td>
-                                            <td class="text-center">
-                                                <div class="badge badge-info">On Hold</div>
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="button" id="PopoverCustomT-4"
-                                                    class="btn btn-primary btn-sm">Details</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="d-block text-center card-footer">
-                                <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger"><i
-                                        class="pe-7s-trash btn-icon-wrapper"> </i></button>
-                                <button class="btn-wide btn btn-success">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card-shadow-danger mb-3 widget-chart widget-chart2 text-left card">
-                            <div class="widget-content">
-                                <div class="widget-content-outer">
-                                    <div class="widget-content-wrapper">
-                                        <div class="widget-content-left pr-2 fsize-1">
-                                            <div class="widget-numbers mt-0 fsize-3 text-danger">71%</div>
-                                        </div>
-                                        <div class="widget-content-right w-100">
-                                            <div class="progress-bar-xs progress">
-                                                <div class="progress-bar bg-danger" role="progressbar"
-                                                    aria-valuenow="71" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 71%;"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="widget-content-left fsize-1">
-                                        <div class="text-muted opacity-6">Income Target</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card-shadow-success mb-3 widget-chart widget-chart2 text-left card">
-                            <div class="widget-content">
-                                <div class="widget-content-outer">
-                                    <div class="widget-content-wrapper">
-                                        <div class="widget-content-left pr-2 fsize-1">
-                                            <div class="widget-numbers mt-0 fsize-3 text-success">54%</div>
-                                        </div>
-                                        <div class="widget-content-right w-100">
-                                            <div class="progress-bar-xs progress">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                    aria-valuenow="54" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 54%;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="widget-content-left fsize-1">
-                                        <div class="text-muted opacity-6">Expenses Target</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card-shadow-warning mb-3 widget-chart widget-chart2 text-left card">
-                            <div class="widget-content">
-                                <div class="widget-content-outer">
-                                    <div class="widget-content-wrapper">
-                                        <div class="widget-content-left pr-2 fsize-1">
-                                            <div class="widget-numbers mt-0 fsize-3 text-warning">32%</div>
-                                        </div>
-                                        <div class="widget-content-right w-100">
-                                            <div class="progress-bar-xs progress">
-                                                <div class="progress-bar bg-warning" role="progressbar"
-                                                    aria-valuenow="32" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 32%;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="widget-content-left fsize-1">
-                                        <div class="text-muted opacity-6">Spendings Target</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card-shadow-info mb-3 widget-chart widget-chart2 text-left card">
-                            <div class="widget-content">
-                                <div class="widget-content-outer">
-                                    <div class="widget-content-wrapper">
-                                        <div class="widget-content-left pr-2 fsize-1">
-                                            <div class="widget-numbers mt-0 fsize-3 text-info">89%</div>
-                                        </div>
-                                        <div class="widget-content-right w-100">
-                                            <div class="progress-bar-xs progress">
-                                                <div class="progress-bar bg-info" role="progressbar" aria-valuenow="89"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 89%;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="widget-content-left fsize-1">
-                                        <div class="text-muted opacity-6">Totals Target</div>
+                                        <h6 class="text-muted text-uppercase font-size-md opacity-5 font-weight-normal">
+                                            Top Authors</h6>
                                     </div>
                                 </div>
                             </div>

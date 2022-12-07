@@ -7,3 +7,4 @@ from .niveau import *
 from .parcours import *
 from .eventlog import *
 from .pointage import *
+from .statistic import *

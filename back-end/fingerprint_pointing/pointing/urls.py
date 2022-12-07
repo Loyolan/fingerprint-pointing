@@ -2,6 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('uuid/', views.getuuid),
+
     path('users/', views.allUsers),
     path('users/<id>/', views.getUserById),
     path('users/add', views.addUser),
@@ -72,6 +74,10 @@ urlpatterns = [
     path('pointages/niveaux/<id_niveau>/parcours/<id_parcours>/debut/<debut>/fin/<fin>', views.getAllPointageNiveauParcours2DateTime),
     path('pointages/niveaux/<id_niveau>/parcours/<id_parcours>/debut/<debut>/fin/<fin>/delete', views.deleteAllPointagesNiveauParcours2DateTime),
     path('pointages/<id>/delete', views.deletePointage),
+
+    path('statistics/etudiants_agility/annees/<annee>', views.sttAgilityEtudiants),
+    path('statistics/stt_pointed_or_not/annees/<annee>', views.sttPointedOrNot),
+    path('statistics/stt_par_niveau_parcours/annees/<annee>', views.sttParNiveauParcours),
 
     path('errors', views.error)
 ]

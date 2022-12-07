@@ -34,6 +34,7 @@ import { ParcoursComponent } from './components/parcours/parcours.component';
 import { NiveauComponent } from './components/niveau/niveau.component';
 import { EventsComponent } from './components/events/events.component';
 import { PointageComponent } from './components/pointage/pointage.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { PointageComponent } from './components/pointage/pointage.component';
         },
         overlap: 150
       }
-    })
+    }),
+    NgApexchartsModule
   ],
   providers: [
     UsersService,

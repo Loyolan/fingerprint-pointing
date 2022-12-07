@@ -4,6 +4,7 @@ from pointing.serializers import EventLogSerializer, EtudiantSerializer, Parcour
 from pointing.models import Etudiant, EventLog, AnneeUniv, Parcours, Niveau
 from django.core.exceptions import ValidationError
 from datetime import datetime
+import uuid
 
 @api_view(['GET'])
 def getAllEventsLogs(request):
@@ -25,7 +26,7 @@ def getAllEventsLogs(request):
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 @api_view(['GET'])
@@ -48,7 +49,7 @@ def getAllEvents2DateTime(request, debut, fin):
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 @api_view(['GET'])
@@ -72,7 +73,7 @@ def getAllEventsNiveauParcours(request, id_niveau, id_parcours):
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 @api_view(['GET'])
@@ -96,7 +97,7 @@ def getAllEventsNiveauParcours2DateTime(request, id_niveau, id_parcours, debut, 
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 @api_view(['DELETE'])
@@ -112,7 +113,7 @@ def deleteAllEventsNiveauParcours2DateTime(request, id_niveau, id_parcours, debu
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 @api_view(['DELETE'])
@@ -122,5 +123,11 @@ def deleteEvent(request, id):
         event.delete()
         res = {'status': 'success', 'message': 'Suppression des evenements réussi'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
+    return Response(res)
+
+@api_view(['GET'])
+def getuuid(request):
+    uuid = uuid.uuid1()
+    res = {'uuid': uuid}
     return Response(res)

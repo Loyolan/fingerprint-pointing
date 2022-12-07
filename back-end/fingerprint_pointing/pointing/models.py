@@ -68,7 +68,8 @@ class EventLog(models.Model):
 
 # POINTAGE
 class Pointage(models.Model):
-    pointageId= models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
+    #pointageId= models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
+    id = models.AutoField(primary_key=True)
     datetimeDebut= models.DateTimeField(null=True)
     datetimeFin= models.DateTimeField(null=True)
     pointageIn = models.CharField(max_length=3,default='UKN')

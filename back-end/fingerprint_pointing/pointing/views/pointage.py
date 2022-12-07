@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from pointing.serializers import EventLogSerializer, EtudiantSerializer, ParcoursSerializer, NiveauSerializer, PointageSerializer, MatiereSerializer
+from pointing.serializers import EtudiantSerializer, ParcoursSerializer, NiveauSerializer, PointageSerializer, MatiereSerializer
 from pointing.models import Etudiant, EventLog, AnneeUniv, Parcours, Niveau, Pointage, Matiere
 from django.core.exceptions import ValidationError
 from datetime import datetime
@@ -47,7 +47,7 @@ def saveEvents(request, id_niveau, id_parcours, debut, fin):
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de l\'enregistrement de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de l\'enregistrement de donnees'}
     return Response(res)
 
 @api_view(['GET'])
@@ -72,7 +72,7 @@ def getAllPointages(request):
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 @api_view(['GET'])
@@ -95,7 +95,7 @@ def getAllPointage2DateTime(request, debut, fin):
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 @api_view(['GET'])
@@ -119,7 +119,7 @@ def getAllPointageNiveauParcours(request, id_niveau, id_parcours):
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 @api_view(['GET'])
@@ -143,7 +143,7 @@ def getAllPointageNiveauParcours2DateTime(request, id_niveau, id_parcours, debut
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 @api_view(['DELETE'])
@@ -158,7 +158,7 @@ def deleteAllPointagesNiveauParcours2DateTime(request, id_niveau, id_parcours, d
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
 @api_view(['DELETE'])
@@ -170,6 +170,6 @@ def deletePointage(request, id):
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:
-        res = {'status': 'warning', 'message': 'Une eurreur se produite lors de la recuperation de donnees'}
+        res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
     return Response(res)
 
