@@ -51,9 +51,9 @@ def saveEvents(request, id_niveau, id_parcours, debut, fin):
     return Response(res)
 
 @api_view(['GET'])
-def getAllPointages(request):
+def getAllPointages(request, limit):
     try:
-        pointages  = Pointage.objects.all().order_by('datetimeDebut')
+        pointages  = Pointage.objects.all().order_by('datetimeDebut')[:int(limit)]
         res = []
         for point in pointages:
             pointageData = PointageSerializer(point, many=False).data
@@ -99,7 +99,7 @@ def getAllPointage2DateTime(request, debut, fin):
     return Response(res)
 
 @api_view(['GET'])
-def getAllPointageNiveauParcours(request, id_niveau, id_parcours):
+def getAllPointageNiveauParcours(request, id_niveau, id_parcours, limit):
     try:
         parcours = Parcours.objects.get(parcoursId=id_parcours)
         niveau = Niveau.objects.get(niveauId=id_niveau)
@@ -116,6 +116,9 @@ def getAllPointageNiveauParcours(request, id_niveau, id_parcours):
                 etudiantData = EtudiantSerializer(et, many=False).data
                 pointage = {'pointage': pointageData, 'matiere': matiereData, 'etudiant': etudiantData, 'parcours': parcoursData, 'niveau': niveauData}
                 res.append(pointage)
+        if int(limit) > len(res):
+            limit = len(res)
+        res = res[0:int(limit)]
     except ValidationError:
         res = {'status': 'warning', 'message': 'Invalide data'}
     except:

@@ -68,16 +68,16 @@ urlpatterns = [
     path('events/niveaux/<id_niveau>/parcours/<id_parcours>/debut/<debut>/fin/<fin>/delete', views.deleteAllEventsNiveauParcours2DateTime),
     path('events/<id>/delete', views.deleteEvent),
 
-    path('pointages/', views.getAllPointages),
+    path('pointages/limit/<limit>', views.getAllPointages),
     path('pointages/debut/<debut>/fin/<fin>', views.getAllPointage2DateTime),
-    path('pointages/niveaux/<id_niveau>/parcours/<id_parcours>', views.getAllPointageNiveauParcours),
+    path('pointages/niveaux/<id_niveau>/parcours/<id_parcours>/limit/<limit>', views.getAllPointageNiveauParcours),
     path('pointages/niveaux/<id_niveau>/parcours/<id_parcours>/debut/<debut>/fin/<fin>', views.getAllPointageNiveauParcours2DateTime),
     path('pointages/niveaux/<id_niveau>/parcours/<id_parcours>/debut/<debut>/fin/<fin>/delete', views.deleteAllPointagesNiveauParcours2DateTime),
     path('pointages/<id>/delete', views.deletePointage),
 
     path('statistics/etudiants_agility/annees/<annee>', views.sttAgilityEtudiants),
     path('statistics/stt_pointed_or_not/annees/<annee>', views.sttPointedOrNot),
-    path('statistics/stt_par_niveau_parcours/annees/<annee>', views.sttParNiveauParcours),
+    path('statistics/get_datasets/annees/<annee>', views.getDatasets),
 
     path('errors', views.error)
 ]

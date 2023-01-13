@@ -152,7 +152,7 @@ export class HomeComponent implements OnInit {
   @ViewChild("chartTimeline") chartTimeline!: ChartComponent;
   public chartTimelineOptions!: Partial<ChartTimelineOptions>;
 
-  annee:string = new Date().getFullYear().toString();
+  annee:string = (new Date().getFullYear()-1).toString();
 
   constructor(
     private service: StatisticsService,

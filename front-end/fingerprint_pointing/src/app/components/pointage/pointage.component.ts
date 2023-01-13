@@ -43,7 +43,11 @@ export class PointageComponent implements OnInit {
     }
   }];
   selected: string = '';
+  limit: number = 50;
+  link: string = '';
   dateForm: FormGroup;
+  limitForm: FormGroup;
+  anneeForm: FormGroup;
   constructor(
     private service: PointageService,
     private fb: FormBuilder,
@@ -54,6 +58,12 @@ export class PointageComponent implements OnInit {
     this.dateForm = this.fb.group({
       debut: ['', [Validators.required]],
       fin: ['', [Validators.required]]
+    });
+    this.limitForm = this.fb.group({
+      limit: [50, [Validators.required]]
+    });
+    this.anneeForm = this.fb.group({
+      annee: [new Date().getFullYear(), [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
     });
   }
 
@@ -79,8 +89,18 @@ export class PointageComponent implements OnInit {
     })
   }
 
+  getClass(in_: string, out_: string): string {
+    if(in_ == 'NO' && out_ == 'NO') {
+      return 'bg-danger text-white';
+    } else if (in_ == 'YES' && out_ == 'YES') {
+      return '';
+    } else {
+      return 'bg-warning';
+    }
+  }
+
   getAllPointages() {
-    this.service.allPointages().subscribe((data) => {
+    this.service.allPointages(this.limit).subscribe((data) => {
       if (data.status) {
         this.notifier.notify(data.status, data.message);
       } else {
@@ -148,6 +168,16 @@ export class PointageComponent implements OnInit {
     }
   }
 
+  changeLimit() {
+    let l = this.limitForm.value.limit;
+    this.limit = l;
+    if (this.niveauParcoursSelected.niveau.niveauId == 'TOUT') {
+      this.getAllPointages();
+    } else {
+      this.changeNiveauParcours(this.niveauParcoursSelected.niveau.niveauId, this.niveauParcoursSelected.parcours.parcoursId);
+    }
+  }
+
   changeNiveauParcours(id_niveau: string, id_parcours: string) {
     if (id_niveau == 'TOUT' && id_parcours == 'TOUT') {
       this.niveauParcoursSelected = {
@@ -175,7 +205,7 @@ export class PointageComponent implements OnInit {
         this.parcoursService.getOneParcours(id_parcours).subscribe((data)=>{
           this.niveauParcoursSelected.parcours = data;
         });
-        this.service.allPointagesNP(id_niveau, id_parcours).subscribe((data)=>{
+        this.service.allPointagesNP(id_niveau, id_parcours, this.limit).subscribe((data)=>{
           if (data.status) {
             this.notifier.notify(data.status, data.message);
           } else {
@@ -264,5 +294,28 @@ export class PointageComponent implements OnInit {
         this.notifier.notify('error', 'Erreur inattendue viens du serveur, Réessayez plus tard!');
       }
     });
+  }
+
+  getLink() {
+    this.notifier.notify('info', 'Preparation du lien!!!');
+    let annee =  `${this.anneeForm.value.annee}`;
+    setTimeout(()=> {
+      this.notifier.notify('info', 'Votre lien de telechargement sera pret dans 5s');
+      setTimeout(()=>{
+        this.link = this.service.getDatasets(annee);
+      }, 5000);
+    }, 3000)
+  }
+
+  afterDowload() {
+    setTimeout(()=>{
+      this.notifier.notify('success', 'Exportation des etudiants effectuée');
+      window.open(this.link);
+      setTimeout(()=>{
+        let c = document.getElementById('closeExportExcel');
+        c!.click();
+        this.link = '';
+      }, 1000)
+    }, 3000)
   }
 }

@@ -33,8 +33,8 @@ export class PointageService {
   }
 
   /** Get pointages */
-  allPointages(): Observable<any> {
-    return this.http.get(endpoint + '/pointages/').pipe(
+  allPointages(limit:number): Observable<any> {
+    return this.http.get(endpoint + '/pointages/limit/'+ limit).pipe(
       map(data => {
         return data;
       }),
@@ -53,8 +53,8 @@ export class PointageService {
   }
 
   /** Get pointages N P */
-  allPointagesNP(id_niveau: string, id_parcours: string): Observable<any> {
-    return this.http.get(endpoint + `/pointages/niveaux/${id_niveau}/parcours/${id_parcours}`).pipe(
+  allPointagesNP(id_niveau: string, id_parcours: string, limit:number): Observable<any> {
+    return this.http.get(endpoint + `/pointages/niveaux/${id_niveau}/parcours/${id_parcours}/limit/${limit}`).pipe(
       map(data => {
         return data;
       }),
@@ -90,5 +90,9 @@ export class PointageService {
       }),
       catchError(this.handleError('delete pointage', []))
     );
+  }
+
+  getDatasets(annee: string){
+    return endpoint + `/statistics/get_datasets/annees/${annee}`;
   }
 }

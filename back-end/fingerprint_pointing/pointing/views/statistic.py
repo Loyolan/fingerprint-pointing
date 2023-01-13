@@ -6,6 +6,7 @@ import datetime
 import time
 import pandas as pd
 from django.core.files.storage import FileSystemStorage
+from django.http.response import FileResponse, HttpResponseRedirect
 
 def datetime_to_milliseconds(d):
     return int(time.mktime(d.timetuple()) * 1000)
@@ -95,15 +96,11 @@ def convertUUIDToBytes(uuid):
     return uuid.replace('-', '')
 
 @api_view(['GET'])
-def sttParNiveauParcours(request, annee):
-    # try:
+def getDatasets(request, annee):
+    try:
         a = datetime.datetime(year=int(annee), month=1, day=1, hour=0,minute=0, second=0, microsecond=0, tzinfo=datetime.timezone.utc)
         f = datetime.datetime(year=int(annee), month=12, day=31, hour=0,minute=0, second=0, microsecond=0, tzinfo=datetime.timezone.utc)
-        # a_debut = datetime_to_milliseconds(a) + 10800000
-        # a_fin = datetime_to_milliseconds(f) + 10800000
-
-
-        res = []
+        
         pointages = Pointage.objects.filter(datetimeDebut__range=(a, f)).filter(datetimeFin__range=(a, f))
         print(convertUUIDToBytes(pointages[0].matiere.matiereId))
         pointagesData = PointageSerializer(pointages, many=True)
@@ -117,17 +114,11 @@ def sttParNiveauParcours(request, annee):
         fs = FileSystemStorage('media/data_pointage')
         f_name = 'data_pointage_{0}.xlsx'.format(str(datetime.datetime.now().date()))
         df_pointage.to_excel(fs.path(f_name), index=False)
-        #print(df_pointage.count())
+        fl_path = fs.path(f_name)
+        fl = open(fl_path, 'rb')
+        res = FileResponse(fl)
+        return res
 
-
-
-        # while (a_debut<=a_fin):
-        #     fin = a_debut + (24*60*60*1000)
-        #     d = datetime.datetime.fromtimestamp((a_debut-10800000)/1000.0)
-        #     b = datetime.datetime.fromtimestamp((fin-10800000)/1000.0)
-        #     pointages  = Pointage.objects.filter(datetimeDebut__range=(d, b)).filter(datetimeFin__range=(d, b))
-        #     res.append([a_debut, (10+len(pointages))])
-        #     a_debut += (24*60*60*1000)
-    # except:
-    #     res = {'status': 'warning', 'message': 'Une erreur se produite lors de la recuperation de donnees'}
-        return Response(res)
+    except:
+        url = request.get_host() +'eni/api/errors'
+        return HttpResponseRedirect(redirect_to=url)
