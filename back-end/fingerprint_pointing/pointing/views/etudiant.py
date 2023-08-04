@@ -182,6 +182,7 @@ def convertMat(mat):
         m = mat
     return m
 
+# ADD ETUDIANT
 @api_view(['POST'])
 def addEtudiantViaExcelData(request, id_annee, id_niveau, id_parcours):
     try:
